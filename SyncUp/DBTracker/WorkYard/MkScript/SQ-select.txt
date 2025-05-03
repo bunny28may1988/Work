@@ -1,0 +1,8 @@
+
+SQL> select 'Pre Deployment Invalid objects for user : ' ||sys_context( 'userenv', 'current_schema' ) from dual;
+SQL> select 'Pre Deployment Invalid objects for user : ' ||sys_context( 'userenv', 'current_schema' ) from dual;
+SQL> select object_name,object_type from user_objects where status='INVALID' ;
+SQL> select object_name,object_type from user_objects where status='INVALID' ;
+SQL> select 'Post Deployment Invalid objects for user : ' ||sys_context( 'userenv', 'current_schema' ) from dual;
+SQL> select 'Post Deployment Invalid objects for user : ' ||sys_context( 'userenv', 'current_schema' ) from dual;
+SQL> select object_name,object_type from user_objects where status='INVALID';

@@ -1,0 +1,12 @@
+
+SQL> DEF;
+DEFINE _DATE	       = "02-OCT-24" (CHAR)
+DEFINE _CONNECT_IDENTIFIER = "//10.10.38.21:1530/findb" (CHAR)
+DEFINE _USER	       = "DPATCH" (CHAR)
+DEFINE _PRIVILEGE      = "" (CHAR)
+DEFINE _SQLPLUS_RELEASE = "1903000000" (CHAR)
+DEFINE _EDITOR	       = "Notepad" (CHAR)
+DEFINE _O_VERSION      = "Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.20.0.0.0" (CHAR)
+DEFINE _O_RELEASE      = "1920000000" (CHAR)
+DEFINE X	       = "2024102_011615_AM" (CHAR)

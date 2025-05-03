@@ -1,0 +1,15 @@
+{
+  "isEnabled": true,
+  "isBlocking": true,
+  "type": {
+    "id": "7ed39669-655c-494e-b4a0-a08b4da0fcce"
+  },
+  "settings": {
+    "allowedForkTargets": 0,
+    "scope": [
+      {
+        "repositoryId": "31aa0654-77ac-4573-9ccf-300c3b4e436a"
+      }
+    ]
+  }
+}

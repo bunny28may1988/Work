@@ -1,0 +1,57 @@
+Manually Check for the Fork Settings for the RepoName: Aravind16022024
+Manually Check for the Fork Settings for the RepoName: Arcostest
+Manually Check for the Fork Settings for the RepoName: Banner
+Manually Check for the Fork Settings for the RepoName: Base
+Manually Check for the Fork Settings for the RepoName: CoreNX.wiki
+Manually Check for the Fork Settings for the RepoName: CustomECR
+Manually Check for the Fork Settings for the RepoName: DB
+Manually Check for the Fork Settings for the RepoName: DBPowershell
+Manually Check for the Fork Settings for the RepoName: DBScripts
+Manually Check for the Fork Settings for the RepoName: Demo-1
+Manually Check for the Fork Settings for the RepoName: Docker
+Manually Check for the Fork Settings for the RepoName: Docker1
+Manually Check for the Fork Settings for the RepoName: Docs
+Manually Check for the Fork Settings for the RepoName: GCP
+Manually Check for the Fork Settings for the RepoName: HAHAHA1
+Manually Check for the Fork Settings for the RepoName: Hackathon
+Manually Check for the Fork Settings for the RepoName: Import
+Manually Check for the Fork Settings for the RepoName: NPM
+Manually Check for the Fork Settings for the RepoName: Navaneeth_SForce-Test
+Manually Check for the Fork Settings for the RepoName: NetScaler
+Manually Check for the Fork Settings for the RepoName: Netbanking
+Manually Check for the Fork Settings for the RepoName: Powershell
+Manually Check for the Fork Settings for the RepoName: ProGra
+Manually Check for the Fork Settings for the RepoName: RECON
+Manually Check for the Fork Settings for the RepoName: SFDC
+Manually Check for the Fork Settings for the RepoName: SFDX
+Manually Check for the Fork Settings for the RepoName: Sailendra_1
+Manually Check for the Fork Settings for the RepoName: Sailendra_2
+Manually Check for the Fork Settings for the RepoName: SpringBoot
+Manually Check for the Fork Settings for the RepoName: Subha
+Manually Check for the Fork Settings for the RepoName: TESTING-REVERT
+Manually Check for the Fork Settings for the RepoName: Test-Repo
+Manually Check for the Fork Settings for the RepoName: TestFort2
+Manually Check for the Fork Settings for the RepoName: TheEND123
+Manually Check for the Fork Settings for the RepoName: TheEND1234
+Manually Check for the Fork Settings for the RepoName: TheEND12346
+Manually Check for the Fork Settings for the RepoName: Veera-bl
+Manually Check for the Fork Settings for the RepoName: WindowsAgent
+Manually Check for the Fork Settings for the RepoName: WindowsPassword
+Manually Check for the Fork Settings for the RepoName: ci-test-repo-1
+Manually Check for the Fork Settings for the RepoName: ci-test-repo-2
+Manually Check for the Fork Settings for the RepoName: config
+Manually Check for the Fork Settings for the RepoName: jarvistest
+Manually Check for the Fork Settings for the RepoName: kotak-uao-pdf-generation-service
+Manually Check for the Fork Settings for the RepoName: m2repositoryPB
+Manually Check for the Fork Settings for the RepoName: nc
+Manually Check for the Fork Settings for the RepoName: newpacakage
+Manually Check for the Fork Settings for the RepoName: packages
+Manually Check for the Fork Settings for the RepoName: schema-spy
+Manually Check for the Fork Settings for the RepoName: shell
+
+
+https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings?view=azure-devops&tabs=azure-devops-cli
+
+az repos policy file-size create --blocking true --enabled true --maximum-git-blob-size 10485760 --repository-id dbf8ce62-0f37-4e21-bd79-6f0b70f05464 --use-uncompressed-size true --output table
+
+az repos policy file-size update --id 27475 --enabled false --output table

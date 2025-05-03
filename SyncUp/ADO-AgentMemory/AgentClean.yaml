@@ -1,0 +1,18 @@
+- name: Execute PowerShell script on Windows machines
+  hosts: windows
+  tasks:
+  - name: Copy PowerShell script to the target machine
+    win_copy:
+      src: ./AgentClean.ps1
+      dest: D:\AgentClean.ps1
+
+  - name: Execute the PowerShell script
+    win_shell: |
+      powershell.exe -ExecutionPolicy Bypass -File D:\AgentClean.ps1
+    args:
+      executable: cmd
+
+  - name: Remove the PowerShell script after execution
+    win_file:
+      path: D:\AgentClean.ps1
+      state: absent

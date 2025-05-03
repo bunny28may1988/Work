@@ -1,0 +1,555 @@
+2024-11-09T17:46:36.4165709Z ##[section]Starting: Agent job
+2024-11-09T17:46:37.0104271Z ##[section]Starting: Initialize job
+2024-11-09T17:46:37.0108373Z Agent name: 'ProdAgent2'
+2024-11-09T17:46:37.0108869Z Agent machine name: 'MSVSTSAPP01'
+2024-11-09T17:46:37.0109087Z Current agent version: '3.227.1'
+2024-11-09T17:46:37.0145558Z Agent running as: 'sysadmin'
+2024-11-09T17:46:37.0146165Z Agent is running behind proxy server: 'http://10.10.2.88:8080'
+2024-11-09T17:46:37.0155711Z Prepare release directory.
+2024-11-09T17:46:37.0163449Z ReleaseId=382, TeamProjectId=3593fdec-b1ca-42ac-bb32-5c620a6b0cd2, ReleaseDefinitionName=ISTDBDataPatch
+2024-11-09T17:46:37.0261765Z Release folder: D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a
+2024-11-09T17:46:37.0371074Z Environment variables available are below.  Note that these environment variables can be referred to in the task (in the ReleaseDefinition) by replacing "_" with "." e.g. AGENT_NAME environment variable can be referenced using Agent.Name in the ReleaseDefinition: 
+				[AGENT_CLOUDID] --> []
+				[AGENT_DISABLELOGPLUGIN_TESTFILEPUBLISHERPLUGIN] --> [true]
+				[AGENT_DISABLELOGPLUGIN_TESTRESULTLOGPLUGIN] --> [true]
+				[AGENT_HOMEDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4]
+				[AGENT_ID] --> [61]
+				[AGENT_ISSELFHOSTED] --> [1]
+				[AGENT_JOBNAME] --> [Agent job]
+				[AGENT_MACHINENAME] --> [MSVSTSAPP01]
+				[AGENT_NAME] --> [ProdAgent2]
+				[AGENT_OS] --> [Windows_NT]
+				[AGENT_OSARCHITECTURE] --> [X64]
+				[AGENT_PROXYURL] --> [http://10.10.2.88:8080]
+				[AGENT_RELEASEDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a]
+				[AGENT_RETAINDEFAULTENCODING] --> [false]
+				[AGENT_ROOTDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work]
+				[AGENT_SERVEROMDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\externals\vstsom]
+				[AGENT_TASKRESTRICTIONSENFORCEMENTMODE] --> [Enabled]
+				[AGENT_TEMPDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\_temp]
+				[AGENT_TOOLSDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\_tool]
+				[AGENT_VERSION] --> [3.227.1]
+				[AGENT_WORKFOLDER] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work]
+				[AGENT_ENABLE_PIPELINEARTIFACT_LARGE_CHUNK_SIZE] --> [true]
+				[AZP_75787_ENABLE_COLLECT] --> [true]
+				[AZP_75787_ENABLE_NEW_LOGIC] --> [false]
+				[AZP_75787_ENABLE_NEW_LOGIC_LOG] --> [false]
+				[AZP_75787_ENABLE_NEW_PH_LOGIC] --> [true]
+				[AZP_AGENT_CHECK_FOR_TASK_DEPRECATION] --> [true]
+				[AZP_AGENT_LOG_TASKNAME_IN_USERAGENT] --> [true]
+				[AZP_AGENT_MOUNT_WORKSPACE] --> [false]
+				[AZP_PS_ENABLE_INVOKE_PROCESS] --> [true]
+				[AZURE_HTTP_USER_AGENT] --> [VSTS_0fd8e1fc-6d2e-486f-b08b-8ced8e241916_Release__382_382_1]
+				[BUILD_BUILDID] --> [914392]
+				[BUILD_BUILDNUMBER] --> [CHG0100001- User Request- ISTDB_NOV2024_914392]
+				[BUILD_BUILDURI] --> [vstfs:///Build/Build/914392]
+				[BUILD_DEFINITIONID] --> [2393]
+				[BUILD_DEFINITIONNAME] --> [ISTDBDataPatch]
+				[BUILD_PROJECTID] --> [3593fdec-b1ca-42ac-bb32-5c620a6b0cd2]
+				[BUILD_PROJECTNAME] --> [ISTDBDataPatch]
+				[BUILD_REPOSITORY_ID] --> [d87eb048-ccbb-4b51-913a-bc99d52d3357]
+				[BUILD_REPOSITORY_NAME] --> [ISTDBDataPatch]
+				[BUILD_REPOSITORY_PROVIDER] --> [TfsGit]
+				[BUILD_REQUESTEDFOR] --> [team atm]
+				[BUILD_REQUESTEDFORID] --> [43843f91-277c-6cb9-8f4b-850038664532]
+				[BUILD_SOURCEBRANCH] --> [refs/heads/ISTDB_NOV2024]
+				[BUILD_SOURCEBRANCHNAME] --> [ISTDB_NOV2024]
+				[BUILD_SOURCEVERSION] --> [956691f3485975b6a80ab78271838f649ec54bec]
+				[BUILD_TYPE] --> [Build]
+				[CRQ] --> [CHG0100001]
+				[DISTRIBUTEDTASK_AGENT_AGENTENABLEPIPELINEARTIFACTLARGECHUNKSIZE] --> [True]
+				[DISTRIBUTEDTASK_AGENT_CHECKIFTASKNODERUNNERISDEPRECATED246] --> [True]
+				[DISTRIBUTEDTASK_AGENT_CLEANUPPSMODULESINPOWERSHELL] --> [False]
+				[DISTRIBUTEDTASK_AGENT_ENABLEISSUESOURCEVALIDATION] --> [True]
+				[DISTRIBUTEDTASK_AGENT_ENABLERESOURCEUTILIZATIONWARNINGS] --> [False]
+				[DISTRIBUTEDTASK_AGENT_FAILDEPRECATEDTASK] --> [True]
+				[DISTRIBUTEDTASK_AGENT_LOGTASKNAMEINUSERAGENT] --> [True]
+				[DISTRIBUTEDTASK_AGENT_LOGTOBLOBSTORAGESERVICE] --> [False]
+				[DISTRIBUTEDTASK_AGENT_USEGITLONGPATHS] --> [True]
+				[DISTRIBUTEDTASK_AGENT_USEINTEROPTOFINDPARENTPROCESS] --> [False]
+				[DISTRIBUTEDTASK_AGENT_USELATESTGITVERSION] --> [True]
+				[DISTRIBUTEDTASK_AGENT_USEMSALLIBRARY] --> [True]
+				[DISTRIBUTEDTASK_AGENT_USENEWNODEHANDLERTELEMETRY] --> [True]
+				[DISTRIBUTEDTASK_TASKS_NODE_SKIPDEBUGLOGSWHENDEBUGMODEOFF] --> [True]
+				[ENABLE_ISSUE_SOURCE_VALIDATION] --> [true]
+				[FAIL_DEPRECATED_TASK] --> [true]
+				[GIT_TERMINAL_PROMPT] --> [0]
+				[MSDEPLOY_HTTP_USER_AGENT] --> [VSTS_0fd8e1fc-6d2e-486f-b08b-8ced8e241916_Release__382_382_1]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_BUILDID] --> [914392]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_BUILDNUMBER] --> [CHG0100001- User Request- ISTDB_NOV2024_914392]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_BUILDURI] --> [vstfs:///Build/Build/914392]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_DEFINITIONID] --> [2393]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_DEFINITIONNAME] --> [ISTDBDataPatch]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_PROJECTID] --> [3593fdec-b1ca-42ac-bb32-5c620a6b0cd2]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_PROJECTNAME] --> [ISTDBDataPatch]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_REPOSITORY_ID] --> [d87eb048-ccbb-4b51-913a-bc99d52d3357]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_REPOSITORY_NAME] --> [ISTDBDataPatch]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_REPOSITORY_PROVIDER] --> [TfsGit]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_REQUESTEDFOR] --> [team atm]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_REQUESTEDFORID] --> [43843f91-277c-6cb9-8f4b-850038664532]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_SOURCEBRANCH] --> [refs/heads/ISTDB_NOV2024]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_SOURCEBRANCHNAME] --> [ISTDB_NOV2024]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_SOURCEVERSION] --> [956691f3485975b6a80ab78271838f649ec54bec]
+				[RELEASE_ARTIFACTS__ISTDBDATAPATCH_TYPE] --> [Build]
+				[RELEASE_ARTIFACTS__SCRIPTS_BUILDID] --> [723c209447db47a79f96a38858f2da78ca13fcec]
+				[RELEASE_ARTIFACTS__SCRIPTS_BUILDNUMBER] --> [723c2094]
+				[RELEASE_ARTIFACTS__SCRIPTS_DEFINITIONID] --> [6629d5b4-1fdb-42d8-8601-d2800a58282f]
+				[RELEASE_ARTIFACTS__SCRIPTS_DEFINITIONNAME] --> [Scripts]
+				[RELEASE_ARTIFACTS__SCRIPTS_DEFINTIONID] --> [6629d5b4-1fdb-42d8-8601-d2800a58282f]
+				[RELEASE_ARTIFACTS__SCRIPTS_PROJECTID] --> [3593fdec-b1ca-42ac-bb32-5c620a6b0cd2]
+				[RELEASE_ARTIFACTS__SCRIPTS_PROJECTNAME] --> [ISTDBDataPatch]
+				[RELEASE_ARTIFACTS__SCRIPTS_REPOSITORY_ID] --> [6629d5b4-1fdb-42d8-8601-d2800a58282f]
+				[RELEASE_ARTIFACTS__SCRIPTS_REPOSITORY_NAME] --> [Scripts]
+				[RELEASE_ARTIFACTS__SCRIPTS_REPOSITORY_PROVIDER] --> [Git]
+				[RELEASE_ARTIFACTS__SCRIPTS_REPOSITORY_URI] --> [https://kmbl-devops@dev.azure.com/kmbl-devops/ISTDBDataPatch/_git/Scripts]
+				[RELEASE_ARTIFACTS__SCRIPTS_SOURCEBRANCH] --> [main]
+				[RELEASE_ARTIFACTS__SCRIPTS_SOURCEVERSION] --> [723c209447db47a79f96a38858f2da78ca13fcec]
+				[RELEASE_ARTIFACTS__SCRIPTS_TYPE] --> [Git]
+				[RELEASE_ATTEMPTNUMBER] --> [1]
+				[RELEASE_DEFINITIONENVIRONMENTID] --> [1]
+				[RELEASE_DEFINITIONID] --> [1]
+				[RELEASE_DEFINITIONNAME] --> [ISTDBDataPatch]
+				[RELEASE_DEFINITIONSNAPSHOTREVISION] --> []
+				[RELEASE_DEPLOYMENT_REQUESTEDFOR] --> [team atm]
+				[RELEASE_DEPLOYMENT_REQUESTEDFOREMAIL] --> [teamatm@kotak.com]
+				[RELEASE_DEPLOYMENT_REQUESTEDFORID] --> [43843f91-277c-6cb9-8f4b-850038664532]
+				[RELEASE_DEPLOYMENT_STARTTIME] --> [2024-11-09 10:07:02Z]
+				[RELEASE_DEPLOYMENTID] --> [381]
+				[RELEASE_DEPLOYPHASEID] --> [307]
+				[RELEASE_ENVIRONMENTID] --> [382]
+				[RELEASE_ENVIRONMENTNAME] --> [PROD]
+				[RELEASE_ENVIRONMENTPROTECTEDTENANTS] --> []
+				[RELEASE_ENVIRONMENTS_PROD_STATUS] --> [InProgress]
+				[RELEASE_ENVIRONMENTURI] --> [vstfs:///ReleaseManagement/Environment/382]
+				[RELEASE_PRIMARYARTIFACTSOURCEALIAS] --> [_ISTDBDataPatch]
+				[RELEASE_REASON] --> [Manual]
+				[RELEASE_RELEASEDESCRIPTION] --> [NFS Bin Addition Release for 09Nov2024]
+				[RELEASE_RELEASEID] --> [382]
+				[RELEASE_RELEASENAME] --> [Release-381]
+				[RELEASE_RELEASEURI] --> [vstfs:///ReleaseManagement/Release/382]
+				[RELEASE_RELEASEWEBURL] --> [https://dev.azure.com/kmbl-devops/3593fdec-b1ca-42ac-bb32-5c620a6b0cd2/_release?releaseId=382&_a=release-summary]
+				[RELEASE_REQUESTEDFOR] --> [team atm]
+				[RELEASE_REQUESTEDFOREMAIL] --> [teamatm@kotak.com]
+				[RELEASE_REQUESTEDFORID] --> [43843f91-277c-6cb9-8f4b-850038664532]
+				[RELEASE_SKIPARTIFACTSDOWNLOAD] --> [False]
+				[RELEASE_TRIGGERINGARTIFACT_ALIAS] --> []
+				[REQUESTEDFORID] --> [43843f91-277c-6cb9-8f4b-850038664532]
+				[SNOW_APP_ID] --> []
+				[SNOW_MODULE_ID] --> []
+				[SYSTEM] --> [release]
+				[SYSTEM_ARTIFACTSDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a]
+				[SYSTEM_COLLECTIONID] --> [0fd8e1fc-6d2e-486f-b08b-8ced8e241916]
+				[SYSTEM_COLLECTIONURI] --> [https://vsrm.dev.azure.com/kmbl-devops/]
+				[SYSTEM_CULTURE] --> [en-US]
+				[SYSTEM_DEFAULTWORKINGDIRECTORY] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a]
+				[SYSTEM_DEFINITIONID] --> [1]
+				[SYSTEM_DEFINITIONNAME] --> [ISTDBDataPatch]
+				[SYSTEM_ENABLEACCESSTOKEN] --> [False]
+				[SYSTEM_HOSTTYPE] --> [release]
+				[SYSTEM_ISDOCKERCONTAINER] --> [0]
+				[SYSTEM_ISSCHEDULED] --> [False]
+				[SYSTEM_JOBATTEMPT] --> [1]
+				[SYSTEM_JOBDISPLAYNAME] --> [Agent job]
+				[SYSTEM_JOBID] --> [b4338567-bf74-5131-332c-ac9145c655d1]
+				[SYSTEM_JOBIDENTIFIER] --> [Stage_3593fdecb1ca42acbb325c620a6b0cd2_1_1.Phase_1.__default]
+				[SYSTEM_JOBNAME] --> [__default]
+				[SYSTEM_JOBPARALLELISMTAG] --> [Private]
+				[SYSTEM_JOBPOSITIONINPHASE] --> [1]
+				[SYSTEM_JOBTIMEOUT] --> [0]
+				[SYSTEM_OIDCREQUESTURI] --> [https://vsrm.dev.azure.com/kmbl-devops/3593fdec-b1ca-42ac-bb32-5c620a6b0cd2/_apis/distributedtask/hubs/release/plans/5ea8bc25-daab-4f4d-864e-950626bd26f3/jobs/b4338567-bf74-5131-332c-ac9145c655d1/oidctoken]
+				[SYSTEM_PHASEATTEMPT] --> [1]
+				[SYSTEM_PHASEDISPLAYNAME] --> [Agent job]
+				[SYSTEM_PHASEID] --> [ca96daa5-2a8c-5d27-eac6-81705a321b02]
+				[SYSTEM_PHASENAME] --> [Phase_1]
+				[SYSTEM_PIPELINESTARTTIME] --> [2024-11-09 23:16:32+05:30]
+				[SYSTEM_PLANID] --> [5ea8bc25-daab-4f4d-864e-950626bd26f3]
+				[SYSTEM_PREFERREDIRECTGETCONTAINERITEM] --> [true]
+				[SYSTEM_SERVERTYPE] --> [Hosted]
+				[SYSTEM_STAGEATTEMPT] --> [1]
+				[SYSTEM_STAGEDISPLAYNAME] --> [PROD]
+				[SYSTEM_STAGEID] --> [22cbbdc4-402e-505e-bb9f-693c395d2b23]
+				[SYSTEM_STAGENAME] --> [Stage_3593fdecb1ca42acbb325c620a6b0cd2_1_1]
+				[SYSTEM_TASKDEFINITIONSURI] --> [https://dev.azure.com/kmbl-devops/]
+				[SYSTEM_TEAMFOUNDATIONCOLLECTIONURI] --> [https://dev.azure.com/kmbl-devops/]
+				[SYSTEM_TEAMFOUNDATIONSERVERURI] --> [https://vsrm.dev.azure.com/kmbl-devops/]
+				[SYSTEM_TEAMPROJECT] --> [ISTDBDataPatch]
+				[SYSTEM_TEAMPROJECTID] --> [3593fdec-b1ca-42ac-bb32-5c620a6b0cd2]
+				[SYSTEM_TIMELINEID] --> [5ea8bc25-daab-4f4d-864e-950626bd26f3]
+				[SYSTEM_TOTALJOBSINPHASE] --> [1]
+				[SYSTEM_WORKFOLDER] --> [D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work]
+				[USE_GIT_LONG_PATHS] --> [true]
+				[USE_LATEST_GIT_VERSION] --> [true]
+				[USE_MSAL] --> [true]
+				[USE_MSDEPLOY_TOKEN_AUTH] --> [true]
+2024-11-09T17:46:37.5435048Z Download all required tasks.
+2024-11-09T17:46:37.5862937Z Checking job knob settings.
+2024-11-09T17:46:37.5873420Z    Knob: AgentEnablePipelineArtifactLargeChunkSize = true Source: $(AGENT_ENABLE_PIPELINEARTIFACT_LARGE_CHUNK_SIZE) 
+2024-11-09T17:46:37.5874938Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC) 
+2024-11-09T17:46:37.5875242Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC_LOG) 
+2024-11-09T17:46:37.5875541Z    Knob: ProcessHandlerTelemetry = true Source: $(AZP_75787_ENABLE_COLLECT) 
+2024-11-09T17:46:37.5876016Z Finished checking job knob settings.
+2024-11-09T17:46:37.6197680Z Start tracking orphan processes.
+2024-11-09T17:46:37.6305110Z ##[section]Finishing: Initialize job
+2024-11-09T17:46:37.6473660Z ##[section]Async Command Start: DetectDockerContainer
+2024-11-09T17:46:37.6473891Z ##[section]Async Command End: DetectDockerContainer
+2024-11-09T17:46:37.6474507Z ##[section]Async Command Start: DetectDockerContainer
+2024-11-09T17:46:37.6474708Z ##[section]Async Command End: DetectDockerContainer
+2024-11-09T17:46:37.6638156Z ##[section]Starting: Download Artifacts
+2024-11-09T17:46:37.7204578Z Creating artifacts directory: D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a
+2024-11-09T17:46:37.7228089Z Created artifacts directory: D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a
+2024-11-09T17:46:37.7228286Z Downloading artifact
+2024-11-09T17:46:37.7237926Z Starting artifacts download...
+2024-11-09T17:46:37.7245505Z Downloading linked artifact _Scripts of type TFGit...
+2024-11-09T17:46:37.7265030Z Ensuring artifact folder D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_Scripts exists and is clean.
+2024-11-09T17:46:37.7383573Z Syncing repository: 6629d5b4-1fdb-42d8-8601-d2800a58282f (Git)
+2024-11-09T17:46:37.7433533Z Prepending Path environment variable with directory containing 'git.exe'.
+2024-11-09T17:46:37.7453712Z ##[command]git version
+2024-11-09T17:46:37.8181679Z git version 2.39.1.windows.1
+2024-11-09T17:46:37.8194980Z ##[command]git lfs version
+2024-11-09T17:46:37.9659937Z git-lfs/3.3.0 (GitHub; windows amd64; go 1.19.3; git 77deabdf)
+2024-11-09T17:46:37.9701356Z ##[command]git init "D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_Scripts"
+2024-11-09T17:46:38.0837434Z Initialized empty Git repository in D:/KMBLAgentLatest02/vsts-agent-win-x64-2.166.4/_work/r790/a/_Scripts/.git/
+2024-11-09T17:46:38.0893738Z ##[command]git remote add origin https://kmbl-devops@dev.azure.com/kmbl-devops/ISTDBDataPatch/_git/Scripts
+2024-11-09T17:46:38.1710508Z ##[command]git config gc.auto 0
+2024-11-09T17:46:38.2449912Z ##[command]git config --get-all http.https://kmbl-devops@dev.azure.com/kmbl-devops/ISTDBDataPatch/_git/Scripts.extraheader
+2024-11-09T17:46:38.3189554Z ##[command]git config --get-all http.proxy
+2024-11-09T17:46:38.3932101Z ##[command]git --config-env=http.extraheader=env_var_http.extraheader -c http.proxy="http://10.10.2.88:8080" fetch --tags --prune --prune-tags --progress --no-recurse-submodules origin
+2024-11-09T17:46:39.2955535Z remote: Azure Repos        
+2024-11-09T17:46:39.3929536Z remote: 
+2024-11-09T17:46:39.3929755Z remote: Found 21 objects to send. (98 ms)        
+2024-11-09T17:46:39.5851005Z From https://dev.azure.com/kmbl-devops/ISTDBDataPatch/_git/Scripts
+2024-11-09T17:46:39.5851249Z  * [new branch]      main       -> origin/main
+2024-11-09T17:46:39.6196618Z ##[command]git checkout --progress --force 723c209447db47a79f96a38858f2da78ca13fcec
+2024-11-09T17:46:39.7248924Z Note: switching to '723c209447db47a79f96a38858f2da78ca13fcec'.
+2024-11-09T17:46:39.7249061Z 
+2024-11-09T17:46:39.7249168Z You are in 'detached HEAD' state. You can look around, make experimental
+2024-11-09T17:46:39.7249390Z changes and commit them, and you can discard any commits you make in this
+2024-11-09T17:46:39.7249587Z state without impacting any branches by switching back to a branch.
+2024-11-09T17:46:39.7249686Z 
+2024-11-09T17:46:39.7249797Z If you want to create a new branch to retain commits you create, you may
+2024-11-09T17:46:39.7249959Z do so (now or later) by using -c with the switch command. Example:
+2024-11-09T17:46:39.7250041Z 
+2024-11-09T17:46:39.7250130Z   git switch -c <new-branch-name>
+2024-11-09T17:46:39.7250199Z 
+2024-11-09T17:46:39.7250271Z Or undo this operation with:
+2024-11-09T17:46:39.7250348Z 
+2024-11-09T17:46:39.7250408Z   git switch -
+2024-11-09T17:46:39.7250468Z 
+2024-11-09T17:46:39.7250575Z Turn off this advice by setting config variable advice.detachedHead to false
+2024-11-09T17:46:39.7250665Z 
+2024-11-09T17:46:39.7250768Z HEAD is now at 723c209 Updated Deploy-UAT.ps1
+2024-11-09T17:46:39.7318695Z Downloaded linked artifact _Scripts
+2024-11-09T17:46:39.7319080Z Finished artifacts download
+2024-11-09T17:46:39.7350414Z ##[section]Finishing: Download Artifacts
+2024-11-09T17:46:39.7387833Z ##[section]Starting: Download artifact - _ISTDBDataPatch - Deployment
+2024-11-09T17:46:39.7827656Z ==============================================================================
+2024-11-09T17:46:39.7828109Z Task         : Download build artifacts
+2024-11-09T17:46:39.7828298Z Description  : Download files that were saved as artifacts of a completed build
+2024-11-09T17:46:39.7828426Z Version      : 0.247.1
+2024-11-09T17:46:39.7828644Z Author       : Microsoft Corporation
+2024-11-09T17:46:39.7828824Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/download-build-artifacts
+2024-11-09T17:46:39.7828948Z ==============================================================================
+2024-11-09T17:46:40.4767598Z Downloading artifacts for build: 914392
+2024-11-09T17:46:40.5267787Z Downloading items from container resource #/9345704/Deployment
+2024-11-09T17:46:40.5268343Z Downloading artifact Deployment from: https://dev.azure.com/kmbl-devops//_apis/resources/Containers/9345704?itemPath=Deployment&isShallow=true&api-version=4.1-preview.4
+2024-11-09T17:46:40.5270280Z Prefer downloading files through redirect to the content stitcher: true
+2024-11-09T17:46:40.8862173Z Downloading Deployment/azure-pipelines.yml to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\azure-pipelines.yml
+2024-11-09T17:46:40.8887198Z Downloaded Deployment/azure-pipelines.yml to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\azure-pipelines.yml
+2024-11-09T17:46:41.1861606Z Downloading Deployment/Deploy.ctl to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\Deploy.ctl
+2024-11-09T17:46:41.1866871Z Downloaded Deployment/Deploy.ctl to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\Deploy.ctl
+2024-11-09T17:46:41.2836240Z Downloading Deployment/README.md to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\README.md
+2024-11-09T17:46:41.2845325Z Downloaded Deployment/README.md to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\README.md
+2024-11-09T17:46:41.3432538Z Downloading Deployment/dpatch/Deploy.ctl to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Deploy.ctl
+2024-11-09T17:46:41.3436760Z Downloaded Deployment/dpatch/Deploy.ctl to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Deploy.ctl
+2024-11-09T17:46:41.4941141Z Downloading Deployment/dpatch/Scripts/3-istdb_mobile_updt_241222_0030.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\3-istdb_mobile_updt_241222_0030.sql
+2024-11-09T17:46:41.4952972Z Downloaded Deployment/dpatch/Scripts/3-istdb_mobile_updt_241222_0030.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\3-istdb_mobile_updt_241222_0030.sql
+2024-11-09T17:46:41.5501235Z Downloading Deployment/dpatch/Scripts/3-istdb_mobile_updt_281222_1347.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\3-istdb_mobile_updt_281222_1347.sql
+2024-11-09T17:46:41.5925892Z Downloaded Deployment/dpatch/Scripts/3-istdb_mobile_updt_281222_1347.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\3-istdb_mobile_updt_281222_1347.sql
+2024-11-09T17:46:41.6082952Z Downloading Deployment/dpatch/Scripts/atm_100123_1855.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\atm_100123_1855.sql
+2024-11-09T17:46:41.6091840Z Downloading Deployment/dpatch/Scripts/atm_060123.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\atm_060123.sql
+2024-11-09T17:46:41.6101296Z Downloaded Deployment/dpatch/Scripts/atm_100123_1855.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\atm_100123_1855.sql
+2024-11-09T17:46:41.6101728Z Downloaded Deployment/dpatch/Scripts/atm_060123.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\atm_060123.sql
+2024-11-09T17:46:41.6180194Z Downloading Deployment/dpatch/Scripts/ATM_FLAG_Upd_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_FLAG_Upd_180123_2015.sql
+2024-11-09T17:46:41.6187966Z Downloaded Deployment/dpatch/Scripts/ATM_FLAG_Upd_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_FLAG_Upd_180123_2015.sql
+2024-11-09T17:46:41.6243379Z Downloading Deployment/dpatch/Scripts/ATM_Fit_list_Update_030223_2138.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_Fit_list_Update_030223_2138.sql
+2024-11-09T17:46:41.6254589Z Downloading Deployment/dpatch/Scripts/3-istdb_mobile_updt_291222_1630.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\3-istdb_mobile_updt_291222_1630.sql
+2024-11-09T17:46:41.6276552Z Downloaded Deployment/dpatch/Scripts/ATM_Fit_list_Update_030223_2138.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_Fit_list_Update_030223_2138.sql
+2024-11-09T17:46:41.6277185Z Downloaded Deployment/dpatch/Scripts/3-istdb_mobile_updt_291222_1630.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\3-istdb_mobile_updt_291222_1630.sql
+2024-11-09T17:46:41.6309078Z Downloading Deployment/dpatch/Scripts/ATM_FLAG_Upd_180123_2115.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_FLAG_Upd_180123_2115.sql
+2024-11-09T17:46:41.6359603Z Downloaded Deployment/dpatch/Scripts/ATM_FLAG_Upd_180123_2115.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_FLAG_Upd_180123_2115.sql
+2024-11-09T17:46:41.6376386Z Downloading Deployment/dpatch/Scripts/ATM_FLAG_Update_130123_2045.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_FLAG_Update_130123_2045.sql
+2024-11-09T17:46:41.6441914Z Downloaded Deployment/dpatch/Scripts/ATM_FLAG_Update_130123_2045.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\ATM_FLAG_Update_130123_2045.sql
+2024-11-09T17:46:41.6555918Z Downloading Deployment/dpatch/Scripts/BIN_update_160123_1245.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_160123_1245.sql
+2024-11-09T17:46:41.6666920Z Downloaded Deployment/dpatch/Scripts/BIN_update_160123_1245.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_160123_1245.sql
+2024-11-09T17:46:41.6890608Z Downloading Deployment/dpatch/Scripts/BIN_update_160123_2215.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_160123_2215.sql
+2024-11-09T17:46:41.6899282Z Downloaded Deployment/dpatch/Scripts/BIN_update_160123_2215.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_160123_2215.sql
+2024-11-09T17:46:41.6959292Z Downloading Deployment/dpatch/Scripts/BIN_update_180123_2115.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_180123_2115.sql
+2024-11-09T17:46:41.6971285Z Downloading Deployment/dpatch/Scripts/del_party_dtls_160123_2215.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\del_party_dtls_160123_2215.sql
+2024-11-09T17:46:41.6976615Z Downloaded Deployment/dpatch/Scripts/BIN_update_180123_2115.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_180123_2115.sql
+2024-11-09T17:46:41.6991969Z Downloaded Deployment/dpatch/Scripts/del_party_dtls_160123_2215.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\del_party_dtls_160123_2215.sql
+2024-11-09T17:46:41.7169144Z Downloading Deployment/dpatch/Scripts/BIN_update_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_180123_2015.sql
+2024-11-09T17:46:41.7240640Z Downloaded Deployment/dpatch/Scripts/BIN_update_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\BIN_update_180123_2015.sql
+2024-11-09T17:46:41.7258642Z Downloading Deployment/dpatch/Scripts/del_party_dtls_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\del_party_dtls_180123_2015.sql
+2024-11-09T17:46:41.7266802Z Downloading Deployment/dpatch/Scripts/Delete_duplicates_atm_party_dtls_271222_2030.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Delete_duplicates_atm_party_dtls_271222_2030.sql
+2024-11-09T17:46:41.7270720Z Downloaded Deployment/dpatch/Scripts/del_party_dtls_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\del_party_dtls_180123_2015.sql
+2024-11-09T17:46:41.7275908Z Downloading Deployment/dpatch/Scripts/idb_to_switch_130123_1000.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\idb_to_switch_130123_1000.sql
+2024-11-09T17:46:41.7282187Z Downloaded Deployment/dpatch/Scripts/Delete_duplicates_atm_party_dtls_271222_2030.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Delete_duplicates_atm_party_dtls_271222_2030.sql
+2024-11-09T17:46:41.7325308Z Downloaded Deployment/dpatch/Scripts/idb_to_switch_130123_1000.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\idb_to_switch_130123_1000.sql
+2024-11-09T17:46:41.7564046Z Downloading Deployment/dpatch/Scripts/IST_PIN_25012023.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\IST_PIN_25012023.sql
+2024-11-09T17:46:41.7608215Z Downloading Deployment/dpatch/Scripts/IST_PIN_30012023.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\IST_PIN_30012023.sql
+2024-11-09T17:46:41.7617047Z Downloading Deployment/dpatch/Scripts/IST_PIN_27012023_new.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\IST_PIN_27012023_new.sql
+2024-11-09T17:46:41.7628993Z Downloading Deployment/dpatch/Scripts/idb_to_switch_130123_2330.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\idb_to_switch_130123_2330.sql
+2024-11-09T17:46:41.7635297Z Downloaded Deployment/dpatch/Scripts/IST_PIN_27012023_new.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\IST_PIN_27012023_new.sql
+2024-11-09T17:46:41.7654899Z Downloaded Deployment/dpatch/Scripts/idb_to_switch_130123_2330.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\idb_to_switch_130123_2330.sql
+2024-11-09T17:46:41.7919809Z Downloading Deployment/dpatch/Scripts/Merge_Atm_Party_Details_10Jan2023.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Merge_Atm_Party_Details_10Jan2023.sql
+2024-11-09T17:46:41.7928068Z Downloaded Deployment/dpatch/Scripts/Merge_Atm_Party_Details_10Jan2023.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Merge_Atm_Party_Details_10Jan2023.sql
+2024-11-09T17:46:41.7949697Z Downloading Deployment/dpatch/Scripts/NFS_binaddition_9thNOV2024.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\NFS_binaddition_9thNOV2024.sql
+2024-11-09T17:46:41.7957011Z Downloaded Deployment/dpatch/Scripts/NFS_binaddition_9thNOV2024.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\NFS_binaddition_9thNOV2024.sql
+2024-11-09T17:46:41.7991017Z Downloading Deployment/dpatch/Scripts/Load_party_details_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Load_party_details_180123_2015.sql
+2024-11-09T17:46:41.7998810Z Downloaded Deployment/dpatch/Scripts/Load_party_details_180123_2015.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Load_party_details_180123_2015.sql
+2024-11-09T17:46:41.8027440Z Downloading Deployment/dpatch/Scripts/pmjdy_insert.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\pmjdy_insert.sql
+2024-11-09T17:46:41.8035041Z Downloaded Deployment/dpatch/Scripts/pmjdy_insert.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\pmjdy_insert.sql
+2024-11-09T17:46:41.8242775Z Downloading Deployment/dpatch/Scripts/pmjdy_insert_040223_1210.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\pmjdy_insert_040223_1210.sql
+2024-11-09T17:46:41.8249251Z Downloading Deployment/dpatch/Scripts/pmjdy_insert_040223_1600.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\pmjdy_insert_040223_1600.sql
+2024-11-09T17:46:41.8259392Z Downloaded Deployment/dpatch/Scripts/pmjdy_insert_040223_1210.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\pmjdy_insert_040223_1210.sql
+2024-11-09T17:46:41.8259828Z Downloaded Deployment/dpatch/Scripts/pmjdy_insert_040223_1600.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\pmjdy_insert_040223_1600.sql
+2024-11-09T17:46:41.8477392Z Downloading Deployment/dpatch/Scripts/Test.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Test.sql
+2024-11-09T17:46:41.8479877Z Downloaded Deployment/dpatch/Scripts/Test.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Test.sql
+2024-11-09T17:46:41.8486266Z Downloaded Deployment/dpatch/Scripts/IST_PIN_25012023.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\IST_PIN_25012023.sql
+2024-11-09T17:46:41.8510042Z Downloading Deployment/dpatch/Scripts/Update_atm_party_details.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Update_atm_party_details.sql
+2024-11-09T17:46:41.8534622Z Downloaded Deployment/dpatch/Scripts/Update_atm_party_details.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\Update_atm_party_details.sql
+2024-11-09T17:46:41.8555195Z Downloaded Deployment/dpatch/Scripts/IST_PIN_30012023.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Scripts\IST_PIN_30012023.sql
+2024-11-09T17:46:41.8571144Z Downloading Deployment/dpatch/Tables/Test.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Tables\Test.sql
+2024-11-09T17:46:41.8573612Z Downloaded Deployment/dpatch/Tables/Test.sql to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\Deployment\dpatch\Tables\Test.sql
+2024-11-09T17:46:42.8649841Z Total Files: 34, Processed: 34, Skipped: 0, Failed: 0, Download time: 2.337 secs, Download size: 252867Bytes
+2024-11-09T17:46:42.8743097Z Successfully downloaded artifacts to D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_ISTDBDataPatch\
+2024-11-09T17:46:42.8810456Z ##[section]Finishing: Download artifact - _ISTDBDataPatch - Deployment
+2024-11-09T17:46:42.8846075Z ##[section]Starting: Default path
+2024-11-09T17:46:42.9113046Z ==============================================================================
+2024-11-09T17:46:42.9113166Z Task         : PowerShell
+2024-11-09T17:46:42.9113239Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2024-11-09T17:46:42.9113329Z Version      : 2.247.1
+2024-11-09T17:46:42.9113384Z Author       : Microsoft Corporation
+2024-11-09T17:46:42.9113466Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2024-11-09T17:46:42.9113577Z ==============================================================================
+2024-11-09T17:46:44.1921086Z Generating script.
+2024-11-09T17:46:44.2363253Z ========================== Starting Command Output ===========================
+2024-11-09T17:46:44.2633689Z ##[command]"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\_temp\bff599dc-f53c-4541-81f1-f254534ce192.ps1'"
+2024-11-09T17:46:44.7140660Z ##[section]Finishing: Default path
+2024-11-09T17:46:44.7172952Z ##[section]Starting: Deployment
+2024-11-09T17:46:44.7412537Z ==============================================================================
+2024-11-09T17:46:44.7412661Z Task         : PowerShell
+2024-11-09T17:46:44.7412743Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2024-11-09T17:46:44.7412845Z Version      : 2.247.1
+2024-11-09T17:46:44.7412901Z Author       : Microsoft Corporation
+2024-11-09T17:46:44.7412978Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2024-11-09T17:46:44.7413072Z ==============================================================================
+2024-11-09T17:46:46.0206591Z Generating script.
+2024-11-09T17:46:46.0783304Z Formatted command: . 'D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\r790\a\_Scripts\Deploy.ps1'
+2024-11-09T17:46:46.1225788Z ========================== Starting Command Output ===========================
+2024-11-09T17:46:46.1480994Z ##[command]"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'D:\KMBLAgentLatest02\vsts-agent-win-x64-2.166.4\_work\_temp\fb8329be-97d0-4589-958d-eb1ed05e6f5b.ps1'"
+2024-11-09T17:46:46.5440094Z dpatch
+2024-11-09T17:46:46.5544894Z 
+2024-11-09T17:46:46.5586010Z IsPublic IsSerial Name   BaseType     
+2024-11-09T17:46:46.5589881Z -------- -------- ----   --------     
+2024-11-09T17:46:46.5592310Z True     True     String System.Object
+2024-11-09T17:46:46.5592383Z 
+2024-11-09T17:46:46.5593675Z 
+2024-11-09T17:46:48.4763911Z Message: dpatch
+2024-11-09T17:46:48.4774582Z Message: <request><header><msg_code>RequestArcosService</msg_code><source>VSTS</source><channel>ALL</channel><txn_ref_number>VSTS_ALL_1731174408000</txn_ref_number><txn_datetime>1731174408000</txn_datetime><ip>10.10.35.158</ip><device_id></device_id></header><detail><service_type>AppToadOracle</service_type><server_ip>10.240.70.23</server_ip><username>DPATCH</username><lob_profile>PRIVILEGE_ORACLE</lob_profile><db_instance_name>istdb</db_instance_name><filler1></filler1><filler2></filler2><filler3></filler3><filler4></filler4><filler5></filler5></detail></request>
+2024-11-09T17:46:48.4911515Z http://10.10.35.158:9080/arcos-service/RequestArcosService?format=xml&data=%3crequest%3e%3cheader%3e%3cmsg_code%3eRequestArcosService%3c%2fmsg_code%3e%3csource%3eVSTS%3c%2fsource%3e%3cchannel%3eALL%3c%2fchannel%3e%3ctxn_ref_number%3eVSTS_ALL_1731174408000%3c%2ftxn_ref_number%3e%3ctxn_datetime%3e1731174408000%3c%2ftxn_datetime%3e%3cip%3e10.10.35.158%3c%2fip%3e%3cdevice_id%3e%3c%2fdevice_id%3e%3c%2fheader%3e%3cdetail%3e%3cservice_type%3eAppToadOracle%3c%2fservice_type%3e%3cserver_ip%3e10.240.70.23%3c%2fserver_ip%3e%3cusername%3eDPATCH%3c%2fusername%3e%3clob_profile%3ePRIVILEGE_ORACLE%3c%2flob_profile%3e%3cdb_instance_name%3eistdb%3c%2fdb_instance_name%3e%3cfiller1%3e%3c%2ffiller1%3e%3cfiller2%3e%3c%2ffiller2%3e%3cfiller3%3e%3c%2ffiller3%3e%3cfiller4%3e%3c%2ffiller4%3e%3cfiller5%3e%3c%2ffiller5%3e%3c%2fdetail%3e%3c%2frequest%3e
+2024-11-09T17:46:48.6064724Z StatusCode: 0
+2024-11-09T17:46:48.6073116Z StatusMessage: SUC
+2024-11-09T17:46:48.6081862Z ResponseDatetime: 1731174408581
+2024-11-09T17:46:48.6090070Z End REST API Invoke
+2024-11-09T17:46:48.8275760Z 
+2024-11-09T17:46:48.8276440Z SQL*Plus: Release 19.0.0.0.0 - Production on Sat Nov 9 23:16:48 2024
+2024-11-09T17:46:48.8276658Z Version 19.3.0.0.0
+2024-11-09T17:46:48.8276714Z 
+2024-11-09T17:46:48.8276868Z Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+2024-11-09T17:46:48.8276945Z 
+2024-11-09T17:46:49.1806810Z Last Successful login time: Sat Nov 09 2024 22:00:19 +05:30
+2024-11-09T17:46:49.1806955Z 
+2024-11-09T17:46:49.1807079Z Connected to:
+2024-11-09T17:46:49.1807331Z Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-11-09T17:46:49.1807507Z Version 19.24.0.0.0
+2024-11-09T17:46:49.1807562Z 
+2024-11-09T17:46:49.1988713Z 2024119_111649_PM
+2024-11-09T17:46:49.1988803Z 
+2024-11-09T17:46:49.1995684Z SQL> DEF;
+2024-11-09T17:46:49.1996933Z DEFINE _DATE	       = "09-NOV-24" (CHAR)
+2024-11-09T17:46:49.1997186Z DEFINE _CONNECT_IDENTIFIER = "//10.240.70.23:1530/istdb" (CHAR)
+2024-11-09T17:46:49.1997370Z DEFINE _USER	       = "DPATCH" (CHAR)
+2024-11-09T17:46:49.1997524Z DEFINE _PRIVILEGE      = "" (CHAR)
+2024-11-09T17:46:49.1997686Z DEFINE _SQLPLUS_RELEASE = "1903000000" (CHAR)
+2024-11-09T17:46:49.1997857Z DEFINE _EDITOR	       = "Notepad" (CHAR)
+2024-11-09T17:46:49.1998054Z DEFINE _O_VERSION      = "Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-11-09T17:46:49.1998246Z Version 19.24.0.0.0" (CHAR)
+2024-11-09T17:46:49.1998405Z DEFINE _O_RELEASE      = "1924000000" (CHAR)
+2024-11-09T17:46:49.1998550Z DEFINE X	       = "2024119_111649_PM" (CHAR)
+2024-11-09T17:46:49.1998695Z SQL> set timing on
+2024-11-09T17:46:49.1998931Z SQL> @Scripts\NFS_binaddition_9thNOV2024.sql
+2024-11-09T17:46:49.2004880Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818008380000000','818008389999999',null,'A','Banaskantha Mercantile BANK','900000','NFSEMV','*	     ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2232406Z 
+2024-11-09T17:46:49.2232744Z 1 row created.
+2024-11-09T17:46:49.2232842Z 
+2024-11-09T17:46:49.2232992Z Elapsed: 00:00:00.02
+2024-11-09T17:46:49.2233484Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('356191000000000','356191999999999',null,'A','YES Bank','900000','NFSEMV','*	  ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2279732Z 
+2024-11-09T17:46:49.2279920Z 1 row created.
+2024-11-09T17:46:49.2279971Z 
+2024-11-09T17:46:49.2280104Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2280501Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('817297000000000','817297999999999',null,'A','Vikas Souharda BANK','900000','NFSEMV','*	     ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2305710Z 
+2024-11-09T17:46:49.2306065Z 1 row created.
+2024-11-09T17:46:49.2306117Z 
+2024-11-09T17:46:49.2306245Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2306707Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818008410000000','818008419999999',null,'A','Nanded Merchants Coop Bank','900000','NFSEMV','*	    ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2312904Z 
+2024-11-09T17:46:49.2313349Z 1 row created.
+2024-11-09T17:46:49.2313418Z 
+2024-11-09T17:46:49.2313563Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2314166Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('817780000000000','817780999999999',null,'A','GAUTAM SAHAKARI BANK','900000','NFSEMV','*	      ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2340089Z 
+2024-11-09T17:46:49.2340286Z 1 row created.
+2024-11-09T17:46:49.2340337Z 
+2024-11-09T17:46:49.2340470Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2341017Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('652491040000000','652491049999999',null,'A','North East Small Finance Bank','900000','NFSEMV','*	       ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2357428Z 
+2024-11-09T17:46:49.2357642Z 1 row created.
+2024-11-09T17:46:49.2358434Z 
+2024-11-09T17:46:49.2358588Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2358998Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005060000000','818005069999999',null,'A','Dharmapuri District Cooperative Bank','900000','NFSEMV','*	      ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2472986Z 
+2024-11-09T17:46:49.2473504Z 1 row created.
+2024-11-09T17:46:49.2473572Z 
+2024-11-09T17:46:49.2473722Z Elapsed: 00:00:00.01
+2024-11-09T17:46:49.2474137Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005120000000','818005129999999',null,'A','Tiruchirapalli district Cooperative Bank','900000','NFSEMV','*	  ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2612823Z 
+2024-11-09T17:46:49.2613311Z 1 row created.
+2024-11-09T17:46:49.2613384Z 
+2024-11-09T17:46:49.2613538Z Elapsed: 00:00:00.01
+2024-11-09T17:46:49.2613923Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005830000000','818005839999999',null,'A','Almora Urban Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2647360Z 
+2024-11-09T17:46:49.2647703Z 1 row created.
+2024-11-09T17:46:49.2647775Z 
+2024-11-09T17:46:49.2647946Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2648357Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005290000000','818005299999999',null,'A','Cuddalore District Cooperative Bank','900000','NFSEMV','*	     ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2666235Z 
+2024-11-09T17:46:49.2666663Z 1 row created.
+2024-11-09T17:46:49.2666757Z 
+2024-11-09T17:46:49.2666937Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2667437Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005160000000','818005169999999',null,'A','Erode District Cooperative Bank','900000','NFSEMV','*	 ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2674062Z 
+2024-11-09T17:46:49.2674490Z 1 row created.
+2024-11-09T17:46:49.2674558Z 
+2024-11-09T17:46:49.2674704Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2675196Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005250000000','818005259999999',null,'A','Thoothukudi District Cooperative Bank','900000','NFSEMV','*	       ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2681115Z 
+2024-11-09T17:46:49.2681389Z 1 row created.
+2024-11-09T17:46:49.2681461Z 
+2024-11-09T17:46:49.2681577Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2682094Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('817745000000000','817745999999999',null,'A','Zila Sahkari Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2697372Z 
+2024-11-09T17:46:49.2697928Z 1 row created.
+2024-11-09T17:46:49.2698125Z 
+2024-11-09T17:46:49.2698317Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2698869Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818008150000000','818008159999999',null,'A','Haryana State Bank','900000','NFSEMV','*	    ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2705058Z 
+2024-11-09T17:46:49.2705362Z 1 row created.
+2024-11-09T17:46:49.2705456Z 
+2024-11-09T17:46:49.2705708Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2706414Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('356192000000000','356192999999999',null,'A','Yes Bank','900000','NFSEMV','*	  ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2714929Z 
+2024-11-09T17:46:49.2715301Z 1 row created.
+2024-11-09T17:46:49.2715438Z 
+2024-11-09T17:46:49.2715597Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2716135Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('356188000000000','356188999999999',null,'A','SBI Cards Credit Card','900000','NFSEMV','*	       ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2721537Z 
+2024-11-09T17:46:49.2721768Z 1 row created.
+2024-11-09T17:46:49.2721820Z 
+2024-11-09T17:46:49.2721965Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2722611Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('356193000000000','356193999999999',null,'A','SBI Cards Credit Card','900000','NFSEMV','*	       ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2732452Z 
+2024-11-09T17:46:49.2732692Z 1 row created.
+2024-11-09T17:46:49.2732795Z 
+2024-11-09T17:46:49.2732953Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2733556Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('818005860000000','818005869999999',null,'A','Bhandara District Cooperative Bank','900000','NFSEMV','*	    ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2742037Z 
+2024-11-09T17:46:49.2742431Z 1 row created.
+2024-11-09T17:46:49.2742495Z 
+2024-11-09T17:46:49.2742645Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2743115Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('356129180000000','356129189999999',null,'A','City Union Bank','900000','NFSEMV','*	 ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2750241Z 
+2024-11-09T17:46:49.2750476Z 1 row created.
+2024-11-09T17:46:49.2750536Z 
+2024-11-09T17:46:49.2750673Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2751263Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('817779000000000','817779999999999',null,'A','Yeshwant Nagari Sahakari Bank','900000','NFSEMV','*	       ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2761605Z 
+2024-11-09T17:46:49.2761977Z 1 row created.
+2024-11-09T17:46:49.2762024Z 
+2024-11-09T17:46:49.2762246Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2762648Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487000000000','223487009999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2786510Z 
+2024-11-09T17:46:49.2786882Z 1 row created.
+2024-11-09T17:46:49.2786951Z 
+2024-11-09T17:46:49.2787263Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2787652Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487010000000','223487019999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2795376Z 
+2024-11-09T17:46:49.2795723Z 1 row created.
+2024-11-09T17:46:49.2795787Z 
+2024-11-09T17:46:49.2795928Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2796600Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487020000000','223487029999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2802096Z 
+2024-11-09T17:46:49.2802386Z 1 row created.
+2024-11-09T17:46:49.2802459Z 
+2024-11-09T17:46:49.2802622Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2803464Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487030000000','223487039999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2808793Z 
+2024-11-09T17:46:49.2809003Z 1 row created.
+2024-11-09T17:46:49.2809080Z 
+2024-11-09T17:46:49.2809290Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2809867Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487040000000','223487049999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2815526Z 
+2024-11-09T17:46:49.2815765Z 1 row created.
+2024-11-09T17:46:49.2815851Z 
+2024-11-09T17:46:49.2815975Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2816886Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487050000000','223487059999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2824332Z 
+2024-11-09T17:46:49.2824576Z 1 row created.
+2024-11-09T17:46:49.2824631Z 
+2024-11-09T17:46:49.2824764Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2825538Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487060000000','223487069999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2888518Z 
+2024-11-09T17:46:49.2888809Z 1 row created.
+2024-11-09T17:46:49.2888873Z 
+2024-11-09T17:46:49.2889015Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2889515Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487070000000','223487079999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2896670Z 
+2024-11-09T17:46:49.2897090Z 1 row created.
+2024-11-09T17:46:49.2897158Z 
+2024-11-09T17:46:49.2897303Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2897765Z SQL> Insert into istdbsp.shcextbindb (LOWBIN,HIGHBIN,O_LEVEL,STATUS,DESCRIPTION,DESTINATION,ENTITY_ID,CARDPRODUCT,NETWORK_DATA,FILE_NAME,FILE_VERSION,FILE_DATE,COUNTRY_CODE,NETWORK_CONFIG) values ('223487080000000','223487089999999',null,'A','HDFC Bank','900000','NFSEMV','*	   ',null,null,null,to_date('09-NOV-24','DD-MON-RR'),356,null);
+2024-11-09T17:46:49.2925126Z 
+2024-11-09T17:46:49.2925489Z 1 row created.
+2024-11-09T17:46:49.2925545Z 
+2024-11-09T17:46:49.2925682Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2925819Z SQL> commit;
+2024-11-09T17:46:49.2946117Z 
+2024-11-09T17:46:49.2946584Z Commit complete.
+2024-11-09T17:46:49.2946656Z 
+2024-11-09T17:46:49.2946797Z Elapsed: 00:00:00.00
+2024-11-09T17:46:49.2946939Z SQL> 
+2024-11-09T17:46:49.2949851Z SQL> set timing off
+2024-11-09T17:46:49.2949992Z SQL> spool off
+2024-11-09T17:46:49.2982725Z SQL> exit
+2024-11-09T17:46:49.3000201Z Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-11-09T17:46:49.3000406Z Version 19.24.0.0.0
+2024-11-09T17:46:50.1684512Z 0
+2024-11-09T17:46:50.1701719Z ok
+2024-11-09T17:46:50.2443577Z ##[section]Finishing: Deployment
+2024-11-09T17:46:50.2555811Z ##[section]Starting: Finalize Job
+2024-11-09T17:46:50.2584609Z Cleaning up task key
+2024-11-09T17:46:50.2585904Z Start cleaning up orphan processes.
+2024-11-09T17:46:50.2628983Z ##[section]Finishing: Finalize Job
+2024-11-09T17:46:50.2691873Z ##[section]Finishing: Agent job

@@ -1,0 +1,457 @@
+2024-10-05T16:30:07.6839316Z ##[section]Starting: Agent job
+2024-10-05T16:30:08.1967752Z ##[section]Starting: Initialize job
+2024-10-05T16:30:08.1970904Z Agent name: 'ProdAgent3'
+2024-10-05T16:30:08.1971190Z Agent machine name: 'MSVSTSAPP01'
+2024-10-05T16:30:08.1971340Z Current agent version: '3.227.1'
+2024-10-05T16:30:08.2000384Z Agent running as: 'sysadmin'
+2024-10-05T16:30:08.2000854Z Agent is running behind proxy server: 'http://10.10.2.88:8080'
+2024-10-05T16:30:08.2009699Z Prepare release directory.
+2024-10-05T16:30:08.2016696Z ReleaseId=793, TeamProjectId=e58ad76c-d571-4a1d-9faf-eeea1c663925, ReleaseDefinitionName=ISTDB
+2024-10-05T16:30:08.2099128Z Release folder: D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a
+2024-10-05T16:30:08.2226981Z Environment variables available are below.  Note that these environment variables can be referred to in the task (in the ReleaseDefinition) by replacing "_" with "." e.g. AGENT_NAME environment variable can be referenced using Agent.Name in the ReleaseDefinition: 
+				[AGENT_CLOUDID] --> []
+				[AGENT_DISABLELOGPLUGIN_TESTFILEPUBLISHERPLUGIN] --> [true]
+				[AGENT_DISABLELOGPLUGIN_TESTRESULTLOGPLUGIN] --> [true]
+				[AGENT_HOMEDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4]
+				[AGENT_ID] --> [62]
+				[AGENT_ISSELFHOSTED] --> [1]
+				[AGENT_JOBNAME] --> [Agent job]
+				[AGENT_MACHINENAME] --> [MSVSTSAPP01]
+				[AGENT_NAME] --> [ProdAgent3]
+				[AGENT_OS] --> [Windows_NT]
+				[AGENT_OSARCHITECTURE] --> [X64]
+				[AGENT_PROXYURL] --> [http://10.10.2.88:8080]
+				[AGENT_RELEASEDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a]
+				[AGENT_RETAINDEFAULTENCODING] --> [false]
+				[AGENT_ROOTDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work]
+				[AGENT_SERVEROMDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\externals\vstsom]
+				[AGENT_TASKRESTRICTIONSENFORCEMENTMODE] --> [Enabled]
+				[AGENT_TEMPDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\_temp]
+				[AGENT_TOOLSDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\_tool]
+				[AGENT_VERSION] --> [3.227.1]
+				[AGENT_WORKFOLDER] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work]
+				[AGENT_ENABLE_PIPELINEARTIFACT_LARGE_CHUNK_SIZE] --> [true]
+				[AZP_75787_ENABLE_COLLECT] --> [true]
+				[AZP_75787_ENABLE_NEW_LOGIC] --> [false]
+				[AZP_75787_ENABLE_NEW_LOGIC_LOG] --> [false]
+				[AZP_75787_ENABLE_NEW_PH_LOGIC] --> [true]
+				[AZP_AGENT_CHECK_FOR_TASK_DEPRECATION] --> [true]
+				[AZP_AGENT_LOG_TASKNAME_IN_USERAGENT] --> [true]
+				[AZP_AGENT_MOUNT_WORKSPACE] --> [false]
+				[AZP_PS_ENABLE_INVOKE_PROCESS] --> [true]
+				[AZURE_HTTP_USER_AGENT] --> [VSTS_0fd8e1fc-6d2e-486f-b08b-8ced8e241916_Release__793_793_1]
+				[BUILD_BUILDID] --> [840439]
+				[BUILD_BUILDNUMBER] --> [CRQNumber- User Request- feature-001_840439]
+				[BUILD_BUILDURI] --> [vstfs:///Build/Build/840439]
+				[BUILD_DEFINITIONID] --> [3873]
+				[BUILD_DEFINITIONNAME] --> [DataPatch]
+				[BUILD_PROJECTID] --> [e58ad76c-d571-4a1d-9faf-eeea1c663925]
+				[BUILD_PROJECTNAME] --> [DB Reachability]
+				[BUILD_REPOSITORY_ID] --> [7b354a82-dee8-4b97-9a9a-7041e50812dc]
+				[BUILD_REPOSITORY_NAME] --> [DataPatch]
+				[BUILD_REPOSITORY_PROVIDER] --> [TfsGit]
+				[BUILD_REQUESTEDFOR] --> [Mohan Krishna Pemmaraju]
+				[BUILD_REQUESTEDFORID] --> [8ea4f2ff-2986-613f-8144-4e32b768b912]
+				[BUILD_SOURCEBRANCH] --> [refs/heads/feature-001]
+				[BUILD_SOURCEBRANCHNAME] --> [feature-001]
+				[BUILD_SOURCEVERSION] --> [1162907546e27a81023f1fbc78d809d799187e78]
+				[BUILD_TYPE] --> [Build]
+				[CRQ] --> []
+				[DISTRIBUTEDTASK_AGENT_AGENTENABLEPIPELINEARTIFACTLARGECHUNKSIZE] --> [True]
+				[DISTRIBUTEDTASK_AGENT_CLEANUPPSMODULESINPOWERSHELL] --> [False]
+				[DISTRIBUTEDTASK_AGENT_ENABLEISSUESOURCEVALIDATION] --> [True]
+				[DISTRIBUTEDTASK_AGENT_ENABLERESOURCEUTILIZATIONWARNINGS] --> [False]
+				[DISTRIBUTEDTASK_AGENT_FAILDEPRECATEDTASK] --> [True]
+				[DISTRIBUTEDTASK_AGENT_LOGTASKNAMEINUSERAGENT] --> [True]
+				[DISTRIBUTEDTASK_AGENT_LOGTOBLOBSTORAGESERVICE] --> [False]
+				[DISTRIBUTEDTASK_AGENT_USEGITLONGPATHS] --> [True]
+				[DISTRIBUTEDTASK_AGENT_USEINTEROPTOFINDPARENTPROCESS] --> [False]
+				[DISTRIBUTEDTASK_AGENT_USELATESTGITVERSION] --> [True]
+				[DISTRIBUTEDTASK_AGENT_USEMSALLIBRARY] --> [True]
+				[DISTRIBUTEDTASK_TASKS_NODE_SKIPDEBUGLOGSWHENDEBUGMODEOFF] --> [True]
+				[ENABLE_ISSUE_SOURCE_VALIDATION] --> [true]
+				[FAIL_DEPRECATED_TASK] --> [true]
+				[GIT_TERMINAL_PROMPT] --> [0]
+				[MSDEPLOY_HTTP_USER_AGENT] --> [VSTS_0fd8e1fc-6d2e-486f-b08b-8ced8e241916_Release__793_793_1]
+				[RELEASE_ARTIFACTS__DATAPATCH_BUILDID] --> [840439]
+				[RELEASE_ARTIFACTS__DATAPATCH_BUILDNUMBER] --> [CRQNumber- User Request- feature-001_840439]
+				[RELEASE_ARTIFACTS__DATAPATCH_BUILDURI] --> [vstfs:///Build/Build/840439]
+				[RELEASE_ARTIFACTS__DATAPATCH_DEFINITIONID] --> [3873]
+				[RELEASE_ARTIFACTS__DATAPATCH_DEFINITIONNAME] --> [DataPatch]
+				[RELEASE_ARTIFACTS__DATAPATCH_PROJECTID] --> [e58ad76c-d571-4a1d-9faf-eeea1c663925]
+				[RELEASE_ARTIFACTS__DATAPATCH_PROJECTNAME] --> [DB Reachability]
+				[RELEASE_ARTIFACTS__DATAPATCH_REPOSITORY_ID] --> [7b354a82-dee8-4b97-9a9a-7041e50812dc]
+				[RELEASE_ARTIFACTS__DATAPATCH_REPOSITORY_NAME] --> [DataPatch]
+				[RELEASE_ARTIFACTS__DATAPATCH_REPOSITORY_PROVIDER] --> [TfsGit]
+				[RELEASE_ARTIFACTS__DATAPATCH_REQUESTEDFOR] --> [Mohan Krishna Pemmaraju]
+				[RELEASE_ARTIFACTS__DATAPATCH_REQUESTEDFORID] --> [8ea4f2ff-2986-613f-8144-4e32b768b912]
+				[RELEASE_ARTIFACTS__DATAPATCH_SOURCEBRANCH] --> [refs/heads/feature-001]
+				[RELEASE_ARTIFACTS__DATAPATCH_SOURCEBRANCHNAME] --> [feature-001]
+				[RELEASE_ARTIFACTS__DATAPATCH_SOURCEVERSION] --> [1162907546e27a81023f1fbc78d809d799187e78]
+				[RELEASE_ARTIFACTS__DATAPATCH_TYPE] --> [Build]
+				[RELEASE_ARTIFACTS__SCRIPT_BUILDID] --> [1bdc51b6f45ed4ece38053d2c9f2b6ce624f7f90]
+				[RELEASE_ARTIFACTS__SCRIPT_BUILDNUMBER] --> [1bdc51b6]
+				[RELEASE_ARTIFACTS__SCRIPT_DEFINITIONID] --> [935f040f-1b30-4c9e-9c32-fea264eb3d71]
+				[RELEASE_ARTIFACTS__SCRIPT_DEFINITIONNAME] --> [Script]
+				[RELEASE_ARTIFACTS__SCRIPT_DEFINTIONID] --> [935f040f-1b30-4c9e-9c32-fea264eb3d71]
+				[RELEASE_ARTIFACTS__SCRIPT_PROJECTID] --> [e58ad76c-d571-4a1d-9faf-eeea1c663925]
+				[RELEASE_ARTIFACTS__SCRIPT_PROJECTNAME] --> [DB Reachability]
+				[RELEASE_ARTIFACTS__SCRIPT_REPOSITORY_ID] --> [935f040f-1b30-4c9e-9c32-fea264eb3d71]
+				[RELEASE_ARTIFACTS__SCRIPT_REPOSITORY_NAME] --> [Script]
+				[RELEASE_ARTIFACTS__SCRIPT_REPOSITORY_PROVIDER] --> [Git]
+				[RELEASE_ARTIFACTS__SCRIPT_REPOSITORY_URI] --> [https://kmbl-devops@dev.azure.com/kmbl-devops/DB%20Reachability/_git/Script]
+				[RELEASE_ARTIFACTS__SCRIPT_SOURCEBRANCH] --> [main]
+				[RELEASE_ARTIFACTS__SCRIPT_SOURCEVERSION] --> [1bdc51b6f45ed4ece38053d2c9f2b6ce624f7f90]
+				[RELEASE_ARTIFACTS__SCRIPT_TYPE] --> [Git]
+				[RELEASE_ATTEMPTNUMBER] --> [1]
+				[RELEASE_DEFINITIONENVIRONMENTID] --> [9]
+				[RELEASE_DEFINITIONID] --> [9]
+				[RELEASE_DEFINITIONNAME] --> [ISTDB]
+				[RELEASE_DEFINITIONSNAPSHOTREVISION] --> []
+				[RELEASE_DEPLOYMENT_REQUESTEDFOR] --> [[kmbl-devops]\Project Collection Service Accounts]
+				[RELEASE_DEPLOYMENT_REQUESTEDFOREMAIL] --> []
+				[RELEASE_DEPLOYMENT_REQUESTEDFORID] --> [f65f0815-0c16-4a71-8c56-f01a89dc64b5]
+				[RELEASE_DEPLOYMENT_STARTTIME] --> [2024-10-05 16:30:00Z]
+				[RELEASE_DEPLOYMENTID] --> [811]
+				[RELEASE_DEPLOYPHASEID] --> [828]
+				[RELEASE_ENVIRONMENTID] --> [793]
+				[RELEASE_ENVIRONMENTNAME] --> [Prod]
+				[RELEASE_ENVIRONMENTPROTECTEDTENANTS] --> []
+				[RELEASE_ENVIRONMENTS_PROD_STATUS] --> [InProgress]
+				[RELEASE_ENVIRONMENTURI] --> [vstfs:///ReleaseManagement/Environment/793]
+				[RELEASE_PRIMARYARTIFACTSOURCEALIAS] --> [_DataPatch]
+				[RELEASE_REASON] --> [Schedule]
+				[RELEASE_RELEASEDESCRIPTION] --> [Scheduled release for pipeline 'ISTDB'.]
+				[RELEASE_RELEASEID] --> [793]
+				[RELEASE_RELEASENAME] --> [Release-58]
+				[RELEASE_RELEASEURI] --> [vstfs:///ReleaseManagement/Release/793]
+				[RELEASE_RELEASEWEBURL] --> [https://dev.azure.com/kmbl-devops/e58ad76c-d571-4a1d-9faf-eeea1c663925/_release?releaseId=793&_a=release-summary]
+				[RELEASE_REQUESTEDFOR] --> [[kmbl-devops]\Project Collection Service Accounts]
+				[RELEASE_REQUESTEDFOREMAIL] --> []
+				[RELEASE_REQUESTEDFORID] --> [f65f0815-0c16-4a71-8c56-f01a89dc64b5]
+				[RELEASE_SKIPARTIFACTSDOWNLOAD] --> [False]
+				[RELEASE_TRIGGERINGARTIFACT_ALIAS] --> []
+				[REQUESTEDFORID] --> [f65f0815-0c16-4a71-8c56-f01a89dc64b5]
+				[SNOW_APP_ID] --> []
+				[SNOW_MODULE_ID] --> []
+				[SYSTEM] --> [release]
+				[SYSTEM_ARTIFACTSDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a]
+				[SYSTEM_COLLECTIONID] --> [0fd8e1fc-6d2e-486f-b08b-8ced8e241916]
+				[SYSTEM_COLLECTIONURI] --> [https://vsrm.dev.azure.com/kmbl-devops/]
+				[SYSTEM_CULTURE] --> [en-US]
+				[SYSTEM_DEFAULTWORKINGDIRECTORY] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a]
+				[SYSTEM_DEFINITIONID] --> [9]
+				[SYSTEM_DEFINITIONNAME] --> [ISTDB]
+				[SYSTEM_ENABLEACCESSTOKEN] --> [False]
+				[SYSTEM_HOSTTYPE] --> [release]
+				[SYSTEM_ISDOCKERCONTAINER] --> [0]
+				[SYSTEM_ISSCHEDULED] --> [False]
+				[SYSTEM_JOBATTEMPT] --> [1]
+				[SYSTEM_JOBDISPLAYNAME] --> [Agent job]
+				[SYSTEM_JOBID] --> [236874b6-9208-5e6d-c7be-e148286cf222]
+				[SYSTEM_JOBIDENTIFIER] --> [Stage_e58ad76cd5714a1d9fafeeea1c663925_9_1.Phase_1.__default]
+				[SYSTEM_JOBNAME] --> [__default]
+				[SYSTEM_JOBPARALLELISMTAG] --> [Private]
+				[SYSTEM_JOBPOSITIONINPHASE] --> [1]
+				[SYSTEM_JOBTIMEOUT] --> [0]
+				[SYSTEM_OIDCREQUESTURI] --> [https://vsrm.dev.azure.com/kmbl-devops/e58ad76c-d571-4a1d-9faf-eeea1c663925/_apis/distributedtask/hubs/release/plans/776f6d30-ce63-4ac7-b891-b6dec2bc305b/jobs/236874b6-9208-5e6d-c7be-e148286cf222/oidctoken]
+				[SYSTEM_PHASEATTEMPT] --> [1]
+				[SYSTEM_PHASEDISPLAYNAME] --> [Agent job]
+				[SYSTEM_PHASEID] --> [ec9b2543-40ce-5c99-282c-9ea1db3c41fe]
+				[SYSTEM_PHASENAME] --> [Phase_1]
+				[SYSTEM_PIPELINESTARTTIME] --> [2024-10-05 22:00:04+05:30]
+				[SYSTEM_PLANID] --> [776f6d30-ce63-4ac7-b891-b6dec2bc305b]
+				[SYSTEM_PREFERREDIRECTGETCONTAINERITEM] --> [true]
+				[SYSTEM_SERVERTYPE] --> [Hosted]
+				[SYSTEM_STAGEATTEMPT] --> [1]
+				[SYSTEM_STAGEDISPLAYNAME] --> [Prod]
+				[SYSTEM_STAGEID] --> [4235992c-b631-5067-f7ea-c8c044d131d7]
+				[SYSTEM_STAGENAME] --> [Stage_e58ad76cd5714a1d9fafeeea1c663925_9_1]
+				[SYSTEM_TASKDEFINITIONSURI] --> [https://dev.azure.com/kmbl-devops/]
+				[SYSTEM_TEAMFOUNDATIONCOLLECTIONURI] --> [https://dev.azure.com/kmbl-devops/]
+				[SYSTEM_TEAMFOUNDATIONSERVERURI] --> [https://vsrm.dev.azure.com/kmbl-devops/]
+				[SYSTEM_TEAMPROJECT] --> [DB Reachability]
+				[SYSTEM_TEAMPROJECTID] --> [e58ad76c-d571-4a1d-9faf-eeea1c663925]
+				[SYSTEM_TIMELINEID] --> [776f6d30-ce63-4ac7-b891-b6dec2bc305b]
+				[SYSTEM_TOTALJOBSINPHASE] --> [1]
+				[SYSTEM_WORKFOLDER] --> [D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work]
+				[USE_GIT_LONG_PATHS] --> [true]
+				[USE_LATEST_GIT_VERSION] --> [true]
+				[USE_MSAL] --> [true]
+				[USE_MSDEPLOY_TOKEN_AUTH] --> [true]
+2024-10-05T16:30:08.6565488Z Download all required tasks.
+2024-10-05T16:30:08.6852089Z Checking job knob settings.
+2024-10-05T16:30:08.6864000Z    Knob: AgentEnablePipelineArtifactLargeChunkSize = true Source: $(AGENT_ENABLE_PIPELINEARTIFACT_LARGE_CHUNK_SIZE) 
+2024-10-05T16:30:08.6865638Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC) 
+2024-10-05T16:30:08.6865984Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC_LOG) 
+2024-10-05T16:30:08.6866331Z    Knob: ProcessHandlerTelemetry = true Source: $(AZP_75787_ENABLE_COLLECT) 
+2024-10-05T16:30:08.6866874Z Finished checking job knob settings.
+2024-10-05T16:30:08.7168170Z Start tracking orphan processes.
+2024-10-05T16:30:08.7270306Z ##[section]Finishing: Initialize job
+2024-10-05T16:30:08.7462507Z ##[section]Async Command Start: DetectDockerContainer
+2024-10-05T16:30:08.7462768Z ##[section]Async Command End: DetectDockerContainer
+2024-10-05T16:30:08.7463572Z ##[section]Async Command Start: DetectDockerContainer
+2024-10-05T16:30:08.7463799Z ##[section]Async Command End: DetectDockerContainer
+2024-10-05T16:30:08.7643029Z ##[section]Starting: Download Artifacts
+2024-10-05T16:30:08.8275849Z Creating artifacts directory: D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a
+2024-10-05T16:30:08.8297439Z Created artifacts directory: D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a
+2024-10-05T16:30:08.8297678Z Downloading artifact
+2024-10-05T16:30:08.8307656Z Starting artifacts download...
+2024-10-05T16:30:08.8316095Z Downloading linked artifact _Script of type TFGit...
+2024-10-05T16:30:08.8338228Z Ensuring artifact folder D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_Script exists and is clean.
+2024-10-05T16:30:08.8468860Z Syncing repository: 935f040f-1b30-4c9e-9c32-fea264eb3d71 (Git)
+2024-10-05T16:30:08.8524728Z Prepending Path environment variable with directory containing 'git.exe'.
+2024-10-05T16:30:08.8547233Z ##[command]git version
+2024-10-05T16:30:08.9384253Z git version 2.39.1.windows.1
+2024-10-05T16:30:08.9398850Z ##[command]git lfs version
+2024-10-05T16:30:09.1133102Z git-lfs/3.3.0 (GitHub; windows amd64; go 1.19.3; git 77deabdf)
+2024-10-05T16:30:09.1179314Z ##[command]git init "D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_Script"
+2024-10-05T16:30:09.2442492Z Initialized empty Git repository in D:/KMBLAgentLatest03/vsts-agent-win-x64-2.166.4/_work/r395/a/_Script/.git/
+2024-10-05T16:30:09.2506670Z ##[command]git remote add origin https://kmbl-devops@dev.azure.com/kmbl-devops/DB%20Reachability/_git/Script
+2024-10-05T16:30:09.3440471Z ##[command]git config gc.auto 0
+2024-10-05T16:30:09.4269775Z ##[command]git config --get-all http.https://kmbl-devops@dev.azure.com/kmbl-devops/DB%20Reachability/_git/Script.extraheader
+2024-10-05T16:30:09.5222281Z ##[command]git config --get-all http.proxy
+2024-10-05T16:30:09.6153580Z ##[command]git --config-env=http.extraheader=env_var_http.extraheader -c http.proxy="http://10.10.2.88:8080" fetch --tags --prune --prune-tags --progress --no-recurse-submodules origin
+2024-10-05T16:30:11.6286979Z remote: Azure Repos        
+2024-10-05T16:30:11.6325218Z remote: 
+2024-10-05T16:30:11.6325479Z remote: Found 378 objects to send. (5 ms)        
+2024-10-05T16:30:11.6789304Z Receiving objects:   0% (1/378)
+2024-10-05T16:30:11.6789942Z Receiving objects:   1% (4/378)
+2024-10-05T16:30:11.6791203Z Receiving objects:   2% (8/378)
+2024-10-05T16:30:11.6797546Z Receiving objects:   3% (12/378)
+2024-10-05T16:30:11.6797884Z Receiving objects:   4% (16/378)
+2024-10-05T16:30:11.6799094Z Receiving objects:   5% (19/378)
+2024-10-05T16:30:11.6800681Z Receiving objects:   6% (23/378)
+2024-10-05T16:30:11.6802041Z Receiving objects:   7% (27/378)
+2024-10-05T16:30:11.6803230Z Receiving objects:   8% (31/378)
+2024-10-05T16:30:11.6804688Z Receiving objects:   9% (35/378)
+2024-10-05T16:30:11.6805321Z Receiving objects:  10% (38/378)
+2024-10-05T16:30:11.6806335Z Receiving objects:  11% (42/378)
+2024-10-05T16:30:11.6807678Z Receiving objects:  12% (46/378)
+2024-10-05T16:30:11.6808080Z Receiving objects:  13% (50/378)
+2024-10-05T16:30:11.6809559Z Receiving objects:  14% (53/378)
+2024-10-05T16:30:11.6810701Z Receiving objects:  15% (57/378)
+2024-10-05T16:30:11.6812036Z Receiving objects:  16% (61/378)
+2024-10-05T16:30:11.6813434Z Receiving objects:  17% (65/378)
+2024-10-05T16:30:11.6814427Z Receiving objects:  18% (69/378)
+2024-10-05T16:30:11.6816120Z Receiving objects:  19% (72/378)
+2024-10-05T16:30:11.6817048Z Receiving objects:  20% (76/378)
+2024-10-05T16:30:11.6818169Z Receiving objects:  21% (80/378)
+2024-10-05T16:30:11.6818374Z Receiving objects:  22% (84/378)
+2024-10-05T16:30:11.6819708Z Receiving objects:  23% (87/378)
+2024-10-05T16:30:11.6820940Z Receiving objects:  24% (91/378)
+2024-10-05T16:30:11.6822048Z Receiving objects:  25% (95/378)
+2024-10-05T16:30:11.6823429Z Receiving objects:  26% (99/378)
+2024-10-05T16:30:11.6823985Z Receiving objects:  27% (103/378)
+2024-10-05T16:30:11.6824764Z Receiving objects:  28% (106/378)
+2024-10-05T16:30:11.6826025Z Receiving objects:  29% (110/378)
+2024-10-05T16:30:11.6828048Z Receiving objects:  30% (114/378)
+2024-10-05T16:30:11.6828331Z Receiving objects:  31% (118/378)
+2024-10-05T16:30:11.6831491Z Receiving objects:  32% (121/378)
+2024-10-05T16:30:11.6831714Z Receiving objects:  33% (125/378)
+2024-10-05T16:30:11.6832321Z Receiving objects:  34% (129/378)
+2024-10-05T16:30:11.6833309Z Receiving objects:  35% (133/378)
+2024-10-05T16:30:11.6835071Z Receiving objects:  36% (137/378)
+2024-10-05T16:30:11.6835884Z Receiving objects:  37% (140/378)
+2024-10-05T16:30:11.6836829Z Receiving objects:  38% (144/378)
+2024-10-05T16:30:11.6837710Z Receiving objects:  39% (148/378)
+2024-10-05T16:30:11.6838587Z Receiving objects:  40% (152/378)
+2024-10-05T16:30:11.6839741Z Receiving objects:  41% (155/378)
+2024-10-05T16:30:11.6840396Z Receiving objects:  42% (159/378)
+2024-10-05T16:30:11.6841388Z Receiving objects:  43% (163/378)
+2024-10-05T16:30:11.6842573Z Receiving objects:  44% (167/378)
+2024-10-05T16:30:11.6843471Z Receiving objects:  45% (171/378)
+2024-10-05T16:30:11.6844322Z Receiving objects:  46% (174/378)
+2024-10-05T16:30:11.6845541Z Receiving objects:  47% (178/378)
+2024-10-05T16:30:11.6846862Z Receiving objects:  48% (182/378)
+2024-10-05T16:30:11.6847692Z Receiving objects:  49% (186/378)
+2024-10-05T16:30:11.6849001Z Receiving objects:  50% (189/378)
+2024-10-05T16:30:11.6850117Z Receiving objects:  51% (193/378)
+2024-10-05T16:30:11.6851306Z Receiving objects:  52% (197/378)
+2024-10-05T16:30:11.6852615Z Receiving objects:  53% (201/378)
+2024-10-05T16:30:11.6852833Z Receiving objects:  54% (205/378)
+2024-10-05T16:30:11.6854094Z Receiving objects:  55% (208/378)
+2024-10-05T16:30:11.6855313Z Receiving objects:  56% (212/378)
+2024-10-05T16:30:11.6856784Z Receiving objects:  57% (216/378)
+2024-10-05T16:30:11.6857824Z Receiving objects:  58% (220/378)
+2024-10-05T16:30:11.6859201Z Receiving objects:  59% (224/378)
+2024-10-05T16:30:11.6860155Z Receiving objects:  60% (227/378)
+2024-10-05T16:30:11.6861416Z Receiving objects:  61% (231/378)
+2024-10-05T16:30:11.6862648Z Receiving objects:  62% (235/378)
+2024-10-05T16:30:11.6862896Z Receiving objects:  63% (239/378)
+2024-10-05T16:30:11.6864141Z Receiving objects:  64% (242/378)
+2024-10-05T16:30:11.6865364Z Receiving objects:  65% (246/378)
+2024-10-05T16:30:11.6866467Z Receiving objects:  66% (250/378)
+2024-10-05T16:30:11.6867725Z Receiving objects:  67% (254/378)
+2024-10-05T16:30:11.6867904Z Receiving objects:  68% (258/378)
+2024-10-05T16:30:11.6869324Z Receiving objects:  69% (261/378)
+2024-10-05T16:30:11.6870162Z Receiving objects:  70% (265/378)
+2024-10-05T16:30:11.6871313Z Receiving objects:  71% (269/378)
+2024-10-05T16:30:11.6872070Z Receiving objects:  72% (273/378)
+2024-10-05T16:30:11.6872942Z Receiving objects:  73% (276/378)
+2024-10-05T16:30:11.6874110Z Receiving objects:  74% (280/378)
+2024-10-05T16:30:11.6875384Z Receiving objects:  75% (284/378)
+2024-10-05T16:30:11.6876261Z Receiving objects:  76% (288/378)
+2024-10-05T16:30:11.6877275Z Receiving objects:  77% (292/378)
+2024-10-05T16:30:11.6878566Z Receiving objects:  78% (295/378)
+2024-10-05T16:30:11.6879854Z Receiving objects:  79% (299/378)
+2024-10-05T16:30:11.6880837Z Receiving objects:  80% (303/378)
+2024-10-05T16:30:11.6882116Z Receiving objects:  81% (307/378)
+2024-10-05T16:30:11.6882381Z Receiving objects:  82% (310/378)
+2024-10-05T16:30:11.6883746Z Receiving objects:  83% (314/378)
+2024-10-05T16:30:11.6884503Z Receiving objects:  84% (318/378)
+2024-10-05T16:30:11.6885752Z Receiving objects:  85% (322/378)
+2024-10-05T16:30:11.6885893Z Receiving objects:  86% (326/378)
+2024-10-05T16:30:11.6887223Z Receiving objects:  87% (329/378)
+2024-10-05T16:30:11.6888211Z Receiving objects:  88% (333/378)
+2024-10-05T16:30:11.6888989Z Receiving objects:  89% (337/378)
+2024-10-05T16:30:11.6890046Z Receiving objects:  90% (341/378)
+2024-10-05T16:30:11.6891410Z Receiving objects:  91% (344/378)
+2024-10-05T16:30:11.6892227Z Receiving objects:  92% (348/378)
+2024-10-05T16:30:11.6893429Z Receiving objects:  93% (352/378)
+2024-10-05T16:30:11.6895173Z Receiving objects:  94% (356/378)
+2024-10-05T16:30:11.6895430Z Receiving objects:  95% (360/378)
+2024-10-05T16:30:11.6896576Z Receiving objects:  96% (363/378)
+2024-10-05T16:30:11.6897693Z Receiving objects:  97% (367/378)
+2024-10-05T16:30:11.6898766Z Receiving objects:  98% (371/378)
+2024-10-05T16:30:11.6899091Z Receiving objects:  99% (375/378)
+2024-10-05T16:30:11.6901922Z Receiving objects: 100% (378/378)
+2024-10-05T16:30:11.6902106Z Receiving objects: 100% (378/378), 231.80 KiB | 21.07 MiB/s, done.
+2024-10-05T16:30:11.7721993Z From https://dev.azure.com/kmbl-devops/DB%20Reachability/_git/Script
+2024-10-05T16:30:11.7722194Z  * [new branch]      main       -> origin/main
+2024-10-05T16:30:11.8113736Z ##[command]git checkout --progress --force 1bdc51b6f45ed4ece38053d2c9f2b6ce624f7f90
+2024-10-05T16:30:11.9555438Z Note: switching to '1bdc51b6f45ed4ece38053d2c9f2b6ce624f7f90'.
+2024-10-05T16:30:11.9555609Z 
+2024-10-05T16:30:11.9555754Z You are in 'detached HEAD' state. You can look around, make experimental
+2024-10-05T16:30:11.9555981Z changes and commit them, and you can discard any commits you make in this
+2024-10-05T16:30:11.9556152Z state without impacting any branches by switching back to a branch.
+2024-10-05T16:30:11.9556267Z 
+2024-10-05T16:30:11.9556387Z If you want to create a new branch to retain commits you create, you may
+2024-10-05T16:30:11.9556567Z do so (now or later) by using -c with the switch command. Example:
+2024-10-05T16:30:11.9556665Z 
+2024-10-05T16:30:11.9556768Z   git switch -c <new-branch-name>
+2024-10-05T16:30:11.9556840Z 
+2024-10-05T16:30:11.9556930Z Or undo this operation with:
+2024-10-05T16:30:11.9557020Z 
+2024-10-05T16:30:11.9557093Z   git switch -
+2024-10-05T16:30:11.9557148Z 
+2024-10-05T16:30:11.9557294Z Turn off this advice by setting config variable advice.detachedHead to false
+2024-10-05T16:30:11.9557418Z 
+2024-10-05T16:30:11.9557533Z HEAD is now at 1bdc51b commented writing to file
+2024-10-05T16:30:11.9621301Z Downloaded linked artifact _Script
+2024-10-05T16:30:11.9621467Z Finished artifacts download
+2024-10-05T16:30:11.9657153Z ##[section]Finishing: Download Artifacts
+2024-10-05T16:30:11.9698729Z ##[section]Starting: Download artifact - _DataPatch - Deployment
+2024-10-05T16:30:12.0184418Z ==============================================================================
+2024-10-05T16:30:12.0184897Z Task         : Download build artifacts
+2024-10-05T16:30:12.0185119Z Description  : Download files that were saved as artifacts of a completed build
+2024-10-05T16:30:12.0185239Z Version      : 0.246.1
+2024-10-05T16:30:12.0185440Z Author       : Microsoft Corporation
+2024-10-05T16:30:12.0185628Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/download-build-artifacts
+2024-10-05T16:30:12.0185760Z ==============================================================================
+2024-10-05T16:30:12.7786340Z Downloading artifacts for build: 840439
+2024-10-05T16:30:12.8244461Z Downloading items from container resource #/8886676/Deployment
+2024-10-05T16:30:12.8245120Z Downloading artifact Deployment from: https://dev.azure.com/kmbl-devops//_apis/resources/Containers/8886676?itemPath=Deployment&isShallow=true&api-version=4.1-preview.4
+2024-10-05T16:30:12.8247305Z Prefer downloading files through redirect to the content stitcher: true
+2024-10-05T16:30:13.0223385Z Downloading Deployment/azure-pipelines.yml to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\azure-pipelines.yml
+2024-10-05T16:30:13.0255892Z Downloaded Deployment/azure-pipelines.yml to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\azure-pipelines.yml
+2024-10-05T16:30:13.1105760Z Downloading Deployment/Deploy.ctl to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\Deploy.ctl
+2024-10-05T16:30:13.1111380Z Downloaded Deployment/Deploy.ctl to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\Deploy.ctl
+2024-10-05T16:30:13.2225022Z Downloading Deployment/dpatch/Deploy.ctl to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\dpatch\Deploy.ctl
+2024-10-05T16:30:13.2231587Z Downloaded Deployment/dpatch/Deploy.ctl to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\dpatch\Deploy.ctl
+2024-10-05T16:30:13.3259803Z Downloading Deployment/dpatch/Script/Test.sql to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\dpatch\Script\Test.sql
+2024-10-05T16:30:13.3265119Z Downloaded Deployment/dpatch/Script/Test.sql to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\dpatch\Script\Test.sql
+2024-10-05T16:30:13.3803609Z Downloading Deployment/dpatch/Script/Test1.sql to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\dpatch\Script\Test1.sql
+2024-10-05T16:30:13.3807240Z Downloaded Deployment/dpatch/Script/Test1.sql to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\Deployment\dpatch\Script\Test1.sql
+2024-10-05T16:30:13.8453313Z Total Files: 5, Processed: 5, Skipped: 0, Failed: 0, Download time: 1.02 secs, Download size: 488Bytes
+2024-10-05T16:30:13.8606104Z Successfully downloaded artifacts to D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_DataPatch\
+2024-10-05T16:30:13.8632757Z ##[section]Finishing: Download artifact - _DataPatch - Deployment
+2024-10-05T16:30:13.8671809Z ##[section]Starting: Default Path
+2024-10-05T16:30:13.8954684Z ==============================================================================
+2024-10-05T16:30:13.8954826Z Task         : PowerShell
+2024-10-05T16:30:13.8954894Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2024-10-05T16:30:13.8955014Z Version      : 2.245.1
+2024-10-05T16:30:13.8955082Z Author       : Microsoft Corporation
+2024-10-05T16:30:13.8955176Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2024-10-05T16:30:13.8955287Z ==============================================================================
+2024-10-05T16:30:15.3544723Z Generating script.
+2024-10-05T16:30:15.4032570Z ========================== Starting Command Output ===========================
+2024-10-05T16:30:15.4381126Z ##[command]"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\_temp\cab9c0c2-a9d3-4946-bf7d-3f28a94c614d.ps1'"
+2024-10-05T16:30:15.9209957Z ##[section]Finishing: Default Path
+2024-10-05T16:30:15.9244780Z ##[section]Starting: Deploy
+2024-10-05T16:30:15.9533916Z ==============================================================================
+2024-10-05T16:30:15.9534053Z Task         : PowerShell
+2024-10-05T16:30:15.9534135Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2024-10-05T16:30:15.9534259Z Version      : 2.245.1
+2024-10-05T16:30:15.9534323Z Author       : Microsoft Corporation
+2024-10-05T16:30:15.9534417Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2024-10-05T16:30:15.9534532Z ==============================================================================
+2024-10-05T16:30:17.4030330Z Generating script.
+2024-10-05T16:30:17.4624432Z Formatted command: . 'D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_Script\ISTDB\Deploy.ps1'
+2024-10-05T16:30:17.5084455Z ========================== Starting Command Output ===========================
+2024-10-05T16:30:17.5373592Z ##[command]"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\_temp\c350c88b-2f48-438e-8575-91cc5a157068.ps1'"
+2024-10-05T16:30:17.9756165Z dpatch
+2024-10-05T16:30:17.9902946Z 
+2024-10-05T16:30:17.9942613Z IsPublic IsSerial Name   BaseType     
+2024-10-05T16:30:17.9945992Z -------- -------- ----   --------     
+2024-10-05T16:30:17.9948695Z True     True     String System.Object
+2024-10-05T16:30:17.9948832Z 
+2024-10-05T16:30:17.9949819Z 
+2024-10-05T16:30:17.9995851Z Folder Exists
+2024-10-05T16:30:20.2408934Z Message: dpatch
+2024-10-05T16:30:20.2422390Z Message: <request><header><msg_code>RequestArcosService</msg_code><source>VSTS</source><channel>ALL</channel><txn_ref_number>VSTS_ALL_1728145820000</txn_ref_number><txn_datetime>1728145820000</txn_datetime><ip>10.10.35.158</ip><device_id></device_id></header><detail><service_type>AppToadOracle</service_type><server_ip>10.240.70.23</server_ip><username>DPATCH</username><lob_profile>PRIVILEGE_ORACLE</lob_profile><db_instance_name>istdb</db_instance_name><filler1></filler1><filler2></filler2><filler3></filler3><filler4></filler4><filler5></filler5></detail></request>
+2024-10-05T16:30:20.2552120Z http://10.10.35.158:9080/arcos-service/RequestArcosService?format=xml&data=%3crequest%3e%3cheader%3e%3cmsg_code%3eRequestArcosService%3c%2fmsg_code%3e%3csource%3eVSTS%3c%2fsource%3e%3cchannel%3eALL%3c%2fchannel%3e%3ctxn_ref_number%3eVSTS_ALL_1728145820000%3c%2ftxn_ref_number%3e%3ctxn_datetime%3e1728145820000%3c%2ftxn_datetime%3e%3cip%3e10.10.35.158%3c%2fip%3e%3cdevice_id%3e%3c%2fdevice_id%3e%3c%2fheader%3e%3cdetail%3e%3cservice_type%3eAppToadOracle%3c%2fservice_type%3e%3cserver_ip%3e10.240.70.23%3c%2fserver_ip%3e%3cusername%3eDPATCH%3c%2fusername%3e%3clob_profile%3ePRIVILEGE_ORACLE%3c%2flob_profile%3e%3cdb_instance_name%3eistdb%3c%2fdb_instance_name%3e%3cfiller1%3e%3c%2ffiller1%3e%3cfiller2%3e%3c%2ffiller2%3e%3cfiller3%3e%3c%2ffiller3%3e%3cfiller4%3e%3c%2ffiller4%3e%3cfiller5%3e%3c%2ffiller5%3e%3c%2fdetail%3e%3c%2frequest%3e
+2024-10-05T16:30:20.3918109Z StatusCode: 0
+2024-10-05T16:30:20.3927458Z StatusMessage: SUC
+2024-10-05T16:30:20.3936418Z ResponseDatetime: 1728145820367
+2024-10-05T16:30:20.3945147Z End REST API Invoke
+2024-10-05T16:30:21.8375525Z 0
+2024-10-05T16:30:21.9628024Z 
+2024-10-05T16:30:21.9628555Z SQL*Plus: Release 19.0.0.0.0 - Production on Sat Oct 5 22:00:21 2024
+2024-10-05T16:30:21.9628786Z Version 19.3.0.0.0
+2024-10-05T16:30:21.9628854Z 
+2024-10-05T16:30:21.9629034Z Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+2024-10-05T16:30:21.9629128Z 
+2024-10-05T16:30:22.3004863Z Last Successful login time: Sat Oct 05 2024 22:00:20 +05:30
+2024-10-05T16:30:22.3005171Z 
+2024-10-05T16:30:22.3005415Z Connected to:
+2024-10-05T16:30:22.3005796Z Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-10-05T16:30:22.3006151Z Version 19.24.0.0.0
+2024-10-05T16:30:22.3006270Z 
+2024-10-05T16:30:22.3072425Z 2024105_100022_PM
+2024-10-05T16:30:22.3072570Z 
+2024-10-05T16:30:22.3081060Z SQL> DEF;
+2024-10-05T16:30:22.3081265Z DEFINE _DATE	       = "05-OCT-24" (CHAR)
+2024-10-05T16:30:22.3081543Z DEFINE _CONNECT_IDENTIFIER = "//10.240.70.24:1530/istdb" (CHAR)
+2024-10-05T16:30:22.3081761Z DEFINE _USER	       = "DPATCH" (CHAR)
+2024-10-05T16:30:22.3081936Z DEFINE _PRIVILEGE      = "" (CHAR)
+2024-10-05T16:30:22.3091581Z DEFINE _SQLPLUS_RELEASE = "1903000000" (CHAR)
+2024-10-05T16:30:22.3091812Z DEFINE _EDITOR	       = "Notepad" (CHAR)
+2024-10-05T16:30:22.3092051Z DEFINE _O_VERSION      = "Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-10-05T16:30:22.3092256Z Version 19.24.0.0.0" (CHAR)
+2024-10-05T16:30:22.3092445Z DEFINE _O_RELEASE      = "1924000000" (CHAR)
+2024-10-05T16:30:22.3092641Z DEFINE X	       = "2024105_100022_PM" (CHAR)
+2024-10-05T16:30:22.3092812Z SQL> set timing on
+2024-10-05T16:30:22.3092958Z SQL> @Script\Test.sql
+2024-10-05T16:30:22.3093129Z SQL> select systimestamp from dual;
+2024-10-05T16:30:22.3110330Z 05-OCT-24 10.00.22.306670 PM +05:30
+2024-10-05T16:30:22.3110446Z 
+2024-10-05T16:30:22.3122815Z Elapsed: 00:00:00.00
+2024-10-05T16:30:22.3124953Z SQL> @Script\Test1.sql
+2024-10-05T16:30:22.3130517Z SQL> select sysdate from dual;
+2024-10-05T16:30:22.3149742Z 05-OCT-24
+2024-10-05T16:30:22.3149814Z 
+2024-10-05T16:30:22.3150464Z Elapsed: 00:00:00.00
+2024-10-05T16:30:22.3152038Z SQL> set timing off
+2024-10-05T16:30:22.3152205Z SQL> spool off
+2024-10-05T16:30:22.3174428Z SQL> exit
+2024-10-05T16:30:22.3186664Z Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-10-05T16:30:22.3186899Z Version 19.24.0.0.0
+2024-10-05T16:30:23.2980608Z 0
+2024-10-05T16:30:23.2994119Z ok
+2024-10-05T16:30:23.3848916Z ##[section]Finishing: Deploy
+2024-10-05T16:30:23.3987186Z ##[section]Starting: Finalize Job
+2024-10-05T16:30:23.4020891Z Cleaning up task key
+2024-10-05T16:30:23.4022546Z Start cleaning up orphan processes.
+2024-10-05T16:30:23.4073706Z ##[section]Finishing: Finalize Job
+2024-10-05T16:30:23.4149992Z ##[section]Finishing: Agent job

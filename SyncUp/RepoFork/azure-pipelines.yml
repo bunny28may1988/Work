@@ -1,0 +1,19 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Bash@3
+  displayName: 'Run sample.sh'
+  inputs:
+    targetType: 'filePath'
+    filePath: './sample.sh'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish log files as artifacts'
+  inputs:
+    PathtoPublish: '**/*.log'
+    ArtifactName: 'log-files'
+    publishLocation: 'Container'

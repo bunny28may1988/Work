@@ -1,0 +1,72 @@
+2024-10-05T16:30:15.9244703Z ##[section]Starting: Deploy
+2024-10-05T16:30:15.9533882Z ==============================================================================
+2024-10-05T16:30:15.9534049Z Task         : PowerShell
+2024-10-05T16:30:15.9534130Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2024-10-05T16:30:15.9534254Z Version      : 2.245.1
+2024-10-05T16:30:15.9534323Z Author       : Microsoft Corporation
+2024-10-05T16:30:15.9534413Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2024-10-05T16:30:15.9534528Z ==============================================================================
+2024-10-05T16:30:17.4030287Z Generating script.
+2024-10-05T16:30:17.4624389Z Formatted command: . 'D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\r395\a\_Script\ISTDB\Deploy.ps1'
+2024-10-05T16:30:17.5084408Z ========================== Starting Command Output ===========================
+2024-10-05T16:30:17.5373442Z ##[command]"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'D:\KMBLAgentLatest03\vsts-agent-win-x64-2.166.4\_work\_temp\c350c88b-2f48-438e-8575-91cc5a157068.ps1'"
+2024-10-05T16:30:17.9756109Z dpatch
+2024-10-05T16:30:17.9902895Z 
+2024-10-05T16:30:17.9942592Z IsPublic IsSerial Name   BaseType     
+2024-10-05T16:30:17.9945983Z -------- -------- ----   --------     
+2024-10-05T16:30:17.9948686Z True     True     String System.Object
+2024-10-05T16:30:17.9948827Z 
+2024-10-05T16:30:17.9949811Z 
+2024-10-05T16:30:17.9995825Z Folder Exists
+2024-10-05T16:30:20.2408879Z Message: dpatch
+2024-10-05T16:30:20.2422347Z Message: <request><header><msg_code>RequestArcosService</msg_code><source>VSTS</source><channel>ALL</channel><txn_ref_number>VSTS_ALL_1728145820000</txn_ref_number><txn_datetime>1728145820000</txn_datetime><ip>10.10.35.158</ip><device_id></device_id></header><detail><service_type>AppToadOracle</service_type><server_ip>10.240.70.23</server_ip><username>DPATCH</username><lob_profile>PRIVILEGE_ORACLE</lob_profile><db_instance_name>istdb</db_instance_name><filler1></filler1><filler2></filler2><filler3></filler3><filler4></filler4><filler5></filler5></detail></request>
+2024-10-05T16:30:20.2552069Z http://10.10.35.158:9080/arcos-service/RequestArcosService?format=xml&data=%3crequest%3e%3cheader%3e%3cmsg_code%3eRequestArcosService%3c%2fmsg_code%3e%3csource%3eVSTS%3c%2fsource%3e%3cchannel%3eALL%3c%2fchannel%3e%3ctxn_ref_number%3eVSTS_ALL_1728145820000%3c%2ftxn_ref_number%3e%3ctxn_datetime%3e1728145820000%3c%2ftxn_datetime%3e%3cip%3e10.10.35.158%3c%2fip%3e%3cdevice_id%3e%3c%2fdevice_id%3e%3c%2fheader%3e%3cdetail%3e%3cservice_type%3eAppToadOracle%3c%2fservice_type%3e%3cserver_ip%3e10.240.70.23%3c%2fserver_ip%3e%3cusername%3eDPATCH%3c%2fusername%3e%3clob_profile%3ePRIVILEGE_ORACLE%3c%2flob_profile%3e%3cdb_instance_name%3eistdb%3c%2fdb_instance_name%3e%3cfiller1%3e%3c%2ffiller1%3e%3cfiller2%3e%3c%2ffiller2%3e%3cfiller3%3e%3c%2ffiller3%3e%3cfiller4%3e%3c%2ffiller4%3e%3cfiller5%3e%3c%2ffiller5%3e%3c%2fdetail%3e%3c%2frequest%3e
+2024-10-05T16:30:20.3918062Z StatusCode: 0
+2024-10-05T16:30:20.3927449Z StatusMessage: SUC
+2024-10-05T16:30:20.3936409Z ResponseDatetime: 1728145820367
+2024-10-05T16:30:20.3945138Z End REST API Invoke
+2024-10-05T16:30:21.8375478Z 0
+2024-10-05T16:30:21.9627969Z 
+2024-10-05T16:30:21.9628550Z SQL*Plus: Release 19.0.0.0.0 - Production on Sat Oct 5 22:00:21 2024
+2024-10-05T16:30:21.9628781Z Version 19.3.0.0.0
+2024-10-05T16:30:21.9628850Z 
+2024-10-05T16:30:21.9629029Z Copyright (c) 1982, 2019, Oracle.  All rights reserved.
+2024-10-05T16:30:21.9629128Z 
+2024-10-05T16:30:22.3004808Z Last Successful login time: Sat Oct 05 2024 22:00:20 +05:30
+2024-10-05T16:30:22.3005167Z 
+2024-10-05T16:30:22.3005406Z Connected to:
+2024-10-05T16:30:22.3005787Z Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-10-05T16:30:22.3006142Z Version 19.24.0.0.0
+2024-10-05T16:30:22.3006266Z 
+2024-10-05T16:30:22.3071197Z 2024105_100022_PM
+2024-10-05T16:30:22.3072566Z 
+2024-10-05T16:30:22.3081043Z SQL> DEF;
+2024-10-05T16:30:22.3081261Z DEFINE _DATE	       = "05-OCT-24" (CHAR)
+2024-10-05T16:30:22.3081539Z DEFINE _CONNECT_IDENTIFIER = "//10.240.70.24:1530/istdb" (CHAR)
+2024-10-05T16:30:22.3081761Z DEFINE _USER	       = "DPATCH" (CHAR)
+2024-10-05T16:30:22.3081932Z DEFINE _PRIVILEGE      = "" (CHAR)
+2024-10-05T16:30:22.3091559Z DEFINE _SQLPLUS_RELEASE = "1903000000" (CHAR)
+2024-10-05T16:30:22.3091807Z DEFINE _EDITOR	       = "Notepad" (CHAR)
+2024-10-05T16:30:22.3092047Z DEFINE _O_VERSION      = "Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-10-05T16:30:22.3092252Z Version 19.24.0.0.0" (CHAR)
+2024-10-05T16:30:22.3092445Z DEFINE _O_RELEASE      = "1924000000" (CHAR)
+2024-10-05T16:30:22.3092637Z DEFINE X	       = "2024105_100022_PM" (CHAR)
+2024-10-05T16:30:22.3092808Z SQL> set timing on
+2024-10-05T16:30:22.3092954Z SQL> @Script\Test.sql
+2024-10-05T16:30:22.3093129Z SQL> select systimestamp from dual;
+2024-10-05T16:30:22.3110301Z 05-OCT-24 10.00.22.306670 PM +05:30
+2024-10-05T16:30:22.3110442Z 
+2024-10-05T16:30:22.3122806Z Elapsed: 00:00:00.00
+2024-10-05T16:30:22.3124944Z SQL> @Script\Test1.sql
+2024-10-05T16:30:22.3130513Z SQL> select sysdate from dual;
+2024-10-05T16:30:22.3149733Z 05-OCT-24
+2024-10-05T16:30:22.3149810Z 
+2024-10-05T16:30:22.3150439Z Elapsed: 00:00:00.00
+2024-10-05T16:30:22.3152030Z SQL> set timing off
+2024-10-05T16:30:22.3152184Z SQL> spool off
+2024-10-05T16:30:22.3174419Z SQL> exit
+2024-10-05T16:30:22.3186655Z Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+2024-10-05T16:30:22.3186895Z Version 19.24.0.0.0
+2024-10-05T16:30:23.2980544Z 0
+2024-10-05T16:30:23.2994106Z ok
+2024-10-05T16:30:23.3848894Z ##[section]Finishing: Deploy

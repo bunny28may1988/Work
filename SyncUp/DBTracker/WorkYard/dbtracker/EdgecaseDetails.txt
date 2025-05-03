@@ -1,0 +1,19 @@
+
+### Failed to get the Instance 
+project_name = "MCollection DataPatch"
+release_id = 41
+Error: Under the Extracted logs found more than one Prod environment
+##### Multi Prod Environments
+project_name = "OLD_PG_KSECDataPatch"
+release_id = 1
+
+Error: 2024-12-03 12:00:05,040 - ERROR - Deploy log file not found.
+None
+2024-12-03 12:00:05,041 - ERROR - Log file path is empty. Exiting the processing.
+
+##### Generation of Empty CSV 
+project_name = "UPIDataPatch"
+release_id = 835
+
+project_name = "CRM DataPatch"
+release_id = 1

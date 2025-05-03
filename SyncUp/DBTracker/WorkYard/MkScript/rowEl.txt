@@ -1,0 +1,821 @@
+
+
+1 row updated.
+
+Elapsed: 00:00:01.61
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.12
+
+
+1 row updated.
+
+Elapsed: 00:00:00.12
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.12
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.12
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.13
+
+
+1 row updated.
+
+Elapsed: 00:00:00.13
+
+
+1 row updated.
+
+Elapsed: 00:00:00.12
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.12
+
+
+1 row updated.
+
+Elapsed: 00:00:00.15
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.08
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.09
+
+
+1 row updated.
+
+Elapsed: 00:00:00.11
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+
+
+1 row updated.
+
+Elapsed: 00:00:00.10
+

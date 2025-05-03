@@ -1,0 +1,48 @@
+{
+  "createdBy": {
+    "descriptor": "aad.YmI5Y2RkMzYtM2E5OS03ZjczLTgwMDctZmY4NzE0MjYwNTli",
+    "directoryAlias": null,
+    "displayName": "Kirankumar Dumpa (Corporate, KMBL)",
+    "id": "bb9cdd36-3a99-6f73-8007-ff871426059b",
+    "imageUrl": "https://dev.azure.com/kmbl-devops/_api/_common/identityImage?id=bb9cdd36-3a99-6f73-8007-ff871426059b",
+    "inactive": null,
+    "isAadIdentity": null,
+    "isContainer": null,
+    "isDeletedInOrigin": null,
+    "profileUrl": null,
+    "uniqueName": "kirankumar.dumpa@kotak.com",
+    "url": "https://spsprodcin1.vssps.visualstudio.com/A725dbef3-7937-466d-995a-663e3ea07363/_apis/Identities/bb9cdd36-3a99-6f73-8007-ff871426059b"
+  },
+  "createdDate": "2025-05-01T10:36:58.672272+00:00",
+  "id": 27485,
+  "isBlocking": true,
+  "isDeleted": false,
+  "isEnabled": true,
+  "isEnterpriseManaged": false,
+  "revision": 4,
+  "settings": {
+    "allowedForkTargets": 0,
+    "breadcrumbDays": null,
+    "detectRenameFalsePositivesByDefault": null,
+    "enforceConsistentCase": null,
+    "gvfsAllowedVersionRanges": null,
+    "gvfsExemptUsers": null,
+    "gvfsOnly": null,
+    "inheritPullRequestCreationMode": null,
+    "optimizedByDefault": null,
+    "rejectDotGit": null,
+    "repoPullRequestAsDraftByDefault": null,
+    "scope": [
+      {
+        "repositoryId": "4dc4d6d0-64f2-4090-8120-1231a3208478"
+      }
+    ],
+    "strictVoteMode": null
+  },
+  "type": {
+    "displayName": "Git repository settings",
+    "id": "7ed39669-655c-494e-b4a0-a08b4da0fcce",
+    "url": "https://dev.azure.com/kmbl-devops/3346c1c0-90be-454b-a169-8ba6828f1fc0/_apis/policy/types/7ed39669-655c-494e-b4a0-a08b4da0fcce"
+  },
+  "url": "https://dev.azure.com/kmbl-devops/3346c1c0-90be-454b-a169-8ba6828f1fc0/_apis/policy/configurations/27485"
+}

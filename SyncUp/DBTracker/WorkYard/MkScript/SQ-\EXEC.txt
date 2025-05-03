@@ -1,0 +1,10 @@
+
+SQL> EXEC TBMS_DL_INFRA_270924();
+No Of Records That Should Be Affected = 168
+No Of Records That Available in SELECT STATEMENT = 168
+Actual No Of Records Affected  = 168
+NO OF RECORDS COMMITTED = 168
+No Of Records That Available in SELECT STATEMENT POST COMMIT = 168
+
+PL/SQL procedure successfully completed.
+

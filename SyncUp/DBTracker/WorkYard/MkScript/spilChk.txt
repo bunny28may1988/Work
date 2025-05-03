@@ -1,0 +1,6 @@
+SQL> update fm.FM_NOP_IRSCIRS_DEALS_BKP set AMOUNT_L1 =534721125.849274, AMOUNT_L2 =-7445027.07723471 where deal_id =5275953 and as_of_date = '11-Oct-2024';
+
+1 row updated.
+
+Elapsed: 00:00:01.61
+

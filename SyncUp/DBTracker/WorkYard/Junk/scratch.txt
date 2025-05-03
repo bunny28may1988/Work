@@ -1,0 +1,13 @@
+#echo "PipelineReleaseID,ReleasePipelineName,ReleaseDate,Application/Project-Name,Summary,ChangeTicket,DBName,SchemaUser,EventType,SQLStatement,RowCount " > test-gen.csv
+#dte="14/10/2024"
+
+#echo  -e "Searching for the ${pattern} pattern\n ###############"
+#Event=$(echo "${pattern}" | awk -F ' ' '{print $2}' | tr ',' ' ' | tr '/' ' ') 
+#a=$(sed -n  -e "${pattern}" "${fileName}"| cut -d " " -f2-)
+#echo "447,CalypsoDataPatch,${dte},CalypsoDataPatch,INC2797014: To populate data in backup tables,NA,CALFIFX,DPATCH,${Event},${a},NA " >> test-gen.csv
+#echo "${a}"
+#echo "###############"
+
+
+
+#(cat ${varfile} | grep -w  CRQ | awk -F '[' '{print $2}' | cut -d ' ' -f1 | tr -d ']' )
