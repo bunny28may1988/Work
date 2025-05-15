@@ -1,0 +1,10 @@
+ingressClass: kong
+
+tgb:
+  enabled: true
+  # ARN of the NLB Target group
+  targetGroupARN:
+  # Service Name of the Kong Proxy
+  kongProxyService: kong-gateway-proxy
+  # Port to bind to NLB
+  port: 443

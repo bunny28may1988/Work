@@ -1,0 +1,134 @@
+controller:
+  image:
+    repository: 992382402880.dkr.ecr.ap-south-1.amazonaws.com/kong-gateway
+    tag: "3.6"
+
+  enterprise:
+    enabled: true
+    license_secret: kong-enterprise-license
+
+  ingressController:
+    image:
+      repository: 992382402880.dkr.ecr.ap-south-1.amazonaws.com/kong-ingress-controller
+      tag: "3.1"
+    resources:
+      limits:
+        cpu: 100m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+  deployment:
+    serviceAccount:
+      create: false
+      name: kong-sa
+      automountServiceAccountToken: true
+      annotations:
+        "eks.amazonaws.com/role-arn": "arn:aws:iam::992382402880:role/kong-ingress-kong-prod-iam-role"
+
+gateway:
+  image:
+    repository: 992382402880.dkr.ecr.ap-south-1.amazonaws.com/kong-gateway
+    tag: "3.6"
+    pullPolicy: Always
+
+  enterprise:
+    enabled: true
+    license_secret: kong-enterprise-license
+
+  proxy:
+    type: ClusterIP
+    # tls:
+    #   parameters: [ ]
+
+  manager:
+    type: ClusterIP
+
+  env:
+    headers: 'off'
+    log_level: info
+    plugins: bundled
+    ssl_cert: /mnt/kong-secrets/domain-ssl-certificate-cer
+    ssl_cert_key: /mnt/kong-secrets/domain-ssl-certificate-key
+    lua_ssl_trusted_certificate: /mnt/kong-secrets/kotak-standalone-ca-cer
+    trusted_ips: 0.0.0.0/0,::/0
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  updateStrategy:
+    type: RollingUpdate
+
+  containerSecurityContext:
+    readOnlyRootFilesystem: false
+
+  deployment:
+    serviceAccount:
+      name: kong-sa
+      automountServiceAccountToken: true
+      annotations:
+        "eks.amazonaws.com/role-arn": "arn:aws:iam::992382402880:role/kong-ingress-kong-prod-iam-role"
+
+    userDefinedVolumes:
+      - name: kong-secrets
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "kong-secrets-provider"
+    userDefinedVolumeMounts:
+      - name: kong-secrets
+        mountPath: "/mnt/kong-secrets"
+        readOnly: true
+
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8444"
+    prometheus.io/path: "/metrics"
+    prometheus.io/scheme: "https"
+
+  extraObjects:
+    - apiVersion: secrets-store.csi.x-k8s.io/v1
+      kind: SecretProviderClass
+      metadata:
+        name: kong-secrets-provider
+      spec:
+        provider: aws
+        parameters:
+          objects: |
+            - objectName: kong-ingress/kong/prod/domain-ssl-certificate-cer
+              objectType: secretsmanager
+              objectAlias: domain-ssl-certificate-cer
+            - objectName: kong-ingress/kong/prod/domain-ssl-certificate-key
+              objectType: secretsmanager
+              objectAlias: domain-ssl-certificate-key
+            - objectName: kong-ingress/kong/prod/kong-enterprise-license
+              objectType: secretsmanager
+              objectAlias: kong-enterprise-license
+            - objectName: kong-ingress/kong/prod/kotak-standalone-ca-cer
+              objectType: secretsmanager
+              objectAlias: kotak-standalone-ca-cer      
+        secretObjects:
+          - secretName: kong-tls-certificate
+            type: Opaque
+            data:
+              - key: tls.crt
+                objectName: domain-ssl-certificate-cer
+              - key: tls.key
+                objectName: domain-ssl-certificate-key
+          - secretName: kong-enterprise-license
+            type: Opaque
+            data:
+              - key: license
+                objectName: kong-enterprise-license
+          - secretName: kotak-standalone-ca-cer
+            type: Opaque
+            data:
+              - key: customca.pem
+                objectName: kotak-standalone-ca-cer                  

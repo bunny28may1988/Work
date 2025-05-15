@@ -1,0 +1,90 @@
+parameters:
+  - name: awsAccountId
+  - name: awsRegion
+  - name: awsAccessKeyId
+  - name: awsSecretAccessKey
+  - name: poolName
+    type: string
+  - name: environment
+    type: string
+  - name: clusterName
+    type: string
+  - name: kubeConfigFile
+    default: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/.kube/context"
+
+  
+
+
+  - name: charts
+    type: object
+      # namespace
+      # name
+      # chartPath
+      # valueFileFolderPath
+      # valueFileName
+      # force
+      # dependsOnStages
+      # checkoutRepos
+
+
+stages:
+  - ${{ each chart in parameters.charts }}:
+    - stage: ${{replace(chart.name,'-','_')}}
+      displayName: "[${{chart.name}}][${{parameters.clusterName}}] Deploy HELM chart"
+
+      jobs:
+        - deployment: ${{replace(chart.name,'-','_')}}
+          displayName: "[${{chart.name}}][${{parameters.clusterName}}] Deploy HELM chart"
+          pool: 
+            name: ${{ parameters.poolName }}
+          environment: ${{ parameters.environment }}
+          strategy:
+            runOnce:
+              deploy:
+                steps:
+                  - checkout: self
+                  - checkout: templates
+                  - ${{ each repo in chart.checkoutRepos }}:
+                    - checkout: ${{ repo }}
+                 
+                  - script: |
+                      set -x
+                      if [[ -z "${{chart.name}}" ]]; then
+                        echo "'name' is a mandatory parameter to the chart"
+                        exit 1
+                      fi
+                      
+                      if [[ -z "${{chart.chartPath}}" ]]; then
+                        echo "'chartPath' is a mandatory parameter to the chart"
+                        exit 1
+                      fi
+                    displayName: "Validate parameters"
+                  
+
+                  - task: Bash@3
+                    inputs:
+                      targetType: 'inline'
+                      workingDirectory: '$(System.DefaultWorkingDirectory)'
+                      script: |
+                        #!/bin/bash
+                        
+                        set -ex
+                        aws eks update-kubeconfig --region "${{ parameters.awsRegion }}" --name "${{ parameters.clusterName }}"
+                        export https_proxy=
+                        kubectl config use-context arn:aws:eks:"${{ parameters.awsRegion }}":"${{ parameters.awsAccountId }}":cluster/"${{ parameters.clusterName }}"
+                        kubectl config current-context
+
+                        cmd="helm upgrade ${{chart.name}} ${{chart.chartPath}} -f ${{ chart.valueFiles }} -n ${{chart.namespace}}"
+
+                        cmd="$cmd  --install --debug --create-namespace --wait --skip-crds"
+
+                        eval $cmd  
+                        
+
+                    displayName: Deploy ${{ parameters.releaseName }} Services
+                    env:
+                      AWS_ACCOUNT_ID: ${{parameters.awsAccountId}}
+                      AWS_DEFAULT_REGION: ${{parameters.awsDefaultRegion}}
+                      AWS_ACCESS_KEY_ID: ${{parameters.awsAccessKeyId}}
+                      AWS_SECRET_ACCESS_KEY: ${{parameters.awsSecretAccessKey}}
+                      KUBECONFIG: ${{parameters.kubeConfigFile}}

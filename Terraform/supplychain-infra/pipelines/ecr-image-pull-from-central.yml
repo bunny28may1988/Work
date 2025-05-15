@@ -1,0 +1,30 @@
+trigger:
+  - none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment
+    type: string
+    values:
+      - NonProd
+      - Prod
+    default: NonProd
+
+variables:
+  - group: SupplyChain-AWS-${{parameters.environment}}
+  - group: Secrets
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Builder Tools/cicd-templates"
+      ref: refs/heads/main
+
+stages:
+  - template: templates/custom-stage/pull-image-from-central-ecr.yaml@templates
+    parameters:
+      sourceRepositoryName: kube-state-metrics-amd64
+      sourceImageTag: v2.9.2
+      destinationRepositoryName: kube-state-metrics-amd64
+      destinationImageTag: v2.9.2

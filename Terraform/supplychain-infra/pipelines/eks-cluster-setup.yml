@@ -1,0 +1,164 @@
+trigger:
+  - none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment where you want to setup the EKS cluster addons
+    type: string
+    values:
+      - nonprod
+      - prod
+    default: nonprod
+
+variables:
+  - ${{ if eq(parameters.environment, 'nonprod') }}:
+      - group: SupplyChain-AWS-NonProd
+      - name: poolName
+        value: OnPremUnix
+      - name: clusterName
+        value: 'eks-supplychain-nonprod'
+  - ${{ if eq(parameters.environment, 'prod') }}:
+      - group: SupplyChain-AWS-Prod
+      - name: poolName
+        value: OnPrimeProdUnix
+      - name: clusterName
+        value: 'eks-supplychain'  
+  - name: basePath
+    value: "$(System.DefaultWorkingDirectory)/supplychain-infra/03-eks-setup"
+  - name: kubeConfig
+    value: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/.kube/context"
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Builder Tools/cicd-templates"
+      ref: refs/tags/v1.3.6
+
+stages:
+  - stage: "EKS_Cluster_Setup"
+    displayName: "[${{parameters.environment}}] EKS Cluster Setup"
+    jobs:
+      - deployment: Deploy_AWS_Load_Balancer_Controller
+        displayName: "[${{parameters.environment}}] Deploy AWS Load Balancer Controller"
+        environment: ${{ parameters.environment }}
+        pool: $(poolName)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - template: ./templates/steps/helm-upgrade.yml
+                  parameters:
+                    clusterName: $(clusterName)
+                    releaseName: 'aws-load-balancer-controller'
+                    chartPath: "$(basePath)/_helm-charts/aws-load-balancer-controller-2.7.2"
+                    valueFiles: "$(basePath)/envs/${{parameters.environment}}/aws-load-balancer-controller/values.yml"
+                    namespace: "kube-addons"
+
+                # The validating webhook configuration and the mutating webhook configurations cause issues
+                # with the ALB Controller registering Kong ingress controller to the NLB.
+                # Here we disable them explicitly to get past this issue.
+                - script: |
+                    set -x
+                    aws eks update-kubeconfig --region ${AWS_DEFAULT_REGION} --name ${CLUSTER_NAME}
+                    https_proxy=
+                    kubectl config use-context arn:aws:eks:${AWS_DEFAULT_REGION}:${AWS_ACCOUNT_ID}:cluster/${CLUSTER_NAME}
+
+                    kubectl get validatingwebhookconfiguration -A
+                    kubectl delete validatingwebhookconfiguration aws-load-balancer-webhook
+
+                    kubectl get mutatingwebhookconfiguration -A
+                    kubectl delete mutatingwebhookconfiguration aws-load-balancer-webhook
+                  displayName: "Cleanup AWS Load balancer controller resources"
+                  env:
+                    CLUSTER_NAME: $(clusterName)
+                    KUBECONFIG: $(kubeConfig)
+                    AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
+
+      - deployment: Deploy_Secret_Store_AWS_Provider
+        displayName: "[${{parameters.environment}}] Deploy Secret Store AWS Provider"
+        environment: ${{ parameters.environment }}
+        pool: $(poolName)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - template: ./templates/steps/helm-upgrade.yml
+                  parameters:
+                    clusterName: $(clusterName)
+                    releaseName: 'secret-store-aws-provider'
+                    chartPath: "$(basePath)/_helm-charts/secrets-store-csi-driver-provider-aws-0.3.8"
+                    valueFiles: "$(basePath)/envs/${{parameters.environment}}/secret-store-aws-provider/values.yml"
+                    namespace: "kube-addons"
+
+      - deployment: Deploy_Secret_Store_CSI_Driver
+        displayName: "[${{parameters.environment}}] Deploy Secret Store CSI Driver"
+        environment: ${{ parameters.environment }}
+        pool: $(poolName)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - template: ./templates/steps/helm-upgrade.yml
+                  parameters:
+                    clusterName: $(clusterName)
+                    releaseName: 'secret-store-csi-driver'
+                    namespace: "kube-addons"
+                    chartPath: "$(basePath)/_helm-charts/secrets-store-csi-driver-1.4.3"
+                    valueFiles: "$(basePath)/envs/${{parameters.environment}}/secret-store-csi-driver/values.yml"
+
+      - deployment: Deploy_Kong_Ingress_Controller
+        displayName: "[${{parameters.environment}}] Deploy Kong Ingress Controller"
+        environment: ${{ parameters.environment }}
+        pool: $(poolName)
+#        dependsOn: [ Deploy_AWS_Load_Balancer_Controller, Deploy_Secret_Store_CSI_Driver, Deploy_Secret_Store_AWS_Provider ]
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - template: ./templates/steps/helm-upgrade.yml
+                  parameters:
+                    clusterName: $(clusterName)
+                    releaseName: 'kong'
+                    chartPath: "$(basePath)/_helm-charts/kong-enterprise-3.6.1.1/ingress"
+                    valueFiles: "$(basePath)/envs/${{parameters.environment}}/kong-ingress-controller/values.yml"
+                    namespace: "kong-ingress"
+
+      - deployment: Deploy_Kong_Plugins
+        displayName: "[${{parameters.environment}}] Deploy Kong Plugins"
+        environment: ${{ parameters.environment }}
+        pool: $(poolName)
+#        dependsOn: [ Deploy_Kong_Ingress_Controller ]
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - template: ./templates/steps/helm-upgrade.yml
+                  parameters:
+                    clusterName: $(clusterName)
+                    releaseName: 'kong-plugins'
+                    chartPath: "$(basePath)/_helm-charts/kong-plugins-config-0.0.1"
+                    valueFiles: "$(basePath)/envs/${{parameters.environment}}/kong-plugins-config/values.yml"
+                    namespace: "kong-ingress"
+
+      - deployment: Deploy_Twistlock
+        displayName: "[${{parameters.environment}}] Deploy Twistlock Defender"
+        environment: ${{ parameters.environment }}
+        pool: $(poolName)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - template: ./templates/steps/helm-upgrade.yml
+                  parameters:
+                    clusterName: $(clusterName)
+                    releaseName: 'twistlock-defender'
+                    chartPath: "$(basePath)/_helm-charts/twistlock-defender-33.00.169"
+                    valueFiles: "$(basePath)/envs/${{parameters.environment}}/twistlock-defender/values.yml"
+                    namespace: "twistlock"

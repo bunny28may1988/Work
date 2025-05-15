@@ -1,0 +1,19 @@
+{{- if and .Values.tgbs (gt (len .Values.tgbs) 0) }}
+apiVersion: v1
+items:
+{{- range $tgb := .Values.tgbs }}
+{{- if $tgb.enabled }}
+  - apiVersion: elbv2.k8s.aws/v1beta1
+    kind: TargetGroupBinding
+    metadata:
+      name: {{ $tgb.name }}
+    spec:
+      targetType: ip
+      serviceRef:
+        name: {{ $tgb.kongProxyService }}
+        port: {{ $tgb.port }}
+      targetGroupARN: {{ $tgb.targetGroupARN }}
+{{- end }}
+{{- end }}
+kind: List
+{{- end }}

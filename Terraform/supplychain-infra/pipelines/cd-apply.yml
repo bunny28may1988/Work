@@ -1,0 +1,70 @@
+trigger: none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment where you want to deploy the Infra
+    type: string
+    values:
+      - NonProd
+      - Prod
+    default: NonProd
+  - name: runApply
+    displayName: Do you want to run Terraform Apply on these resources?
+    type: boolean
+    default: false
+
+
+variables:
+  - group: Terraform-${{parameters.environment}}
+  - group: Secrets
+  - name: terraformVersion
+    value: 1.6.0
+  - name: terraformWorkingDirectory
+    value:  ./supplychain-infra-deploy/supplychain-infra/01-infra-setup # Has to be relative due to assumptions made in ci-cd templates
+  - name: terraformStateFile
+    value: $(appStateFile)
+  - name: terraformInitParameters
+    value: '-upgrade -backend-config="dynamodb_table=$(stateLockFile)"'
+  - name: terraformExecParameters
+    #value: '-var-file=configs/common.tfvars -var-file=configs/${{parameters.environment}}.tfvars -replace="module.nlb[\"nlb2\"].module.nlb.aws_lb_target_group.this[\"supplychain-nlb-common-kong-tg\"]"'
+    #value: '-var-file=configs/common.tfvars -var-file=configs/${{parameters.environment}}.tfvars -replace="module.s3[\"bucket4\"].module.supplychain-s3-bucket.aws_s3_bucket.this[0]"'
+    value: '-var-file=configs/common.tfvars -var-file=configs/${{parameters.environment}}.tfvars'
+  - name: workingDirectory
+    value: ./supplychain-infra
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Builder Tools/cicd-templates"
+      url: https://dev.azure.com/kmbl-devops/Builder%20Tools/_git/cicd-templates
+      ref: refs/tags/v1.3.6
+
+stages:
+  # - template: ./templates/tf-sec.yaml
+  #   parameters:
+  #     awsServiceConnection: $(awsServiceConnection)
+  #     awsS3Bucket: $(awsS3Bucket)
+  #     poolName: Cloud2.0
+  #     terraformWorkingDirectory: $(terraformWorkingDirectory)
+  #     terraformStateFile: $(terraformStateFile)
+  #     terraformInitParameters: '-upgrade  --migrate-state'
+  #     terraformExecParameters: $(terraformExecParameters)
+  #     infraCostAPIKey: $(infraCostAPIKey)
+  #     environment: ${{parameters.environment}}
+  #     terraformVersion: $(terraformVersion)
+
+  - template: ./templates/tf-plan-and-apply.yml
+    parameters:
+      environment: ${{parameters.environment}}
+      runApply: ${{parameters.runApply}}
+      requireManualValidation: true
+      dependsOnStages: [ ]
+      poolName: $(poolName)
+      terraformVersion: $(terraformVersion)
+      terraformWorkingDirectory: $(terraformWorkingDirectory)
+      awsS3Bucket: $(awsS3Bucket)
+      awsServiceConnection: $(awsServiceConnection)
+      terraformStateFile: $(terraformStateFile)
+      terraformInitParameters: $(terraformInitParameters)
+      terraformExecParameters: $(terraformExecParameters)

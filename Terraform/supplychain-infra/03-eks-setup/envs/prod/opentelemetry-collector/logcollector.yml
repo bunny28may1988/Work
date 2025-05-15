@@ -1,0 +1,181 @@
+mode: daemonset # Set the mode to daemonset
+
+image:
+  repository: "#{awsAccountId}#.dkr.ecr.ap-south-1.amazonaws.com/#{otelImageName}#"
+  tag: "#{otelImageTag}#"
+
+presets:
+  logsCollection:
+    enabled: true
+    includeCollectorLogs: false
+  kubernetesAttributes:
+    enabled: true
+  hostMetrics:
+    enabled: true
+  kubeletMetrics:
+    enabled: true
+
+securityContext:
+  runAsUser: 0
+
+clusterRole:
+  rules:
+    - apiGroups: [""]
+      resources: ["nodes/proxy"]
+      verbs: ["get"]
+
+config:
+  receivers:
+    kubeletstats:
+      collection_interval: 60s
+      metric_groups:
+        - pod
+        - container
+        - volume
+        - node
+    prometheus:
+      config:
+        scrape_configs:
+          - job_name: opentelemetry-collector-daemonset
+            scrape_interval: 60s
+            static_configs:
+              - targets:
+                  - ${env:MY_POD_IP}:8888
+    hostmetrics:
+      collection_interval: 60s
+      root_path: /
+      scrapers:
+        paging:
+          metrics:
+            system.paging.usage:
+              enabled: true
+            system.paging.utilization:
+              enabled: true
+        cpu:
+          metrics:
+            system.cpu.logical.count:
+              enabled: true
+        memory:
+          metrics:
+            system.memory.utilization:
+              enabled: true
+            system.memory.limit:
+              enabled: true
+        filesystem:
+          metrics:
+            system.filesystem.utilization:
+              enabled: true
+        process:
+          mute_process_user_error: true
+          metrics:
+            process.cpu.utilization:
+              enabled: true
+            process.memory.utilization:
+              enabled: true
+            process.threads:
+              enabled: true
+            process.paging.faults:
+              enabled: true
+
+  processors:
+    memory_limiter:
+      limit_mib: 512
+      spike_limit_mib: 256
+      check_interval: 5s
+
+    attributes:
+      actions:
+        - key: app_id
+          value: #{appID}#
+          action: upsert
+        - key: tenant_name
+          value: #{tenantName}#
+          action: upsert
+        - key: app_env
+          value: #{environment}#
+          action: upsert
+        - key: node_name
+          value: ${K8S_NODE_NAME}
+          action: upsert
+        - key: cluster
+          value: #{clusterName}#
+          action: upsert
+
+    transform:
+      metric_statements:
+        - context: datapoint
+          statements:
+            - set(attributes["namespace"], resource.attributes["k8s.namespace.name"])
+            - set(attributes["container"], resource.attributes["k8s.container.name"])
+            - set(attributes["pod"], resource.attributes["k8s.pod.name"])
+
+  exporters:
+    prometheusremotewrite:
+      # Prometheus remote write exporter settings
+      endpoint: "#{endpoint}#" # Grafana Mimir Endpoint for remote write
+      tls:
+        insecure_skip_verify: true
+      auth:
+        authenticator: oauth2client/client
+      resource_to_telemetry_conversion:
+        enabled: true # Convert resource attributes to metric labels
+    debug: { }
+    awscloudwatchlogs:
+      region: ap-south-1
+      log_group_name: "supplychain-prod"
+      log_stream_name: "supplychain-service-logs"
+
+  extensions:
+    oauth2client/client:
+      client_id: #{clientId}#
+      client_secret: #{clientSecret}#
+      token_url: #{tokenUrl}#
+      tls:
+        insecure_skip_verify: true
+
+  service:
+    extensions:
+      - health_check
+      - oauth2client/client
+    pipelines:
+      logs:
+        exporters:
+          - debug
+          - awscloudwatchlogs
+      metrics:
+        receivers:
+          - kubeletstats
+          - hostmetrics
+          - prometheus
+        processors:
+          - memory_limiter
+          - attributes
+          - transform
+          - batch
+        exporters:
+          - prometheusremotewrite
+
+ports:
+  metrics:
+    enabled: true
+
+serviceAccount:
+  # Service account configuration
+  create: #{createServiceAccount}# # Create a new service account
+  name: #{serviceAccountName}# # Name of the service account
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::#{awsAccountId}#:role/#{irsa}#
+
+resources:
+  # Resources configuration
+  limits:
+    # Resource limits
+    cpu: 100m # CPU limit
+    memory: 200M # Memory limit
+
+extraEnvs:
+  - name: NODE_NAME
+    valueFrom:
+      fieldRef:
+        apiVersion: v1
+        fieldPath: spec.nodeName

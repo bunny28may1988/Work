@@ -1,0 +1,17 @@
+enableSecretRotation: true
+syncSecret:
+  enabled: true
+linux:
+  image:
+    repository: 471112531675.dkr.ecr.ap-south-1.amazonaws.com/csi-secrets-store-driver
+    tag: v1.4.4
+  crds:
+    image:
+      repository: 471112531675.dkr.ecr.ap-south-1.amazonaws.com/csi-secrets-store-driver-crds
+      tag: v1.4.4
+  registrarImage:
+    repository: 471112531675.dkr.ecr.ap-south-1.amazonaws.com/sig-storage-csi-node-driver-registrar
+    tag: v2.10.0
+  livenessProbeImage:
+    repository: 471112531675.dkr.ecr.ap-south-1.amazonaws.com/sig-storage-livenessprobe
+    tag: v2.12.0

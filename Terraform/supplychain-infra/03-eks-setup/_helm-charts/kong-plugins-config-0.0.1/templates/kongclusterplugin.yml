@@ -1,0 +1,23 @@
+{{- if gt (len .Values.clusterPlugins) 0 }}
+apiVersion: v1
+items:
+{{- range $clusterPlugin := .Values.clusterPlugins }}
+  - apiVersion: configuration.konghq.com/v1
+    disabled: false
+    kind: KongClusterPlugin
+    plugin: {{ $clusterPlugin.plugin }}
+    metadata:
+      annotations:
+        kubernetes.io/ingress.class: {{ $.Values.ingressClass }}
+      labels:
+        global: {{ $clusterPlugin.global | quote }}
+      name: {{ $clusterPlugin.name }}
+    config:
+      {{- toYaml $clusterPlugin.config | nindent 6 }}
+    {{- with $clusterPlugin.ordering }}
+    ordering:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}  
+{{- end }}
+kind: List
+{{- end }}

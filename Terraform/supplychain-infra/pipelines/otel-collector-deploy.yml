@@ -1,0 +1,107 @@
+trigger:
+  - none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment where you want to deploy
+    type: string
+    values:
+      - NonProd
+      - Prod
+    default: NonProd
+ 
+variables:
+  - ${{ if eq(parameters.environment, 'NonProd') }}:
+      - group: SupplyChain-AWS-NonProd
+      - group: otel-${{parameters.environment}}
+      - name: poolName
+        value: OnPremUnix
+      - name: clusterName
+        value: 'eks-supplychain-nonprod'
+      - name: environment
+        value: ${{parameters.environment}}
+      - name: env
+        value: nonprod
+  - ${{ if eq(parameters.environment, 'Prod') }}:
+      - group: SupplyChain-AWS-Prod
+      - group: otel-${{parameters.environment}}
+      - name: poolName
+        value: OnPrimeProdUnix
+      - name: clusterName
+        value: 'eks-supplychain'
+      - name: environment
+        value: ${{parameters.environment}}
+      - name: env
+        value: prod
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Observability/observability-templates"
+      ref: "refs/tags/release-0.0.3"
+
+stages: 
+- template: otel/single-app-cluster/helmFile/otel-helm-upgrade.yml@templates
+  parameters:
+    clusterName: ${{variables.clusterName}}
+    awsAccountId: $(awsAccountId)
+    awsRegion: $(AWS_DEFAULT_REGION)
+    awsAccessKeyId: $(AWS_ACCESS_KEY_ID)
+    awsSecretAccessKey: $(AWS_SECRET_ACCESS_KEY)
+    poolName: $(POOL_NAME)
+    otelImageName: $(otelImageName)
+    otelImageTag: $(otelImageTag)
+    appID: $(appID)
+    serviceAccountName: $(serviceAccountName)
+    endpoint: $(endpoint)
+    environment: "${{variables.environment}}"
+    charts:
+    - name: 'opentelemetry-collector-daemonset'
+      namespace: "supplychain-otel"
+      checkoutRepos:
+        - git://helm-charts/opentelemetry-collector@refs/tags/0.97.1
+      chartPath: "./opentelemetry-collector"
+      valueFileFolderPath: "supplychain-infra-deploy/supplychain-infra/03-eks-setup/envs/nonprod/opentelemetry-collector"
+      valueFileName: "logcollector.yml"
+      irsa: "$(irsa)"
+      clientId: "$(clientId)"
+      clientSecret: "$(clientSecret)"
+      tokenUrl: "$(tokenUrl)"
+      tenantName: $(tenantName)
+      daemonset_path: "$(daemonset_path)"
+      daemonset_port: "$(daemonset_port)"
+      createServiceAccount: true
+
+    - name: 'kube-opentelemetry-collector-deployment'
+      namespace: "supplychain-otel"
+      checkoutRepos:
+        - git://helm-charts/opentelemetry-collector@refs/tags/0.97.1
+      chartPath: "./opentelemetry-collector"
+      valueFileFolderPath: "./observability-templates/otel/single-app-cluster/valueFiles"
+      valueFileName: "otel-collector-kube-state-metrics.yaml"
+      serviceNamespaces: "kube-addons"
+      clientId: "$(clientId)"
+      clientSecret: "$(clientSecret)"
+      tokenUrl: "$(tokenUrl)"
+      tenantName: $(tenantName)
+      deployment_path: "$(deployment_path)"
+      deployment_port: "$(deployment_port)"
+      createServiceAccount: false
+
+    - name: 'opentelemetry-collector-deployment'
+      namespace: "supplychain-otel"
+      checkoutRepos:
+        - git://helm-charts/opentelemetry-collector@refs/tags/0.97.1
+      chartPath: "./opentelemetry-collector"
+      valueFileFolderPath: "./observability-templates/otel/single-app-cluster/valueFiles"
+      valueFileName: "otel-collector-deploy.yaml"
+      serviceNamespaces: "$(serviceNamespaces)"
+      jobName: "$(jobName)"
+      clientId: "$(clientId)"
+      clientSecret: "$(clientSecret)"
+      tokenUrl: "$(tokenUrl)"
+      tenantName: $(tenantName)
+      deployment_path: "$(deployment_path)"
+      deployment_port: "$(deployment_port)"
+      createServiceAccount: false

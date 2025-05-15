@@ -1,0 +1,16 @@
+image:
+  registry: 471112531675.dkr.ecr.ap-south-1.amazonaws.com
+  repository: kube-state-metrics-amd64
+  tag: v2.9.2
+
+replicas: 1
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 512M
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8080"
+  prometheus.io/path: "/metrics"

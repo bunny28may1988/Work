@@ -1,0 +1,50 @@
+trigger: none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment where you want to deploy the Infra
+    type: string
+    values:
+      - NonProd
+      - Prod
+    default: NonProd
+  - name: runDestroy
+    displayName: Do you want to run Terraform Destroy on these resources?
+    type: boolean
+    default: false
+
+variables:
+  - group: Terraform-${{parameters.environment}}
+  - name: terraformVersion
+    value: 1.6.0
+  - name: terraformWorkingDirectory
+    value: ./supplychain-infra-deploy/supplychain-infra/01-infra-setup # Has to be relative due to assumptions made in ci-cd templates
+  - name: terraformStateFile
+    value: $(appStateFile)
+  - name: terraformInitParameters
+    value: '-upgrade -backend-config="dynamodb_table=$(stateLockFile)" -migrate-state'
+  - name: terraformExecParameters
+    value: '-var-file=01-infra-setup/configs/${{parameters.environment}}.tfvars'
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Builder Tools/cicd-templates"
+      ref: refs/tags/v1.3.6
+
+stages:
+  - template: ./templates/tf-destroy.yml
+    parameters:
+      environment: ${{parameters.environment}}
+      runDestroy: ${{parameters.runDestroy}}
+      requireManualValidation: true
+      dependsOnStages: [ ]
+      poolName: $(poolName)
+      terraformVersion: $(terraformVersion)
+      terraformWorkingDirectory: $(terraformWorkingDirectory)
+      awsS3Bucket: $(awsS3Bucket)
+      awsServiceConnection: $(awsServiceConnection)
+      terraformStateFile: $(terraformStateFile)
+      terraformInitParameters: $(terraformInitParameters)
+      terraformExecParameters: $(terraformExecParameters)

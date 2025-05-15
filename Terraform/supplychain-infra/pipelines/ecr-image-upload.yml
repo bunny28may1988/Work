@@ -1,0 +1,134 @@
+trigger:
+  - none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment where you want to push the external images
+    type: string
+    values:
+      - NonProd
+      - Prod
+    default: NonProd
+
+variables:
+  - group: SupplyChain-AWS-${{parameters.environment}}
+  - name: prismaServiceConnection
+    value: 'PrismaScan'
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Builder Tools/cicd-templates"
+      ref: refs/tags/v1.3.2
+
+stages:
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: AWS_Load_Balancer_Controller
+    artifactPrefix: 'AWS_Load_Balancer_Controller-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'aws-load-balancer-controller-v2.7.2'
+      repositoryName: 'aws-load-balancer-controller'
+      imageTag: 'v2.7.2'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Secrets_Store_CSI_Driver_Provider
+    artifactPrefix: 'Secrets_Store_CSI_Driver_Provider-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'secrets-store-csi-driver-provider-aws-1'
+      repositoryName: 'secrets-store-csi-driver-provider-aws'
+      imageTag: '1'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Secrets_Store_CSI_Driver
+    artifactPrefix: 'Secrets_Store_CSI_Driver-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'csi-secrets-store-driver-v1.4.4'
+      repositoryName: 'csi-secrets-store-driver'
+      imageTag: 'v1.4.4'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Secrets_Store_CSI_Driver_CRDs
+    artifactPrefix: 'Secrets_Store_CSI_Driver_CRDs-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'csi-secrets-store-driver-crds-v1.4.4'
+      repositoryName: 'csi-secrets-store-driver-crds'
+      imageTag: 'v1.4.4'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Secrets_Store_CSI_Driver_Registrar
+    artifactPrefix: 'Secrets_Store_CSI_Driver_Registrar-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'sig-storage-csi-node-driver-registrar-v2.10.0'
+      repositoryName: 'sig-storage-csi-node-driver-registrar'
+      imageTag: 'v2.10.0'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Secrets_Store_Liveness_Probe
+    artifactPrefix: 'Secrets_Store_Liveness_Probe-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'sig-storage-livenessprobe-v2.12.0'
+      repositoryName: 'sig-storage-livenessprobe'
+      imageTag: 'v2.12.0'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Twistlock_Defender
+    artifactPrefix: 'Twistlock_Defender-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'twistlock-defender-defender_33_01_137'
+      repositoryName: 'twistlock-defender'
+      imageTag: 'defender_33_01_137'
+
+#- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+#  parameters:
+#    stageName: Open_Telemetry_Collector_Contrib
+#    artifactPrefix: 'Open_Telemetry_Collector_Contrib-'
+#    dependsOnStages: [ ]
+#    prismaServiceConnection: $(prismaServiceConnection)
+#    images:
+#    - imageName: 'otel-opentelemetry-collector-contrib-0.100.0'
+#      repositoryName: 'otel-opentelemetry-collector-contrib'
+#      imageTag: '0.100.0'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Kong_Gateway
+    artifactPrefix: 'Kong_Gateway-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'kong-gateway-3.6'
+      repositoryName: 'kong-gateway'
+      imageTag: '3.6'
+
+- template: templates/custom-stage/publish-third-party-image-to-ecr.yaml@templates
+  parameters:
+    stageName: Kong_Ingress_Controller
+    artifactPrefix: 'Kong_Ingress_Controller-'
+    dependsOnStages: [ ]
+    prismaServiceConnection: $(prismaServiceConnection)
+    images:
+    - imageName: 'kong-kubernetes-ingress-controller-3.1'
+      repositoryName: 'kong-ingress-controller'
+      imageTag: '3.1'

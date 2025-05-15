@@ -1,0 +1,54 @@
+trigger:
+  - none
+
+parameters:
+  - name: environment
+    displayName: Please select the environment where you want to setup the EKS cluster addons
+    type: string
+    values:
+      - nonprod
+      - prod
+    default: nonprod
+
+variables:
+  - ${{ if eq(parameters.environment, 'nonprod') }}:
+      - group: SupplyChain-AWS-NonProd
+      - name: poolName
+        value: OnPremUnix
+      - name: clusterName
+        value: 'eks-supplychain-nonprod'
+  - ${{ if eq(parameters.environment, 'prod') }}:
+      - group: SupplyChain-AWS-Prod
+      - name: poolName
+        value: OnPrimeProdUnix
+      - name: clusterName
+        value: 'eks-supplychain'  
+  - name: basePath
+    value: "$(System.DefaultWorkingDirectory)/supplychain-infra/03-eks-setup"
+  - name: kubeConfig
+    value: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/.kube/context"
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: "Builder Tools/cicd-templates"
+      ref: refs/tags/v1.3.6
+
+stages:
+  - template: ./templates/steps/helm-upgrade-with-chart-parameters.yml
+    parameters:
+      clusterName: ${{variables.clusterName}}
+      awsAccountId: $(AWS_ACCOUNT_ID)
+      awsRegion: $(AWS_DEFAULT_REGION)
+      awsAccessKeyId: $(AWS_ACCESS_KEY_ID)
+      awsSecretAccessKey: $(AWS_SECRET_ACCESS_KEY)
+      poolName: $(POOL_NAME)
+      environment: "${{parameters.environment}}"
+      charts:
+        - name: 'kube-state-metrics'
+          namespace: "kube-addons"
+          checkoutRepos:
+            - git://helm-charts/_git/kube-state-metrics@refs/tags/5.25.1
+          chartPath: "./kube-state-metrics"
+          valueFiles: "./supplychain-infra-deploy/supplychain-infra/03-eks-setup/envs/${{parameters.environment}}/kube-state-metrics/kube-state-metrics-values.yml"

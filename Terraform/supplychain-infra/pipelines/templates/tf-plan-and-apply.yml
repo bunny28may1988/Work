@@ -1,0 +1,135 @@
+parameters:
+  - name: environment
+    type: string
+    values:
+      - NonProd
+      - Prod
+    default: NonProd
+  - name: runApply
+    type: boolean
+    default: false
+
+  - name: poolName
+    type: string
+    default: ''
+  - name: terraformVersion
+    type: string
+  - name: awsServiceConnection
+    type: string
+  - name: awsS3Bucket
+    type: string
+  - name: terraformStateFile
+    type: string
+  - name: terraformWorkingDirectory
+    type: string
+  - name: terraformInitParameters
+    type: string
+  - name: terraformExecParameters
+    type: string
+  - name: requireManualValidation
+    type: boolean
+    default: true
+  - name: validationEmails
+    type: string
+    default: ''
+  - name: stageName
+    default: Code_Quality    
+  - name: dependsOnStages
+    type: object
+    default: [ ]
+
+stages:
+  - stage: "Infra_Deploy_${{parameters.environment}}"
+    displayName: "[${{parameters.environment}}] Infra Deployment"
+    dependsOn: ${{parameters.dependsOnStages}}
+    jobs:
+      - deployment: Terraform_Plan
+        displayName: "[${{parameters.environment}}] Terraform Plan"
+        pool: ${{parameters.poolName}}
+        environment: ${{parameters.environment}}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - checkout: git://modules/terraform-aws-modules-network-interface@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-secretmanager@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-security-groups@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-load-balancer-v2@refs/tags/1.0.3
+                - checkout: git://modules/terraform-aws-modules-elastic-container-registry@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-iam@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-ec2@refs/tags/1.0.1
+                - checkout: git://modules/terraform-aws-modules-eks@refs/tags/1.1.0
+                - checkout: git://modules/terraform-aws-modules-s3@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-rds@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-athena@refs/tags/2.0.4
+                - checkout: git://modules/terraform-aws-modules-glue@refs/tags/2.0.4
+
+#                - template: templates/steps/checkov-scan-terraform-step.yaml@templates
+#                  parameters:
+#                    workingDirectory: 'supplychain-infra-deploy/supplychain-infra/01-infra-setup'
+
+                - template: templates/steps/install-terraform-step.yaml@templates
+                  parameters:
+                    terraformVersion: ${{parameters.terraformVersion}}
+
+                - template: templates/steps/aws/generate-terraform-plan-step.yaml@templates
+                  parameters:
+                    awsServiceConnection: ${{parameters.awsServiceConnection}}
+                    awsS3Bucket: ${{parameters.awsS3Bucket}}
+                    stateFilePath: ${{parameters.terraformStateFile}}
+                    workingDirectory: ${{parameters.terraformWorkingDirectory}}
+                    additionalCommandOptionsForINIT: ${{parameters.terraformInitParameters}}
+                    additionalCommandOptionsForPLAN: ${{parameters.terraformExecParameters}}
+                    environment: ${{parameters.environment}}
+                    
+
+      - job: Manual_Validation
+        displayName: "[${{parameters.environment}}] Approve Terraform Plan"
+        pool: server
+        condition: and(succeeded(), eq(${{parameters.requireManualValidation}}, true))
+        dependsOn: [ Terraform_Plan ]
+        steps:
+          - task: ManualValidation@0
+            displayName: "Approve Terraform Plan"
+            timeoutInMinutes: 1440
+            inputs:
+              instructions: "Please review the Terraform plan and validate the intended changes to be applied to the environment: ${{parameters.environment}}"
+
+      - deployment: Terraform_Apply
+        condition: and(succeeded(), eq(${{parameters.runApply}}, true))
+        displayName: "[${{parameters.environment}}] Terraform Apply"
+        pool: ${{parameters.poolName}}
+        environment: ${{parameters.environment}}
+        dependsOn: [ Manual_Validation, Terraform_Plan ]
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - checkout: git://modules/terraform-aws-modules-network-interface@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-secretmanager@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-security-groups@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-load-balancer-v2@refs/tags/1.0.3
+                - checkout: git://modules/terraform-aws-modules-elastic-container-registry@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-iam@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-ec2@refs/tags/1.0.1
+                - checkout: git://modules/terraform-aws-modules-eks@refs/tags/1.1.0
+                - checkout: git://modules/terraform-aws-modules-s3@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-rds@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-athena@refs/tags/2.0.4
+                - checkout: git://modules/terraform-aws-modules-glue@refs/tags/2.0.4
+
+                - template: templates/steps/install-terraform-step.yaml@templates
+                  parameters:
+                    terraformVersion: ${{parameters.terraformVersion}}
+
+                - template: templates/steps/aws/generate-terraform-apply-step.yaml@templates
+                  parameters:
+                    awsServiceConnection: ${{parameters.awsServiceConnection}}
+                    awsS3Bucket: ${{parameters.awsS3Bucket}}
+                    stateFilePath: ${{parameters.terraformStateFile}}
+                    workingDirectory: ${{parameters.terraformWorkingDirectory}}
+                    additionalCommandOptionsForINIT: ${{parameters.terraformInitParameters}}
+                    additionalCommandOptionsForAPPLY:  ${{parameters.terraformExecParameters}}
+                    environment: ${{parameters.environment}}

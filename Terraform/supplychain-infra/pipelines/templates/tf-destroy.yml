@@ -1,0 +1,91 @@
+parameters:
+  - name: environment
+    type: string
+    values:
+      - nonprod
+      - preprod
+      - prod
+    default: nonprod
+  - name: runDestroy
+    type: boolean
+    default: false
+
+  - name: poolName
+    type: string
+  - name: terraformVersion
+    type: string
+  - name: awsServiceConnection
+    type: string
+  - name: awsS3Bucket
+    type: string
+  - name: terraformStateFile
+    type: string
+  - name: terraformWorkingDirectory
+    type: string
+  - name: terraformInitParameters
+    type: string
+  - name: terraformExecParameters
+    type: string
+  - name: requireManualValidation
+    type: boolean
+    default: true
+  - name: validationEmails
+    type: string
+    default: ''
+  - name: dependsOnStages
+    type: object
+    default: [ ]
+
+stages:
+  - stage: "Infra_Deploy_${{parameters.environment}}"
+    displayName: "[${{parameters.environment}}] Infra Deployment"
+    dependsOn: ${{parameters.dependsOnStages}}
+    jobs:
+      - job: Manual_Validation
+        displayName: "[${{parameters.environment}}] Approve Terraform Destroy"
+        pool: server
+        condition: ${{ eq(parameters.requireManualValidation, true) }}
+        steps:
+          - task: ManualValidation@0
+            displayName: "Approve Terraform Destroy"
+            timeoutInMinutes: 1440
+            inputs:
+              instructions: "Please review that terraform destroy will be run to the environment: ${{parameters.environment}}. This will remove all resources provisioned on this environment."
+      
+      - deployment: Terraform_Destroy
+        condition: and(succeeded(), eq(${{parameters.runDestroy}}, true))
+        displayName: "[${{parameters.environment}}] Terraform Destroy"
+        pool: ${{parameters.poolName}}
+        environment: ${{parameters.environment}}
+        dependsOn: [ Manual_Validation ]
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - checkout: git://modules/terraform-aws-modules-network-interface@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-secretmanager@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-security-groups@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-load-balancer-v2@refs/tags/1.0.3
+                - checkout: git://modules/terraform-aws-modules-elastic-container-registry@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-iam@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-ec2@refs/tags/1.0.1
+                - checkout: git://modules/terraform-aws-modules-eks@refs/tags/1.1.0
+                - checkout: git://modules/terraform-aws-modules-s3@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-rds@refs/tags/1.0.0
+                - checkout: git://modules/terraform-aws-modules-athena@refs/tags/2.0.4
+                - checkout: git://modules/terraform-aws-modules-glue@refs/tags/2.0.4
+
+                - template: templates/steps/install-terraform-step.yaml@templates
+                  parameters:
+                    terraformVersion: ${{parameters.terraformVersion}}
+
+                - template: templates/steps/aws/generate-terraform-destroy-step.yaml@templates
+                  parameters:
+                    awsServiceConnection: ${{parameters.awsServiceConnection}}
+                    awsS3Bucket: ${{parameters.awsS3Bucket}}
+                    stateFilePath: ${{parameters.terraformStateFile}}
+                    workingDirectory: ${{parameters.terraformWorkingDirectory}}
+                    additionalCommandOptionsForINIT: ${{parameters.terraformInitParameters}}
+                    additionalCommandOptionsForDESTROY: ${{parameters.terraformExecParameters}}
+                    environment: ${{parameters.environment}}

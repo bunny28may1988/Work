@@ -1,0 +1,123 @@
+tgbs:
+  - name: "kong-tgb1"
+    targetGroupARN: arn:aws:elasticloadbalancing:ap-south-1:992382402880:targetgroup/supplychain-nlb-common-kong-tg/8d38baf5abb430e3
+    enabled: true
+    kongProxyService: kong-gateway-proxy
+    port: 443
+
+clusterPlugins:
+  - name: "correlation-id"
+    plugin: "correlation-id"
+    global: true
+    config:
+      generator: uuid
+      header_name: X-Correlation-ID
+
+  - name: "cors"
+    plugin: "cors"
+    global: true
+    config:
+      origins:
+        - "*"
+      methods:
+        - GET
+        - PUT
+        - PATCH
+        - POST
+        - DELETE
+
+  - name: "prometheus"
+    plugin: "prometheus"
+    global: true
+    config:
+      per_consumer: false
+      status_code_metrics: true
+      latency_metrics: true
+      bandwidth_metrics: true
+      upstream_health_metrics: true
+
+  - name: "security-headers-response-transformer"
+    plugin: "response-transformer-advanced"
+    global: true
+    config:
+      add:
+        headers:
+          - "X-Content-Type: nonsniff"
+          - "X-Frame-Options: SAMEORIGIN"
+          - "X-XSS-Protection: 1; mode=block"
+          - "Cache-Control: no-store, no-cache, must-revalidate, max-age=0"
+          - "Reffer-Policy: strict-origin-when-cross-origin"
+          - "Strict-Transport-Security: max-age=31536000; includeSubDomains;"
+      remove:
+        headers:
+          - "Server"
+          - "version"
+          - "X-Powered-By"
+          - "X-Xss-Protection"
+
+  - name: "openid-connect-catalog-portal-prod"
+    plugin: "openid-connect"
+    global: false
+    display_errors: true
+    config:
+      ssl_verify: false
+      client_id:
+        - 0165adb0-4f66-4aa1-8528-3ffdf3965844
+      client_secret:
+        - JRZTi1skkbbNYEi.LTOUDwWIny
+      verify_claims: false  
+      scopes:
+        - openid
+        - profile
+        - email
+      upstream_headers_claims:
+        - user_name
+        - display_name
+        - email
+      upstream_headers_names:
+        - username
+        - displayname
+        - email
+      upstream_id_token_header: idtoken
+      issuer: https://api.idam.kotak.internal/.well-known/openid-configuration
+      display_errors: true
+      redirect_uri:
+        - https://supplychain.kotak.internal/catalog-portal/api-catalog
+      refresh_token_param_type: 
+        - header
+        # - body
+      # refresh_tokens: true
+      refresh_token_param_name: refresh_token
+      upstream_refresh_token_header: refresh_token
+      token_endpoint_auth_method: client_secret_post
+      logout_uri_suffix: /logout
+      logout_redirect_uri:
+        - https://supplychain.kotak.internal/catalog-portal/api/auth/callback/oidc/logout
+      logout_methods:
+        - GET
+      logout_revoke: true
+      unauthorized_destroy_session: true
+      session_secret: '121212132'
+      session_cookie_same_site: Strict
+      session_cookie_secure: true
+      #session_rolling_timeout: 3
+      client_auth:
+        - client_secret_post
+      auth_methods:
+        - authorization_code
+        - refresh_token
+        - session
+        
+  - name: "oauth2-introspection-prod"
+    plugin: "oauth2-introspection"
+    global: false
+    display_errors: true
+    config:
+      introspection_url: https://api.idam.kotak.internal/oauth2/token/introspect
+      authorization_value: Basic MDE2NWFkYjAtNGY2Ni00YWExLTg1MjgtM2ZmZGYzOTY1ODQ0OkpSWlRpMXNra2JiTllFaS5MVE9VRHdXSW55
+      ttl: 1
+      consumer_by: username
+    ordering:
+      after:
+        access:
+          - openid-connect                

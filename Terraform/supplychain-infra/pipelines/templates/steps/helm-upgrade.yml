@@ -1,0 +1,67 @@
+parameters:
+  - name: clusterName
+  - name: kubeConfigFile
+    default: "$(System.DefaultWorkingDirectory)/$(Build.BuildId)/.kube/context"
+  - name: releaseName
+    type: string
+  - name: chartPath
+    type: string
+  - name: namespace
+    type: string
+    default: ''
+  - name: valueFiles
+    type: string
+    default: ''
+  - name: force
+    type: boolean
+    default: false
+
+steps:
+  - script: |
+      set -x
+      aws eks update-kubeconfig --region ${AWS_DEFAULT_REGION} --name ${CLUSTER_NAME}
+      
+      https_proxy=
+      kubectl config get-contexts
+      kubectl config use-context arn:aws:eks:${AWS_DEFAULT_REGION}:${AWS_ACCOUNT_ID}:cluster/${CLUSTER_NAME}
+      
+      cmd="helm upgrade"
+      if ! [[ -z "${{parameters.releaseName}}" ]]; then
+        cmd="$cmd ${{parameters.releaseName}}"
+      else
+        echo "'releaseName' is a mandatory parameter to the template"
+        exit 1
+      fi
+      
+      if ! [[ -z "${{parameters.chartPath}}" ]]; then
+        cmd="$cmd ${{parameters.chartPath}}"
+      else
+        echo "'chartPath' is a mandatory parameter to the template"
+        exit 1
+      fi
+      
+      if ! [[ -z "${{parameters.namespace}}" ]]; then
+        cmd="$cmd -n ${{parameters.namespace}}"
+      fi
+
+      if ! [[ -z "${{parameters.valueFiles}}" ]]; then
+        for VALUE_FILE in $(echo "${{parameters.valueFiles}}" | tr ',' '\n')
+        do
+          cmd="$cmd -f ${VALUE_FILE}"
+        done
+      fi
+      
+      if [[ "${{parameters.force}}" == "True" ]]; then
+        cmd="$cmd --force"
+      fi
+      
+      cmd="$cmd  --install --debug --create-namespace --wait"
+      
+      helm dependency build ${{parameters.chartPath}} --debug
+      
+      $cmd
+    displayName: "Deploy HELM chart"
+    env:
+      CLUSTER_NAME: ${{parameters.clusterName}}
+      KUBECONFIG: ${{parameters.kubeConfigFile}}
+      AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)

@@ -1,0 +1,3 @@
+image:
+  repository: 992382402880.dkr.ecr.ap-south-1.amazonaws.com/secrets-store-csi-driver-provider-aws
+  tag: 1

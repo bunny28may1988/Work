@@ -1,0 +1,13 @@
+image:
+  repository: 992382402880.dkr.ecr.ap-south-1.amazonaws.com/aws-load-balancer-controller
+  tag: v2.7.2
+
+clusterName: eks-supplychain
+replicaCount: 1
+serviceAccount:
+  name: "aws-load-balancer-controller-sa"
+  annotations:
+    "eks.amazonaws.com/role-arn": "arn:aws:iam::992382402880:role/kube-addons-aws-load-balancer-controller-prod-iam-role"
+
+defaultTargetType: ip
+enableServiceMutatorWebhook: false
