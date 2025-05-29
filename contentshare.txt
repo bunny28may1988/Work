@@ -1,0 +1,44 @@
+Hi Suchit,
+
+Thank you for your response.
+
+Please find below the details and justification for the requested /24 CIDR VPC in the Chain Loop Non-Prod account (471112531675):
+
+⸻
+
+🔧 Infrastructure Plan
+
+This VPC is intended to host Azure DevOps build agents, which can be provisioned as either:
+	•	EC2 instances, or
+	•	EKS pods (Kubernetes-based ephemeral agents)
+
+The current /21 shared VPC is oversized for this workload and already accommodates other applications like the supply chain cluster, so we are requesting a clean and isolated /24 block for agent use.
+
+⸻
+
+📊 CIDR Justification
+	•	The build agents are expected to scale to 100 parallel jobs, which aligns with the on-prem Azure DevOps capacity.
+	•	We plan to use t3.medium (AMD) instances as worker nodes, which support up to 12 pods per node with 2 ENIs.
+	•	A team scaling to 100 pods could require 10+ EC2 nodes, each reserving 15–20 IPs — which would easily exhaust a /25 subnet (128 IPs).
+	•	Hence, we propose a /24 CIDR (256 IPs) to be split into two /25 subnets for better control and IP headroom.
+	•	This design follows the CoE recommendation for addressing IPv4 exhaustion in EKS clusters using custom networking.
+
+⸻
+
+✅ CoE Policy Alignment
+	•	Region: Mumbai (ap-south-1) as per standard
+	•	Instance Type: t3.medium (AMD) — CoE approved, no Graviton or Intel
+	•	No public IPs will be assigned
+	•	SSM: Not enabled — we will use ARCOS or PAM for access
+	•	AMI: Will be selected from CoE-approved AMIs
+	•	Disk: Will use only gp3 volumes
+	•	Private NAT Gateway: Will be used for outbound internet access from private subnets
+	•	VACA agent (twistlock-defender): Will be run alongside agent workloads as required
+
+⸻
+
+🏷️ Tagging and Budget Code
+	•	App ID: APP12345
+	•	Budget Code: BU123-DEVOPS-AGENTS
+
+We’ll ensure that Terraform provisioning follows CoE-approved modules and tagging standards.
