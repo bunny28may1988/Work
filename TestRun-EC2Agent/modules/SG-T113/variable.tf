@@ -74,4 +74,3 @@ variable "Predefined_tags" {
   nullable  = true
   sensitive = false
 }
- 
