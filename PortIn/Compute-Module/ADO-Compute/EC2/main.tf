@@ -1,5 +1,5 @@
 module "EC2_ADO-Agent" {
-    source = "../modules/EC2"
+    source = "../../../Resource-Modules/EC2"
     ssh_key_name = null
     create_instance = {
         (var.EC2_ADO-Agent_name) = {
