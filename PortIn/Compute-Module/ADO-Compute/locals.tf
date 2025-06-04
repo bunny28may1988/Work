@@ -17,3 +17,14 @@ locals {
     "map-migrated"         = var.application.map-migrated
   }
 }
+
+locals {
+  network_sg = data.terraform_remote_state.NWSateFile.outputs.all_security_group_ids["Network_VPC-SG"]
+  vpc_id     = data.terraform_remote_state.NWSateFile.outputs.vpc_id
+  vpc_cidr   = data.terraform_remote_state.NWSateFile.outputs.vpc_cidr_block
+  subnet_ids = data.terraform_remote_state.NWSateFile.outputs.private_subnet_ids
+}
+
+locals {
+  compute_sg = module.ADO-Agent_SG
+}

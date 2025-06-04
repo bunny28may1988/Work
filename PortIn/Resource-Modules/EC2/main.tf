@@ -41,19 +41,20 @@ resource "aws_instance" "instance" {
   ebs_optimized               = try(each.value["ebs_optimized"], null)
 
   dynamic "capacity_reservation_specification" {
-    for_each = each.value["capacity_reservation_specification"] != null ? [each.value["capacity_reservation_specification"]] : []
+  for_each = length(each.value["capacity_reservation_specification"]) > 0 ? each.value["capacity_reservation_specification"] : []
 
-    content {
-      capacity_reservation_preference = capacity_reservation_specification.value.capacity_reservation_preference
-      dynamic "capacity_reservation_target" {
-        for_each = capacity_reservation_specification.value.capacity_reservation_target != null ? [capacity_reservation_specification.value.capacity_reservation_target] : []
-        content {
-          capacity_reservation_id                 = capacity_reservation_target.value.capacity_reservation_id
-          capacity_reservation_resource_group_arn = capacity_reservation_target.value.capacity_reservation_resource_group_arn
-        }
+  content {
+    capacity_reservation_preference = capacity_reservation_specification.value[0].capacity_reservation_preference
+
+    dynamic "capacity_reservation_target" {
+      for_each = capacity_reservation_specification.value[0].capacity_reservation_target != null ? [capacity_reservation_specification.value[0].capacity_reservation_target] : []
+      content {
+        capacity_reservation_id                 = capacity_reservation_target.value.capacity_reservation_id
+        capacity_reservation_resource_group_arn = capacity_reservation_target.value.capacity_reservation_resource_group_arn
       }
     }
   }
+}
 
   dynamic "root_block_device" {
     for_each = each.value.root_block_device != [] ? each.value.root_block_device : []

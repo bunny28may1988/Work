@@ -1,8 +1,9 @@
+/*
 output "sg_id" {
   value       = [for i in aws_security_group.main : i.id]
   description = "ID of the Security Group"
 }
-
+*/
 output "sg_arn" {
   value       = [for i in aws_security_group.main : i.arn]
   description = "ARN of the Security Group"
@@ -16,4 +17,11 @@ output "sg_ingress_arn" {
 output "sg_egress_arn" {
   value       = [for i in aws_vpc_security_group_egress_rule.egress : i.arn]
   description = "ARN of the Egress Security Group Rule"
+}
+output "sg_id" {
+  description = "Map of Security Group IDs created by the module"
+  value = {
+    for sg_key, sg in aws_security_group.main :
+    sg_key => sg.id
+  }
 }
