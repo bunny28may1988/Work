@@ -23,9 +23,11 @@ locals {
 }
 
 locals {
-  VpcSg_id        = data.terraform_remote_state.network.outputs.all_security_group_ids["Network_VPC-SG"]
-  VPC-SSH_SG      = data.terraform_remote_state.network.outputs.all_security_group_ids["SSH-VPC"]
-  subnet_Private  = data.terraform_remote_state.network.outputs.private_subnet_ids
+  Private-VPC_SG  = data.terraform_remote_state.network.outputs.all_security_group_ids["Network_VPC-SG"]
+  Public-VPC_SG   = data.terraform_remote_state.network.outputs.all_security_group_ids["Public_VPC-SG"]
+  Private-SSH_SG  = data.terraform_remote_state.network.outputs.all_security_group_ids["SSH-VPC"]
+  Public-SSH_SG   = data.terraform_remote_state.network.outputs.all_security_group_ids["SSH-Internet"]
+  subnet_Private  = data.terraform_remote_state.network.outputs.private_subnet_idsSSH-VPC
   subnet_Public   = data.terraform_remote_state.network.outputs.public_subnet_ids
   InstanceProfile = data.terraform_remote_state.network.outputs.EC2_instance_profile_name
 }

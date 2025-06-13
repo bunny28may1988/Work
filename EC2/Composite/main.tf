@@ -4,7 +4,7 @@ module "ADO-Agent" {
   EC2_name                   = var.Resource.Agent.ADO-Agent_Name
   EC2_ami                    = var.Resource.Agent.ADO-Agent_ami
   EC2_instance_type          = var.Resource.Agent.ADO-Agent_instance_type
-  EC2_security_group_ids     = [local.VpcSg_id, local.VPC-SSH_SG]
+  EC2_security_group_ids     = [local.Private-VPC_SG, local.Private-SSH_SG]
   EC2_subnet_id              = local.subnet_Private[0]
   EC2_instance_profile       = local.InstanceProfile #local.iam_ssm_role_name
   default_tags               = local.default_tags
@@ -21,8 +21,8 @@ module "JumpServer" {
   EC2_name                   = var.Resource.Jump.JumpServer_Name
   EC2_ami                    = var.Resource.Jump.JumpServer_ami
   EC2_instance_type          = var.Resource.Jump.JumpServer_instance_type
-  EC2_security_group_ids     = [local.VpcSg_id, local.VPC-SSH_SG]
-  EC2_subnet_id              = local.subnet_Private[0]
+  EC2_security_group_ids     = [local.Public-VPC_SG, local.Public-SSH_SG]
+  EC2_subnet_id              = local.subnet_Public[0]
   EC2_instance_profile       = local.InstanceProfile #local.iam_ssm_role_name
   default_tags               = local.default_tags
   EC2_root_volume_size       = var.Resource.Jump.JumpServer_root_volume_size
