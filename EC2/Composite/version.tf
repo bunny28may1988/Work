@@ -14,8 +14,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "kmbl-terraform-state-s3-bucket"
-    key    = "devopssupplychain-01396/supplychain-devops-01396-ado_ec2/nonprod/supplychain-01396-devops-ado_ec2-nonprod.tfstate"
+    bucket = "skilluputilities"
+    key    = "terraform/Workspace/EC2-DevOpsAgent/EC2/ec2terraform.tfstate"
     region = "ap-south-1"
   }
 }

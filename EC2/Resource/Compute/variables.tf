@@ -25,6 +25,7 @@ variable "EC2_subnet_id" {
 variable "EC2_instance_profile" {
   description = "IAM instance profile for the EC2 ADO Agent"
   type        = string
+  default     = null
 }
 variable "default_tags" {
   description = "Default tags to apply to all resources"

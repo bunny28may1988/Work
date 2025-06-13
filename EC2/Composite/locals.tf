@@ -18,6 +18,15 @@ locals {
   }
 }
 
+locals {
+  nw-Op = data.terraform_remote_state.network.outputs
+}
+
+locals {
+  VpcSg_id = data.terraform_remote_state.network.outputs.all_security_group_ids["Network_VPC-SG"]
+  subnet   = data.terraform_remote_state.network.outputs.private_subnet_ids
+}
+/*
 # Outputs extracted from the network module
 locals {
   vpc_id = data.terraform_remote_state.network.outputs.vpc_id
@@ -29,4 +38,4 @@ locals {
   iam_ssm_role_name = data.terraform_remote_state.network.outputs.iam_ssm_role_name
   iam_ssm_role_arn  = data.terraform_remote_state.network.outputs.ssm_role_arn
   kms_key_arn       = data.terraform_remote_state.network.outputs.kms_key
-}
+}*/
