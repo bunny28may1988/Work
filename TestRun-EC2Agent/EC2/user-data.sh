@@ -6,6 +6,7 @@ S3_BUCKET="skilluputilities"
 SCRIPT_KEY="Scripts/install-multi-agent.sh"
 LOCAL_SCRIPT="/opt/scripts/install-multi-agent.sh"
 LOG_FILE="/var/log/ado-agent-install.log"
+S3_LOG_KEY="Logs/ado-agent-install-$(date +%Y%m%d%H%M%S).log"
 
 # === Create working directory ===
 mkdir -p /opt/scripts
@@ -36,3 +37,6 @@ chmod +x "$LOCAL_SCRIPT"
 "$LOCAL_SCRIPT" >> "$LOG_FILE" 2>&1
 
 echo "✅ Bootstrap complete." | tee -a "$LOG_FILE"
+
+# === Upload log file to S3 ===
+aws s3 cp "$LOG_FILE" "s3://$S3_BUCKET/$S3_LOG_KEY" || echo "⚠️ Failed to upload log to S3"
