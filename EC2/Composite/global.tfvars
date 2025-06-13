@@ -22,7 +22,7 @@ aws = {
 }
 
 Resource = {
-  EC2 = {
+  Agent = {
     ADO-Agent_Name                   = "ADO-BuildAgent"
     ADO-Agent_ami                    = "ami-0b09627181c8d5778"
     ADO-Agent_instance_type          = "t2.micro"
@@ -30,5 +30,14 @@ Resource = {
     ADO-Agent_root_volume_type       = "gp3"
     ADO-Agent_root_volume_iops       = 3000
     ADO-Agent_root_volume_throughput = 125
+  }
+  Jump = {
+    JumpServer_Name                   = "JumpServer"
+    JumpServer_ami                    = "ami-0b09627181c8d5778"
+    JumpServer_instance_type          = "t2.micro"
+    JumpServer_root_volume_size       = 50
+    JumpServer_root_volume_type       = "gp3"
+    JumpServer_root_volume_iops       = 3000
+    JumpServer_root_volume_throughput = 125
   }
 }

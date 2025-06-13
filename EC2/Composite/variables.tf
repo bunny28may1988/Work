@@ -47,7 +47,7 @@ variable "aws" {
 variable "Resource" {
   description = "Resource related variables"
   type = object({
-    EC2 = object({
+    Agent = object({
       ADO-Agent_Name                   = string
       ADO-Agent_ami                    = string
       ADO-Agent_instance_type          = string
@@ -55,6 +55,15 @@ variable "Resource" {
       ADO-Agent_root_volume_type       = string
       ADO-Agent_root_volume_iops       = optional(number, null)
       ADO-Agent_root_volume_throughput = optional(number, null)
+    })
+    Jump = object({
+      JumpServer_Name                   = string
+      JumpServer_ami                    = string
+      JumpServer_instance_type          = string
+      JumpServer_root_volume_size       = number
+      JumpServer_root_volume_type       = string
+      JumpServer_root_volume_iops       = optional(number, null)
+      JumpServer_root_volume_throughput = optional(number, null)
     })
   })
 }
