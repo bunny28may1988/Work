@@ -23,10 +23,10 @@ locals {
 }
 
 locals {
-  VpcSg_id = data.terraform_remote_state.network.outputs.all_security_group_ids["Network_VPC-SG"]
-  subnet   = data.terraform_remote_state.network.outputs.private_subnet_ids
+  VpcSg_id        = data.terraform_remote_state.network.outputs.all_security_group_ids["Network_VPC-SG"]
+  subnet          = data.terraform_remote_state.network.outputs.private_subnet_ids
   InstanceProfile = data.terraform_remote_state.network.outputs.EC2_instance_profile_name
-} 
+}
 /*
 # Outputs extracted from the network module
 locals {

@@ -1,15 +1,13 @@
-output "nw-op" {
-  value = local.nw-Op
-}
-
 output "VPC_SG" {
   value = local.VpcSg_id
 }
 
-output "subnet" {
-  value = local.subnet
+output "subnet-az1" {
+  value = local.subnet[0]
 }
-
+output "subnet-az2" {
+  value = local.subnet[1]
+}
 output "InstanceProfile" {
   value = local.InstanceProfile
 }
