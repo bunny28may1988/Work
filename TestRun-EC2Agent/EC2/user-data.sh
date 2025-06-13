@@ -2,8 +2,8 @@
 set -e
 
 # === Configuration ===
-S3_BUCKET="supplychain-db-tracker-s3-bucket"
-SCRIPT_KEY="utilities/Scripts/install-multi-agent.sh"
+S3_BUCKET="skilluputilities"
+SCRIPT_KEY="Scripts/install-multi-agent.sh"
 LOCAL_SCRIPT="/opt/scripts/install-multi-agent.sh"
 LOG_FILE="/var/log/ado-agent-install.log"
 
