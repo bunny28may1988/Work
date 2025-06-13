@@ -78,7 +78,7 @@ module "security_groups" {
       Predefined_tags = merge(local.default_tags, {
         Name = "Network_VPC-SG"
       })
+    }
+
   }
- 
-}
 }
