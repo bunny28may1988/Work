@@ -1,6 +1,15 @@
 #!/bin/bash
 set -e
 
+# === Configuration for Logging ===
+LOG_FILE="/var/log/ado-agent-bootstrap.log"
+TIMESTAMP=$(date +%Y%m%d%H%M%S)
+S3_LOG_KEY="Logs/InstallAgent/ado-agent-install-${TIMESTAMP}.log"
+S3_UPLOAD_BUCKET="skilluputilities"
+
+# === Redirect all output to LOG_FILE ===
+exec > >(tee -a "$LOG_FILE") 2>&1
+
 # === Ensure root privileges ===
 if [[ $EUID -ne 0 ]]; then
     echo "❌ This script must be run as root or with sudo."
@@ -67,3 +76,7 @@ sudo ./svc.sh install
 sudo ./svc.sh start
 
 echo "✅ Agent $AGENT_NAME installed and running successfully!"
+
+# === Upload log to S3 ===
+echo "📤 Uploading install log to S3..."
+aws s3 cp "$LOG_FILE" "s3://$S3_UPLOAD_BUCKET/$S3_LOG_KEY" || echo "⚠️ Failed to upload log to S3"
