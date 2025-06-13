@@ -24,6 +24,7 @@ locals {
 
 locals {
   VpcSg_id        = data.terraform_remote_state.network.outputs.all_security_group_ids["Network_VPC-SG"]
+  VPC-SSH_SG      = data.terraform_remote_state.network.outputs.all_security_group_ids["SSH-VPC"]
   subnet          = data.terraform_remote_state.network.outputs.private_subnet_ids
   InstanceProfile = data.terraform_remote_state.network.outputs.EC2_instance_profile_name
 }
