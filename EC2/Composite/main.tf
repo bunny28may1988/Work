@@ -6,7 +6,7 @@ module "ADO-Agent" {
   EC2_instance_type          = var.Resource.EC2.ADO-Agent_instance_type
   EC2_security_group_ids     = [local.VpcSg_id]
   EC2_subnet_id              = local.subnet[0]
-  EC2_instance_profile       = null #local.iam_ssm_role_name
+  EC2_instance_profile       = local.InstanceProfile #local.iam_ssm_role_name
   default_tags               = local.default_tags
   EC2_root_volume_size       = var.Resource.EC2.ADO-Agent_root_volume_size
   EC2_root_volume_type       = var.Resource.EC2.ADO-Agent_root_volume_type

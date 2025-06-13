@@ -9,3 +9,10 @@ output "VPC_SG" {
 output "subnet" {
   value = local.subnet
 }
+
+output "InstanceProfile" {
+  value = local.InstanceProfile
+}
+output "default_tags" {
+  value = local.default_tags
+} 
