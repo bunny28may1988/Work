@@ -27,20 +27,7 @@ locals {
   Public-VPC_SG   = data.terraform_remote_state.network.outputs.all_security_group_ids["Public_VPC-SG"]
   Private-SSH_SG  = data.terraform_remote_state.network.outputs.all_security_group_ids["SSH-VPC"]
   Public-SSH_SG   = data.terraform_remote_state.network.outputs.all_security_group_ids["SSH-Internet"]
-  subnet_Private  = data.terraform_remote_state.network.outputs.private_subnet_idsSSH-VPC
+  subnet_Private  = data.terraform_remote_state.network.outputs.private_subnet_ids
   subnet_Public   = data.terraform_remote_state.network.outputs.public_subnet_ids
   InstanceProfile = data.terraform_remote_state.network.outputs.EC2_instance_profile_name
 }
-/*
-# Outputs extracted from the network module
-locals {
-  vpc_id = data.terraform_remote_state.network.outputs.vpc_id
-  ADO-Agent_Subnets = [
-    data.terraform_remote_state.network.outputs.web_subnet_1a, data.terraform_remote_state.network.outputs.web_subnet_1b
-  ]
-  arcon_sg          = data.terraform_remote_state.network.outputs.arcon_sg
-  vpc_sg            = data.terraform_remote_state.network.outputs.vpce_sg
-  iam_ssm_role_name = data.terraform_remote_state.network.outputs.iam_ssm_role_name
-  iam_ssm_role_arn  = data.terraform_remote_state.network.outputs.ssm_role_arn
-  kms_key_arn       = data.terraform_remote_state.network.outputs.kms_key
-}*/

@@ -14,12 +14,17 @@ output "Private_SSH-SG" {
   value = local.Private-SSH_SG
 }
 
-output "subnet-az1" {
-  value = local.subnet[0]
+output "Private_subnet-ID-AZ1" {
+  value = local.subnet_Private[0]
 }
-output "subnet-az2" {
-  value = local.subnet[1]
+output "Private_subnet-ID-AZ2" {
+  value = local.subnet_Private[1]
 }
+
+output "Public_subnet-ID" {
+  value = local.subnet_Public[0]
+}
+
 output "InstanceProfile" {
   value = local.InstanceProfile
 }
