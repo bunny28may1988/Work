@@ -28,6 +28,15 @@ module "security_groups" {
       Predefined_tags = merge(local.default_tags, {
         Name = "SSH-Internet"
       })
+    },
+    "Public_VPC-SG" = {
+      name                   = "Public_VPC_SG"
+      description            = "Security Group for Self VPC CIDR Block"
+      vpc_id                 = aws_vpc.ADO-Agent_VPC.id
+      revoke_rules_on_delete = false
+      Predefined_tags = merge(local.default_tags, {
+        Name = "Network_VPC_SG"
+      })
     }
   }
 
@@ -41,6 +50,17 @@ module "security_groups" {
       description = "Allow all  InBound with in  VPC CIDR Block"
       Predefined_tags = merge(local.default_tags, {
         Name = "Network_VPC-SG"
+      })
+    },
+    "Public_VPC-SG" = {
+      sg_key      = "Public_VPC-SG"
+      from_port   = 0
+      to_port     = 0
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+      description = "Allow all  InBound access from Internet"
+      Predefined_tags = merge(local.default_tags, {
+        Name = "Public_VPC-SG"
       })
     },
     "SSH-VPC" = {
