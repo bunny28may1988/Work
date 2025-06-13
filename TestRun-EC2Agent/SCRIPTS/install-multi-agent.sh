@@ -17,11 +17,11 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # === Static Config ===
-AZP_URL="https://dev.azure.com/kmbl-devops"
-AZP_TOKEN="3TdM0lfC2XzuJASboHxyDygSoW1h28OMgWfvuHNWzHmO2i7mJoyuJQQJ99BDACAAAAAl4kWTAAASAZDO1SOW"
-AZP_POOL="UAT3"
-S3_BUCKET="supplychain-db-tracker-s3-bucket"
-AGENT_TARBALL="utilities/tools/vsts-agent-linux-x64-4.255.0.tar.gz"
+AZP_URL="https://dev.azure.com/3angelsinv"
+AZP_TOKEN="2RuWl2KurloJLCh1ox5r0CicIsgz4VDEAocaybQXLFjcY2JhdhCwJQQJ99BDACAAAAANsnKMAAASAZDO3et3"
+AZP_POOL="SelfHosted-AWS"
+S3_BUCKET="skilluputilities"
+AGENT_TARBALL="Utilities/Tools/vsts-agent-linux-x64-4.255.0.tar.gz"
 USER="app_user"
 PASSWORD="Kotak@123"
 
