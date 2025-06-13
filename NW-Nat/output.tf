@@ -131,3 +131,11 @@ output "s3_gateway_endpoint_route_table_ids" {
 output "all_security_group_ids" {
   value = module.security_groups.security_group_ids
 }
+
+#########################
+# EC2 Instance Profile Outputs 
+#########################
+
+output "EC2_instance_profile_name" {
+  value = aws_iam_instance_profile.ec2_instance_profile.name
+}
