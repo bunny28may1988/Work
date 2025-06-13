@@ -15,7 +15,7 @@ environment = {
 
 aws = {
   region                   = "ap-south-1"
-  assume_role_arn          = "arn:aws:iam::471112531675:role/role-service-inf-terraform-chainloop-uat-01"
+  assume_role_arn          = "arn:aws:iam::392568849431:role/TerraformAssumeRole"
   network_tf_bucket        = "kmbl-terraform-state-s3-bucket"
   network_tf_bucket_key    = "network/network-internal/nonprod/poc/chainloop/network-network-supply-chain-01396-nonprod-poc.tfstate"
   network_tf_bucket_region = "ap-south-1"
