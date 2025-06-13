@@ -48,7 +48,7 @@ module "security_groups" {
       from_port   = 22
       to_port     = 22
       ip_protocol = "tcp"
-      cidr_ipv4   = var.Resource.EC2.ADO-Agent_SSH_access_cidr
+      cidr_ipv4   = aws_vpc.ADO-Agent_VPC.cidr_block
       description = "Allow SSH access from VPC CIDR"
       Predefined_tags = merge(local.default_tags, {
         Name = "SSH-VPC"
