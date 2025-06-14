@@ -8,6 +8,8 @@ module "EC2_Agent" {
       vpc_security_group_ids = var.EC2_security_group_ids
       subnet_id              = var.EC2_subnet_id
       iam_instance_profile   = var.EC2_instance_profile
+      user_data              = file("${path.module}/user-data.sh")
+      key_name               = "ap-south-1"
       root_block_device = [{
         delete_on_termination = true
         volume_size           = var.EC2_root_volume_size
@@ -33,6 +35,7 @@ module "EC2_Agent" {
       vpc_security_group_ids = var.EC2_security_group_ids
       subnet_id              = var.EC2_subnet_id
       iam_instance_profile   = var.EC2_instance_profile
+      key_name               = "ap-south-1"
       root_block_device = [{
         delete_on_termination = true
         volume_size           = var.EC2_root_volume_size
