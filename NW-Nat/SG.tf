@@ -98,6 +98,17 @@ module "security_groups" {
       Predefined_tags = merge(local.default_tags, {
         Name = "Network_VPC-SG"
       })
+    },
+    "Public_VPC-SG" = {
+      sg_key      = "Public_VPC-SG"
+      from_port   = 0
+      to_port     = 0
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+      description = "Allow all outbound traffic"
+      Predefined_tags = merge(local.default_tags, {
+        Name = "Public_VPC-SG"
+      })
     }
 
   }
