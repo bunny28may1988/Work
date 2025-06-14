@@ -1,6 +1,6 @@
 module "EC2_Agent" {
   source       = "../../Modules/EC2-T117"
-  ssh_key_name = null
+  ssh_key_name = "ap-south-1"
   create_instance = {
     (var.EC2_name) = {
       ami                    = var.EC2_ami
