@@ -1,0 +1,22 @@
+V-1.1.0 Mar-3/2/24
+
+- Creation of EC2 jumpserver is made optional
+- custom AMI can be passed for jumpserver
+- added EBS encyption for jumpserver additional volume
+
+v-1.3.0
+
+- added support for OIDC
+- optimzations and enhancements
+- added outputs
+
+v1.4.0
+
+- added more terraform outputs
+- added more control on eks addons by allowing users to input addon version. Otherwise defaults to AWS recommended version
+- enforcing gp3 volumes for nodegroups
+
+v1.4.1
+
+- added more control over the NG subnets
+
