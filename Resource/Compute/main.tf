@@ -40,3 +40,26 @@ module "ADO_BuildAgent_NIC" {
   EC2_Agent_NIC_SG      = var.ADO_BuildAgent_NIC_SG
   default_tags          = local.default_tags
 }
+
+resource "aws_ebs_volume" "extra_data_volume" {
+  availability_zone = "ap-south-1a"
+  size              = 500
+  type              = "gp3"
+  iops              = 3000
+  throughput        = 125
+  encrypted         = var.EC2_root_volume_encrypted
+  kms_key_id        = var.EC2_root_volume_kms_key_id
+
+  tags = merge(local.default_tags, {
+    Name   = "${var.EC2_name}_data_volume"
+    Module = "ADO-Agent"
+  })
+}
+
+resource "aws_volume_attachment" "attach_extra_data_volume" {
+  device_name = "/dev/sdf"
+  volume_id   = aws_ebs_volume.extra_data_volume.id
+  instance_id = module.EC2_Agent.instance_ids[0]
+  force_detach = false
+  skip_destroy = false
+}
