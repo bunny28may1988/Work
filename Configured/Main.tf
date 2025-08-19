@@ -14,55 +14,18 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = var.subscription_id
+  subscription_id = "0e772bc3-0a1a-466f-8d51-4076bdc28134"
+  tenant_id       = "1a1680cb-e128-4577-9dbe-9aa330bd7f17"
 }
 
-resource "azapi_resource" "managed_devops_pool" {
-  type      = "Microsoft.DevOpsInfrastructure/pools@2025-01-21"
-  name      = var.pool_name
-  location  = azurerm_resource_group.rg.location
-  parent_id = azurerm_resource_group.rg.id
-
-  identity {
-    type = "SystemAssigned"
-  }
-
-  body = {
-    properties = {
-      versionControlSystem = {
-        type            = "azuredevops"
-        organization    = var.ado_org_name
-        projectNames    = [var.ado_project_name]
-      }
-      devCenterProjectResourceId = azurerm_dev_center_project.devproj.id
-      agentProfile = {
-        kind                         = "Stateless"
-        resourcePredictionsProfile   = { kind = "Off" } # Off | Manual | Automatic
-        maxAgentLifetime             = null             # e.g., "1.00:00:00" (1 day)
-        gracePeriodTimeSpan          = null             # e.g., "0.12:00:00" (12 hours)
-      }
-      fabricProfile = {
-        skuName = "Standard_D2ads_v5"
-        images  = [
-          { wellKnownImageName = "ubuntu-22.04/latest" }
-        ]
-        # For private networking, include:
-        networkProfile = {
-          subnetId = azurerm_subnet.devops_subnet.id
-        }
-      }
-      maximumConcurrency = 2
-    }
-  }
-}
-
-
+# -------------------------
+# Base infra
+# -------------------------
 resource "azurerm_resource_group" "rg" {
   name     = "rg-devops-pool"
-  location = "uksouth"
+  location = "Central India" #"Central India"
 }
 
-# Example Dev Center + Project (if you don’t already have one)
 resource "azurerm_dev_center" "dc" {
   name                = "dc-devops"
   resource_group_name = azurerm_resource_group.rg.name
@@ -76,28 +39,77 @@ resource "azurerm_dev_center_project" "devproj" {
   dev_center_id       = azurerm_dev_center.dc.id
 }
 
-# Example VNet/subnet for private networking (optional)
-resource "azurerm_virtual_network" "vnet" {
-  name                = "vnet-devops"
+# -------------------------
+# User-Assigned Managed Identity + RBAC
+# (Pools require UserAssigned identity)
+# -------------------------
+resource "azurerm_user_assigned_identity" "mdp_uami" {
+  name                = "uami-mdp"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  address_space       = ["10.20.0.0/16"]
 }
 
-resource "azurerm_subnet" "devops_subnet" {
-  name                 = "snet-devops"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.20.1.0/24"]
+# Give the UAMI permissions to create/operate the underlying infra (tighten later if desired)
+resource "azurerm_role_assignment" "mdp_uami_contributor" {
+  scope                = azurerm_resource_group.rg.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.mdp_uami.principal_id
+}
 
-  # Required: delegate to Managed DevOps Pools
-  delegation {
-    name = "mdp-delegation"
-    service_delegation {
-      name = "Microsoft.DevOpsInfrastructure/pools"
-      actions = [
-        "Microsoft.Network/virtualNetworks/subnets/join/action",
-      ]
+# -------------------------
+# Managed DevOps Pool (public agents; all projects in org)
+# -------------------------
+resource "azapi_resource" "managed_devops_pool" {
+  type      = "Microsoft.DevOpsInfrastructure/pools@2025-01-21"
+  name      = "SampleDevOpsPool"
+  location  = azurerm_resource_group.rg.location
+  parent_id = azurerm_resource_group.rg.id
+
+  # Must be UserAssigned (SystemAssigned not supported)
+  identity {
+    type         = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.mdp_uami.id]
+  }
+
+  body = {
+    properties = {
+      # Link to Azure DevOps org; open to ALL projects
+      organizationProfile = {
+        kind = "AzureDevOps"
+        organizations = [{
+          url        = "https://dev.azure.com/3angelsinv"
+          openAccess = true
+          # projects = []  # (optional) use if you want to restrict to specific projects
+        }]
+      }
+
+      devCenterProjectResourceId = azurerm_dev_center_project.devproj.id
+
+      # Stateless ephemeral agents; Azure auto-predicts capacity
+      agentProfile = {
+        kind = "Stateless"
+        resourcePredictionsProfile = {
+          kind = "Automatic" # Off | Manual | Automatic
+        }
+      }
+
+      # VM sizing/image (no networkProfile => public agents)
+      fabricProfile = {
+        kind = "Vmss"
+        sku = { name = "Standard_D2s_v5" #"Standard_D2ads_v5" 
+        }
+        images = [
+          { wellKnownImageName = "ubuntu-22.04/latest" }
+        ]
+      }
+
+      # Cap of concurrent agents provisioned by Azure
+      maximumConcurrency = 1
     }
   }
+
+  depends_on = [
+    azurerm_dev_center_project.devproj,
+    azurerm_role_assignment.mdp_uami_contributor
+  ]
 }

@@ -1,0 +1,10 @@
+# Log in and pick the right sub (if needed)
+az login
+az account set --subscription 0e772bc3-0a1a-466f-8d51-4076bdc28134
+
+# Register DevCenter + Managed DevOps Pools providers
+az provider register --namespace Microsoft.DevCenter
+az provider register --namespace Microsoft.DevOpsInfrastructure
+
+az provider show --namespace Microsoft.DevCenter --query "registrationState" -o tsv
+az provider show --namespace Microsoft.DevOpsInfrastructure --query "registrationState" -o tsv
