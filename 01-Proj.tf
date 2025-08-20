@@ -57,7 +57,7 @@ resource "null_resource" "venv_setup" {
 data "external" "ado_projects" {
   depends_on = [null_resource.venv_setup]
 
-  program = [".venv/bin/python", "${path.module}/ProjList.py"]
+  program = [".venv/bin/python", "${path.module}/Proj_List.py"]
 
   query = {
     org      = var.ado_org
