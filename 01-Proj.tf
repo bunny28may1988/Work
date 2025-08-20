@@ -79,17 +79,9 @@ data "external" "ado_projects" {
 
 # ------------ Locals from Python output ------------
 locals {
-  project_names   = tolist(try(data.external.ado_projects.result.projects, []))
+  project_names   = tolist(try(jsondecode(data.external.ado_projects.result.projects_json), []))
   project_objects = [for p in local.project_names : { name = p }]
 }
 
-# ------------ Outputs ------------
-output "project_names" {
-  value       = local.project_names
-  description = "List of ADO project names (after exclusions)."
-}
-
-output "project_objects" {
-  value       = local.project_objects
-  description = "List as objects { name = <project> }."
-}
+output "project_names"   { value = local.project_names }
+output "project_objects" { value = local.project_objects }
