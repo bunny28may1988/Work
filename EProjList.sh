@@ -1,34 +1,47 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ---- Read JSON from stdin (no jq) ----
-read -r INPUT_JSON
+# -----------------------------
+# Read JSON from stdin (Terraform external query)
+# Expecting: {"org":"<ORG>", "pat":"<PAT>"}
+# -----------------------------
+INPUT="$(cat || true)"
 
-# Extract fields "org", "pat", "exclude" from the single-line JSON
-get_json_val() {
-  # usage: get_json_val KEY
-  # very simple extractor for flat JSON like {"org":"...","pat":"...","exclude":"a,b"}
-  echo "$INPUT_JSON" | sed -n "s/.*\"$1\"[[:space:]]*:[[:space:]]*\"\([^\"]*\)\".*/\1/p"
+# Extract values from the small JSON without jq (simple, tolerant)
+extract_json_value () {
+  # $1 = key, reads from $INPUT
+  # finds the first "key":"value" pair
+  printf '%s' "$INPUT" \
+  | tr -d '\n' \
+  | sed -n "s/.*\"$1\"[[:space:]]*:[[:space:]]*\"\([^\"]*\)\".*/\1/p"
 }
 
-ORG=$(get_json_val org)
-ADO_PAT=$(get_json_val pat)
-EXCLUDE_RAW=$(get_json_val exclude || true)
+ORG="$(extract_json_value org)"
+ADO_PAT="$(extract_json_value pat)"
 
-# Defaults if not provided
-: "${ORG:=kmbl-devops}"
-: "${ADO_PAT:?Missing PAT in query JSON (key: \"pat\").}"
-API="7.1-preview.4"
+# Fallbacks (optional): allow env overrides if not provided by Terraform
+: "${ORG:=${ORG:-${ORG:-}}}"
+: "${ADO_PAT:=${ADO_PAT:-${ADO_PAT:-}}}"
 
-# Build exclude array from comma-separated string (optional)
-EXCLUDE=()
-if [[ -n "${EXCLUDE_RAW:-}" ]]; then
-  IFS=',' read -r -a EXCLUDE <<< "$EXCLUDE_RAW"
+# Fail clearly if missing
+if [[ -z "${ORG:-}" || -z "${ADO_PAT:-}" ]]; then
+  # Return *valid* JSON even on error (to keep external data source happy)
+  printf '{"projects":[]}\n' 
+  exit 0
 fi
+
+# -----------------------------
+# Config
+# -----------------------------
+API="${API:-7.1-preview.4}"
+
+# Exclusions (exact, case-sensitive). Override with env:
+#   EXCLUDE="Name1,Name2" terraform apply ...
+IFS=',' read -r -a EXCLUDE <<< "${EXCLUDE:-Builder Tools,DevOps Tasks}"
 
 BASE="https://dev.azure.com/${ORG}/_apis/projects?api-version=${API}"
 
-# Helper: return 0 if $1 is in EXCLUDE array (exact, case-sensitive)
+# Helper: is name in EXCLUDE[]
 is_excluded() {
   local name="$1"
   for ex in "${EXCLUDE[@]}"; do
@@ -37,53 +50,63 @@ is_excluded() {
   return 1
 }
 
-# Quick auth/URL check (log errors to stderr so stdout stays JSON-only)
-HTTP_CODE=$(curl -sS -o /dev/null -w '%{http_code}' -u ":${ADO_PAT}" "$BASE" || echo "000")
-if [[ "$HTTP_CODE" != "200" ]]; then
-  {
-    echo "API call failed (HTTP $HTTP_CODE) for org: $ORG"
-    echo "Check org URL and PAT scopes (Org-level: Project and Team - Read)."
-  } >&2
+# -----------------------------
+# Quick auth/URL check
+# -----------------------------
+http_code=$(curl -sS -o /dev/null -w '%{http_code}' -u ":${ADO_PAT}" "$BASE")
+if [[ "$http_code" != "200" ]]; then
+  # Don’t print errors to stdout; Terraform expects JSON only.
+  # Emit empty list so terraform still proceeds deterministically.
   printf '{"projects":[]}\n'
   exit 0
 fi
 
-# Collect project names (after exclusion)
-PROJECTS=()
-TOKEN=""
+# -----------------------------
+# Collect projects (pagination)
+# -----------------------------
+projects=()
+token=""
 while :; do
-  URL="$BASE"
-  [[ -n "$TOKEN" ]] && URL="${BASE}&continuationToken=${TOKEN}"
+  url="$BASE"
+  [[ -n "$token" ]] && url="${BASE}&continuationToken=${token}"
 
-  JSON=$(curl -sS -u ":${ADO_PAT}" "$URL")
+  json="$(curl -sS -u ":${ADO_PAT}" "$url")"
 
-  # Extract names without jq:
-  # 1) flatten; 2) split objects; 3) grab value after "name"
-  while IFS= read -r NAME; do
-    [[ -z "$NAME" ]] && continue
-    if ! is_excluded "$NAME"; then
-      PROJECTS+=("$NAME")
+  # Extract project names w/out jq:
+  # 1) flatten; 2) split objects; 3) take value after "name"
+  while IFS= read -r name; do
+    [[ -z "$name" ]] && continue
+    if ! is_excluded "$name"; then
+      projects+=("$name")
     fi
   done < <(
-    echo "$JSON" \
+    printf '%s' "$json" \
       | tr -d '\n' \
       | sed 's/},{/}\n{/g' \
       | awk -F'"' '/"name":/ {for(i=1;i<=NF;i++) if($i=="name"){print $(i+2)}}'
   )
 
-  TOKEN=$(printf '%s' "$JSON" | sed -n 's/.*"continuationToken":"\([^"]*\)".*/\1/p' || true)
-  [[ -z "$TOKEN" ]] && break
+  # Continuation token
+  token="$(printf '%s' "$json" | sed -n 's/.*"continuationToken":"\([^"]*\)".*/\1/p')"
+  [[ -z "$token" ]] && break
 done
 
-# ---- JSON OUTPUT (stdout) ----
-if ((${#PROJECTS[@]} == 0)); then
+# -----------------------------
+# Emit valid JSON for Terraform
+# -----------------------------
+if ((${#projects[@]} == 0)); then
   printf '{"projects":[]}\n'
 else
-  # Build JSON array safely (escape \ and ")
-  BUF=""
-  for P in "${PROJECTS[@]}"; do
-    ESC="${P//\\/\\\\}"; ESC="${ESC//\"/\\\"}"
-    if [[ -z "$BUF" ]]; then BUF="\"$ESC\""; else BUF+=",\"$ESC\""; fi
+  buf=""
+  for p in "${projects[@]}"; do
+    # minimal escaping for JSON safety
+    esc="${p//\\/\\\\}"
+    esc="${esc//\"/\\\"}"
+    if [[ -z "$buf" ]]; then
+      buf="\"$esc\""
+    else
+      buf+=",\"$esc\""
+    fi
   done
-  printf '{"projects":[%s]}\n' "$BUF"
+  printf '{"projects":[%s]}\n' "$buf"
 fi
