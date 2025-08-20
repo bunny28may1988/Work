@@ -76,7 +76,7 @@ resource "null_resource" "python_venv" {
 data "external" "ado_projects" {
   program = [
     "${path.module}/.venv/bin/python",
-    "${path.module}/scripts/project_list.py"
+    "${path.module}/project_list.py"
   ]
 
   # external.query values must be strings; pass exclude list as JSON string
