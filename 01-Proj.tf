@@ -1,5 +1,12 @@
 terraform {
-  required_version = "~> 1.12.0"
+  required_version = ">= 1.5.0"
+
+  required_providers {
+    external = {
+      source  = "hashicorp/external"
+      version = "~> 2.3"
+    }
+  }
 }
 
 # ---- Inputs ----
@@ -11,27 +18,33 @@ variable "ado_org" {
 variable "ado_pat" {
   type        = string
   sensitive   = true
-  description = "Azure DevOps PAT with Project & Team: Read"
+  description = "Azure DevOps PAT with Org scope (Project & Team: Read)"
 }
 
-# ---- External data: run your bash script ----
-# The script must print JSON like: {"projects":["ProjA","ProjB",...]}
+# Optional: names to exclude (exact, case-sensitive)
+variable "exclude_projects" {
+  type        = list(string)
+  default     = []
+  description = "Project names to exclude from the output"
+}
+
+# ---- External data: run the bash script ----
+# The script prints JSON: {"projects":["ProjA","ProjB",...]}
 data "external" "ado_projects" {
   program = ["bash", "${path.module}/scripts/EProjList.sh"]
 
-  # stdin to the script (your script should read this JSON)
-  query = {
-    org = var.ado_org
-    pat = var.ado_pat
+  # Pass inputs via environment (matches how your script reads them)
+  environment = {
+    ORG     = var.ado_org
+    ADO_PAT = var.ado_pat
+    EXCLUDE = join(",", var.exclude_projects) # script splits on commas
   }
 }
 
 # ---- Locals from the data source ----
 locals {
-  # raw array as returned by the script
   project_names = tolist(try(data.external.ado_projects.result.projects, []))
-
-  # (optional) transform into objects { name = "..." } if you need that shape later
+  # If you need name objects later:
   project_objects = [for p in local.project_names : { name = p }]
 }
 
