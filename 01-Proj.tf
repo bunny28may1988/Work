@@ -1,14 +1,8 @@
 terraform {
-  required_version = ">= 1.6"
-  required_providers {
-    external = {
-      source  = "hashicorp/external"
-      version = "~> 2.3"
-    }
-  }
+  required_version = ">= 1.0.0"
 }
 
-# ---------- Inputs ----------
+# ------------ Variables ------------
 variable "ado_org" {
   type        = string
   description = "ADO org short name (e.g., kmbl-devops)"
@@ -17,7 +11,7 @@ variable "ado_org" {
 variable "ado_pat" {
   type        = string
   sensitive   = true
-  description = "Azure DevOps PAT (Org scope: Project & Team -> Read)"
+  description = "Azure DevOps PAT with Project & Team: Read"
 }
 
 variable "exclude_projects" {
@@ -26,22 +20,20 @@ variable "exclude_projects" {
   description = "Exact project names to exclude (case-sensitive)."
 }
 
-# ---------- Locals ----------
+# ------------ Locals ------------
 locals {
-  venv_dir                     = "${path.module}/.venv"
-  script_path                  = "${path.module}/scripts/proj_list.py"
-  effective_requirements_path  = "${path.module}/requirements.txt"
+  venv_dir        = "${path.module}/.venv"
+  script_path     = "${path.module}/scripts/proj_list.py"
+  requirements    = "${path.module}/requirements.txt"
 
-  # compute a stable hash for triggers; if file missing, use sentinel
-  requirements_hash = fileexists(local.effective_requirements_path)
-    ? filesha256(local.effective_requirements_path)
-    : "no-file"
+  # hash changes when requirements.txt changes
+  requirements_hash = fileexists(local.requirements) ? filesha256(local.requirements) : "no-file"
 
-  # external data source accepts only strings; pass excludes as CSV
+  # external data source accepts only strings
   exclude_csv = join(",", var.exclude_projects)
 }
 
-# ---------- Create / update the venv and pip install ----------
+# ------------ Create venv & install requirements ------------
 resource "null_resource" "venv_setup" {
   triggers = {
     req_hash = local.requirements_hash
@@ -53,51 +45,51 @@ resource "null_resource" "venv_setup" {
       set -e
       cd ${path.module}
 
-      # Create venv if not present
+      # Create venv if missing
       if [ ! -d "${local.venv_dir}" ]; then
         python3 -m venv "${local.venv_dir}"
       fi
 
-      # Activate + upgrade pip
+      # Activate venv
       source "${local.venv_dir}/bin/activate"
+
+      # Upgrade pip
       python -m pip install --upgrade pip
 
-      # Install requirements if file exists and is non-empty
-      if [ -s "${local.effective_requirements_path}" ]; then
-        pip install -r "${local.effective_requirements_path}"
+      # Install requirements if file exists
+      if [ -f "${local.requirements}" ]; then
+        pip install -r "${local.requirements}"
       fi
     EOT
   }
 }
 
-# ---------- Run the Python script and capture results ----------
+# ------------ External Data Source (Python script) ------------
 data "external" "ado_projects" {
-  depends_on = [null_resource.venv_setup]
+  program = ["${local.venv_dir}/bin/python", local.script_path]
 
-  # Run the script using the venv's python
-  program = ["bash", "-lc", "${local.venv_dir}/bin/python ${local.script_path}"]
-
-  # external only accepts strings in 'query'
   query = {
-    org     = var.ado_org
-    pat     = var.ado_pat
-    exclude = local.exclude_csv
+    org      = var.ado_org
+    pat      = var.ado_pat
+    excludes = local.exclude_csv
   }
+
+  depends_on = [null_resource.venv_setup]
 }
 
-# ---------- Make results easy to use ----------
+# ------------ Locals from Python output ------------
 locals {
   project_names   = tolist(try(data.external.ado_projects.result.projects, []))
   project_objects = [for p in local.project_names : { name = p }]
 }
 
-# ---------- Outputs ----------
+# ------------ Outputs ------------
 output "project_names" {
   value       = local.project_names
-  description = "List of ADO project names after exclusions."
+  description = "List of ADO project names (after exclusions)."
 }
 
 output "project_objects" {
   value       = local.project_objects
-  description = "Same, but as objects { name = <project> }."
+  description = "List as objects { name = <project> }."
 }
