@@ -1,62 +1,58 @@
 #!/usr/bin/env python3
 import sys, json, base64, urllib.request, urllib.error
 
-API_VER = "7.1-preview.4"
-
 def read_query():
     raw = sys.stdin.read()
-    try:
-        return json.loads(raw or "{}")
-    except json.JSONDecodeError as e:
-        print(json.dumps({"error": f"bad input: {e}"}))
-        sys.exit(0)
+    if not raw:
+        return {}
+    return json.loads(raw)
 
-def get(url, pat):
-    req = urllib.request.Request(url)
-    # PAT with empty username in basic auth
-    token = ":" + pat
-    b64 = base64.b64encode(token.encode("utf-8")).decode("utf-8")
-    req.add_header("Authorization", f"Basic {b64}")
+def ado_get(url, pat):
+    # PAT auth: Basic base64(":PAT")
+    token = base64.b64encode(f":{pat}".encode("utf-8")).decode("utf-8")
+    req = urllib.request.Request(url, headers={"Authorization": f"Basic {token}"})
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
 def main():
     q = read_query()
-    org = q.get("org", "").strip()
-    pat = q.get("pat", "")
-    exclude_csv = q.get("exclude", "")
+    org      = q.get("org", "")
+    pat      = q.get("pat", "")
+    excludes = [p for p in q.get("excludes", "").split(",") if p]
 
     if not org or not pat:
-        print(json.dumps({"projects": []}))
+        # external provider needs a map of string -> string
+        print(json.dumps({"projects_json": "[]"}))
         return
 
-    exclude = [x for x in (exclude_csv.split(",") if exclude_csv else []) if x]
+    api  = "7.1-preview.4"
+    base = f"https://dev.azure.com/{org}/_apis/projects?api-version={api}"
 
-    base = f"https://dev.azure.com/{org}/_apis/projects?api-version={API_VER}"
     projects = []
     token = None
+    while True:
+        url = base if not token else f"{base}&continuationToken={token}"
+        data = ado_get(url, pat)
 
-    try:
-        while True:
-            url = base if not token else f"{base}&continuationToken={token}"
-            data = get(url, pat)
+        # extract names
+        for it in data.get("value", []):
+            name = it.get("name")
+            if not name:
+                continue
+            if name in excludes:
+                continue
+            projects.append(name)
 
-            # Collect names
-            for item in data.get("value", []):
-                name = item.get("name", "")
-                if name and name not in exclude:
-                    projects.append(name)
+        token = data.get("continuationToken")
+        if not token:
+            break
 
-            token = data.get("continuationToken")
-            if not token:
-                break
-
-        print(json.dumps({"projects": projects}))
-    except urllib.error.HTTPError as e:
-        # On API error, return empty list (keeps TF happy)
-        print(json.dumps({"projects": [], "http_error": e.code}))
-    except Exception as e:
-        print(json.dumps({"projects": [], "error": str(e)}))
+    # IMPORTANT: Return strings only → serialize array as a JSON string
+    print(json.dumps({"projects_json": json.dumps(projects)}))
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        # Keep provider happy even on error
+        print(json.dumps({"projects_json": "[]"}))
