@@ -32,12 +32,11 @@ variable "exclude_projects" {
 # The script prints JSON: {"projects":["ProjA","ProjB",...]}
 data "external" "ado_projects" {
   program = ["bash", "${path.module}/scripts/EProjList.sh"]
-
-  # Pass inputs via environment (matches how your script reads them)
-  environment = {
-    ORG     = var.ado_org
-    ADO_PAT = var.ado_pat
-    EXCLUDE = join(",", var.exclude_projects) # script splits on commas
+  query = {
+    org     = var.ado_org
+    pat     = var.ado_pat
+    # optional: comma-separated excludes
+    # exclude = join(",", var.exclude_projects)
   }
 }
 
