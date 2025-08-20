@@ -1,20 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ====== CONFIG (can be overridden) ======
-ORG="${ORG:-kmbl-devops}"          # or pass via env: ORG=yourorg
-API="${API:-7.1-preview.4}"
+# ---- Read JSON from stdin (no jq) ----
+read -r INPUT_JSON
 
-# Exclusions (exact, case-sensitive). You can override with:
-#   EXCLUDE="Name1,Name2" ADO_PAT=xxxxx bash script.sh
-IFS=',' read -r -a EXCLUDE <<< "${EXCLUDE:-Builder Tools,DevOps Tasks}"
-# ======================================
+# Extract fields "org", "pat", "exclude" from the single-line JSON
+get_json_val() {
+  # usage: get_json_val KEY
+  # very simple extractor for flat JSON like {"org":"...","pat":"...","exclude":"a,b"}
+  echo "$INPUT_JSON" | sed -n "s/.*\"$1\"[[:space:]]*:[[:space:]]*\"\([^\"]*\)\".*/\1/p"
+}
 
-: "${ADO_PAT:?Set ADO_PAT environment variable with an Azure DevOps PAT (Org scope, Project & Team: Read)}"
+ORG=$(get_json_val org)
+ADO_PAT=$(get_json_val pat)
+EXCLUDE_RAW=$(get_json_val exclude || true)
+
+# Defaults if not provided
+: "${ORG:=kmbl-devops}"
+: "${ADO_PAT:?Missing PAT in query JSON (key: \"pat\").}"
+API="7.1-preview.4"
+
+# Build exclude array from comma-separated string (optional)
+EXCLUDE=()
+if [[ -n "${EXCLUDE_RAW:-}" ]]; then
+  IFS=',' read -r -a EXCLUDE <<< "$EXCLUDE_RAW"
+fi
 
 BASE="https://dev.azure.com/${ORG}/_apis/projects?api-version=${API}"
 
-# Helper: return 0 if $1 is in EXCLUDE array (exact match)
+# Helper: return 0 if $1 is in EXCLUDE array (exact, case-sensitive)
 is_excluded() {
   local name="$1"
   for ex in "${EXCLUDE[@]}"; do
@@ -23,61 +37,53 @@ is_excluded() {
   return 1
 }
 
-# Quick auth/URL check (log to stderr so stdout stays JSON-only)
-http_code=$(curl -sS -o /dev/null -w '%{http_code}' -u ":${ADO_PAT}" "$BASE")
-if [[ "$http_code" != "200" ]]; then
+# Quick auth/URL check (log errors to stderr so stdout stays JSON-only)
+HTTP_CODE=$(curl -sS -o /dev/null -w '%{http_code}' -u ":${ADO_PAT}" "$BASE" || echo "000")
+if [[ "$HTTP_CODE" != "200" ]]; then
   {
-    echo "API call failed (HTTP $http_code)."
-    echo "Check org URL ($ORG) and PAT scopes (Org: Project and Team Read)."
+    echo "API call failed (HTTP $HTTP_CODE) for org: $ORG"
+    echo "Check org URL and PAT scopes (Org-level: Project and Team - Read)."
   } >&2
-  # Return empty list to keep external data source happy
   printf '{"projects":[]}\n'
   exit 0
 fi
 
 # Collect project names (after exclusion)
-projects=()
-token=""
+PROJECTS=()
+TOKEN=""
 while :; do
-  url="$BASE"
-  [[ -n "$token" ]] && url="${BASE}&continuationToken=${token}"
+  URL="$BASE"
+  [[ -n "$TOKEN" ]] && URL="${BASE}&continuationToken=${TOKEN}"
 
-  json=$(curl -sS -u ":${ADO_PAT}" "$url")
+  JSON=$(curl -sS -u ":${ADO_PAT}" "$URL")
 
   # Extract names without jq:
-  # 1) Flatten; 2) split objects; 3) grab value after "name"
-  while IFS= read -r name; do
-    [[ -z "$name" ]] && continue
-    if ! is_excluded "$name"; then
-      projects+=("$name")
+  # 1) flatten; 2) split objects; 3) grab value after "name"
+  while IFS= read -r NAME; do
+    [[ -z "$NAME" ]] && continue
+    if ! is_excluded "$NAME"; then
+      PROJECTS+=("$NAME")
     fi
   done < <(
-    echo "$json" \
+    echo "$JSON" \
       | tr -d '\n' \
       | sed 's/},{/}\n{/g' \
       | awk -F'"' '/"name":/ {for(i=1;i<=NF;i++) if($i=="name"){print $(i+2)}}'
   )
 
-  token=$(printf '%s' "$json" | sed -n 's/.*"continuationToken":"\([^"]*\)".*/\1/p' || true)
-  [[ -z "$token" ]] && break
+  TOKEN=$(printf '%s' "$JSON" | sed -n 's/.*"continuationToken":"\([^"]*\)".*/\1/p' || true)
+  [[ -z "$TOKEN" ]] && break
 done
 
 # ---- JSON OUTPUT (stdout) ----
-# No external deps; assumes project names don't contain quotes.
-if ((${#projects[@]} == 0)); then
+if ((${#PROJECTS[@]} == 0)); then
   printf '{"projects":[]}\n'
 else
-  # join with "," and wrap with ["..."]
-  buf=""
-  for p in "${projects[@]}"; do
-    # basic escape for backslashes and double-quotes
-    esc="${p//\\/\\\\}"
-    esc="${esc//\"/\\\"}"
-    if [[ -z "$buf" ]]; then
-      buf="\"$esc\""
-    else
-      buf+=",\"$esc\""
-    fi
+  # Build JSON array safely (escape \ and ")
+  BUF=""
+  for P in "${PROJECTS[@]}"; do
+    ESC="${P//\\/\\\\}"; ESC="${ESC//\"/\\\"}"
+    if [[ -z "$BUF" ]]; then BUF="\"$ESC\""; else BUF+=",\"$ESC\""; fi
   done
-  printf '{\"projects\":[%s]}\n' "$buf"
+  printf '{"projects":[%s]}\n' "$BUF"
 fi
