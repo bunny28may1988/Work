@@ -17,7 +17,7 @@ variable "ado_pat" {
 # ---- External data: run your bash script ----
 # The script must print JSON like: {"projects":["ProjA","ProjB",...]}
 data "external" "ado_projects" {
-  program = ["bash", "${path.module}/scripts/ProjectsList.sh"]
+  program = ["bash", "${path.module}/scripts/EProjList.sh"]
 
   # stdin to the script (your script should read this JSON)
   query = {
