@@ -1,58 +1,69 @@
 terraform {
-  required_version = ">= 1.5.0"
-  required_providers {
-    external = {
-      source  = "hashicorp/external"
-      version = "~> 2.3"
-    }
-  }
+  required_version = ">= 1.2.0"
 }
 
-variable "ado_org" { type = string }
-variable "ado_pat" { type = string, sensitive = true }
+# --- inputs ---
+variable "ado_org"  { type = string }
+variable "ado_pat"  { type = string, sensitive = true }
 variable "exclude_projects" {
   type        = list(string)
   default     = []
   description = "Exact project names to exclude"
 }
+
+# Can't use path.module in a variable default, so keep this empty by default …
 variable "requirements_path" {
   type        = string
-  default     = "${path.module}/requirements.txt"
+  default     = ""
+  description = "Optional path to requirements.txt (absolute or relative). Leave empty to use ${path.module}/requirements.txt"
 }
 
-resource "null_resource" "python_venv" {
+# … and compute the real path here.
+locals {
+  effective_requirements_path = (
+    var.requirements_path != "" ? var.requirements_path : "${path.module}/requirements.txt"
+  )
+}
+
+# --- create venv & install deps (safe if requirements.txt is empty/missing) ---
+resource "null_resource" "venv_setup" {
   triggers = {
-    req_hash = fileexists(var.requirements_path) ? filesha256(var.requirements_path) : ""
+    req_hash = fileexists(local.effective_requirements_path)
+      ? filesha256(local.effective_requirements_path)
+      : ""
   }
+
   provisioner "local-exec" {
     interpreter = ["bash", "-lc"]
-    command = <<-EOT
+    command = <<EOT
       set -e
       cd ${path.module}
+
       if [ ! -d ".venv" ]; then
         python3 -m venv .venv
       fi
+
       source .venv/bin/activate
       python -m pip install --upgrade pip
-      if [ -f "${var.requirements_path}" ]; then
-        # empty file is fine; pip exits 0
-        pip install -r "${var.requirements_path}"
+
+      if [ -s "${local.effective_requirements_path}" ]; then
+        pip install -r "${local.effective_requirements_path}"
       fi
     EOT
   }
 }
 
+# --- call your Python script via external data source ---
 data "external" "ado_projects" {
-  program = [
-    "${path.module}/.venv/bin/python",
-    "${path.module}/scripts/project_list.py"
-  ]
+  depends_on = [null_resource.venv_setup]
+
+  program = [".venv/bin/python", "${path.module}/ProjList.py"]
+
   query = {
-    org     = var.ado_org
-    pat     = var.ado_pat
-    exclude = jsonencode(var.exclude_projects)
+    org      = var.ado_org
+    pat      = var.ado_pat
+    excludes = join(",", var.exclude_projects)
   }
-  depends_on = [null_resource.python_venv]
 }
 
 locals {
